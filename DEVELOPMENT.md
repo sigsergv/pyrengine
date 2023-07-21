@@ -47,5 +47,6 @@ $ psql -h 127.0.0.1 pyrengine pyrengine_user
 $ export FLASK_APP=app
 $ export FLASK_ENV=development
 $ export PYRENGINE_SETTINGS=`pwd`/examples/development.cfg
+$ export FLASK_DEBUG=1
 $ flask run
 ~~~~
