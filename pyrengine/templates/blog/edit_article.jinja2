@@ -1,0 +1,44 @@
+{% extends 'base.jinja2' %}
+{% import 'macros/forms.jinja2' as forms %}
+
+{% block title %}{% if mode == 'create' %}{{ _('Write a new article') }}{% else %}{{ _('Edit article') }}{% endif %}{% endblock %}
+
+{% block content %}
+<form action="{{ submit_url }}" method="POST" id="form" onsubmit="return pyrengine.articleCheckForm();">
+  <dl class="form">
+    {{ forms.textfield('title', form['title'], _('Subject (required)'), '', errors['title']) }}
+    {{ forms.textfield('shortcut', form['shortcut'], _('Shortcut (required)'), _('Short string (part of the URL), alphanumeric characters and “-” are recommended.'), errors['shortcut']) }}
+    {{ forms.textfield('published', form['published'], _('Publishing date and time'), _('Format: YYYY-MM-DD HH:MM'), errors['published']) }}
+    {{ forms.textfield('tags', form['tags'], _('Tags (comma separated)'), '', errors['tags']) }}
+
+    <div>{{ _('Article body (required, markup: *<em>italic</em>*, **<strong>bold</strong>**, [hyperlink](http://example.com) <a href="{0}" target="_blank" class="new-window">more</a>)').format(url_for('blog.article_markup_help')) }}</div>
+
+    <!-- body text control buttons -->
+    <div class="editor-text-controls">
+      <span class="button" onclick="pyrengine.editorWrap('fid-body', '`');" title="{{ _('Inline code (monospace text)') }}">`$x`</span>
+      <span class="button" onclick="pyrengine.editorWrap('fid-body', '*');" title="{{ _('Emphasis (italic)') }}"><em>I</em>&nbsp;</span>
+      <span class="button" onclick="pyrengine.editorWrap('fid-body', '**');" title="{{ _('Strong text (bold)') }}"><strong>B</strong></span>
+      <span class="button" onclick="pyrengine.editorBlockquote('fid-body');" title="{{ _('Quotation') }}">&gt;</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '❈ ❈ ❈ {@class=center}\n');" title="{{ _('Insert dinkus') }}">❈ ❈ ❈</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '────────────────── {@class=center}\n');" title="{{ _('Insert dinkus') }}">──</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '══════════════════ {@class=center}\n');" title="{{ _('Insert dinkus') }}">══</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '~~~~~shell-session\n[user@shell]% \n~~~~~\n');" title="{{ _('Insert shell code') }}">sh $</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '{@style=color:red;}');" title="{{ _('Insert paragraph color text') }}"><span style="color: red;">red</span></span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '[TEXT](https://)');" title="{{ _('Insert hyperlink template') }}">&lt;a&gt;</span>
+    </div>
+
+    {{ forms.textarea('body', form['body'], '', '', errors['body']) }}
+    {{ forms.checkbox('is_draft', form['is_draft'], none, _('draft article'), _('if checked article will not be available to everyone')) }}
+    {{ forms.checkbox('is_commentable', form['is_commentable'], none, _('allow visitors comments')) }}
+
+    <dd>{% if mode == 'edit' %}{{ forms.button(_('save and continue editing'), '', "pyrengine.saveArticle('" + url_for('blog.edit_article_ajax', article_id=article_id) + "'); return false;") }} {% endif %}
+    {{ forms.button(_('save'), 'fa fa-save', "$('#form').submit(); return false;") }}
+    {{ forms.button(_('preview'), 'fa fa-flask', "pyrengine.previewArticle(); return false;") }}
+  </dl>
+</form>
+
+<div id="eid-article-notify" class="panel notify" style="display:none;"></div>
+<div id="eid-article-warning" class="panel warning" style="display:none;"></div>
+<div id="eid-article-render-preview" style="display: none;"></div>
+
+{% endblock %}

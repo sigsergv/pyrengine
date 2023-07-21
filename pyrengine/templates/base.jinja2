@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+{% set editor_permission = h.user_has_permission(current_user, 'editor') %}
+{% set admin_permission = h.user_has_permission(current_user, 'admin') %}
+<head>
+  <meta charset="UTF-8">
+  <script language="javascript" src="/static/js/jquery.min.js"></script>
+  <script language="javascript" src="/static/js/jquery/field-selection.js"></script>
+  <script language="javascript" src="/static/js/tr-{{get_locale()}}.js"></script>
+  <script language="javascript" src="/static/js/pyrengine.js"></script>
+{% if admin_permission %}  <script language="javascript" src="/static/js/pyrengine-admin.js"></script>{% endif %}
+  <link rel="icon" type="image/png" href="/favicon.png">
+  <link rel="stylesheet" type="text/css" href="/static/styles/{{ h.get_config('ui_theme') }}/blog.css">
+  <link rel="stylesheet" type="text/css" href="/static/font-awesome/css/font-awesome.min.css">
+  <link rel="alternate" type="application/atom+xml" title="{{ h.get_config('site_title')}} - {{_('Latest articles feed')}}" href="{{ url_for('blog.latest_rss') }}">
+  <title>{% block title %}{% endblock %} — {{ h.get_config('site_title') }}</title>
+</head>
+
+<body>
+  <div id="topbar"><div class="title"><a href="{{ url_for('blog.index') }}">{{ h.get_config('site_title') }}</a>{% block topbar_suffix %}{% endblock %}</div></div>
+
+  <div id="contentbar">
+    <div id="content">
+{% block content %}{% endblock %}
+    </div>
+    <div id="bottombar"><div class="title">{{ h.get_config('site_copyright') }} | <a href="https://github.com/sigsergv/pyrengine">{{ _('Powered by pyrengine') }}</a></div>
+    </div>
+  </div>
+
+  <div id="sidebar">
+    {% include 'widgets/pages.jinja2' %}
+    <!-- <include file="/widgets/search.mako"/> -->
+    <!-- <include file="/widgets/account.mako"/> -->
+    {% include 'widgets/actions.jinja2' %}
+    {% include 'widgets/tags_cloud.jinja2' %}
+  </div>
+
+
+</body>
+</html>

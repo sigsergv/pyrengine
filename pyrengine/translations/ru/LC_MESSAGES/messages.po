@@ -1,0 +1,871 @@
+# Russian translations for pyrengine.
+# Copyright (C) 2023 Sergey Stolyarov
+# This file is distributed under the same license as the pyrengine project.
+# Sergey Stolyarov <sergei@regolit.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: sergei@regolit.com\n"
+"POT-Creation-Date: 2023-09-02 12:25+0700\n"
+"PO-Revision-Date: 2023-07-22 13:13+0700\n"
+"Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
+"Language: ru\n"
+"Language-Team: ru <LL@li.org>\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
+"n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: pyrengine/__init__.py:48 pyrengine/__init__.py:56
+msgid "Page not found"
+msgstr "Страница не найдена"
+
+#: pyrengine/backups.py:68
+msgid "Backup ID cannot be processed."
+msgstr ""
+
+#: pyrengine/backups.py:72
+msgid "Backup not found."
+msgstr "Бэкап не найден."
+
+#: pyrengine/backups.py:79
+msgid "Backup file is broken!"
+msgstr "Файл бэкапа повреждён!"
+
+#: pyrengine/backups.py:85
+msgid "Backup file is broken, no catalog file inside!"
+msgstr "Файл бэкапа повреждён, не найден файл каталога внутри архива!"
+
+#: pyrengine/backups.py:90
+msgid "Backup file is broken, XML catalog is broken!"
+msgstr "Файл бэкапа повреждён, файл каталога повреждён!"
+
+#: pyrengine/backups.py:109
+msgid "Unknown XML format of catalog file."
+msgstr "Формат файла каталога не является корректным XML."
+
+#: pyrengine/backups.py:114
+msgid "Unsupported backup version: “{0}”!"
+msgstr "Версия бэкапа «{0}» не поддерживается!"
+
+#: pyrengine/backups.py:136
+msgid "Backup file is broken: settings block not found"
+msgstr "Файл бэкапа повреждён, блок «settings» не обнаружен"
+
+#: pyrengine/backups.py:154
+msgid "Backup file is broken: users block not found"
+msgstr "Файл бэкапа повреждён, блок «users» не обнаружен"
+
+#: pyrengine/backups.py:203 pyrengine/backups.py:316
+msgid "Backup file is broken: articles block not found"
+msgstr "Файл бэкапа повреждён, блок «articles» не обнаружен"
+
+#: pyrengine/backups.py:367 pyrengine/backups.py:370
+msgid ""
+"Unable to restore backup: database error, maybe your backup file is "
+"corrupted"
+msgstr ""
+"Не удалось восстановить бэкап, ошибка базы данных, вероятно файл бэкапа "
+"повреждён"
+
+#: pyrengine/admin/routes.py:113
+msgid "Invalid input data"
+msgstr ""
+
+#: pyrengine/blog/routes.py:63
+msgid "Latest articles"
+msgstr "Недавние статьи"
+
+#: pyrengine/blog/routes.py:91 pyrengine/templates/base.jinja2:15
+msgid "Latest articles feed"
+msgstr "Лента недавних статей"
+
+#: pyrengine/blog/routes.py:228
+msgid "User not found"
+msgstr "Пользователь не найден"
+
+#: pyrengine/blog/routes.py:254
+msgid "New article title"
+msgstr "Название новой статьи"
+
+#: pyrengine/blog/routes.py:286 pyrengine/blog/routes.py:338
+msgid "Article with the same shortcut already exists."
+msgstr "Статья с таким шорткатом уже существует"
+
+#: pyrengine/blog/routes.py:460
+msgid "Field is required."
+msgstr "Поле обязательно нужно заполнить."
+
+#: pyrengine/blog/routes.py:465
+msgid "Invalid date format."
+msgstr "Некорректный формат даты."
+
+#: pyrengine/blog/routes.py:516
+msgid "Empty comment body is not allowed."
+msgstr "Пустой комментарий не разрешён."
+
+#: pyrengine/blog/routes.py:550
+msgid "Answering to not approved comment"
+msgstr "Нельзя ответить на неподтверждённый комментарий"
+
+#: pyrengine/templates/base.jinja2:26
+msgid "Powered by pyrengine"
+msgstr "Работает на pyrengine"
+
+#: pyrengine/templates/account/login.jinja2:3
+msgid "Sign in"
+msgstr "Вход"
+
+#: pyrengine/templates/account/login.jinja2:14
+msgid "Login name"
+msgstr "Логин"
+
+#: pyrengine/templates/account/login.jinja2:16
+msgid "Password"
+msgstr "Пароль"
+
+#: pyrengine/templates/account/login.jinja2:18
+msgid "sign in"
+msgstr "войти"
+
+#: pyrengine/templates/admin/backups_list.jinja2:3
+#: pyrengine/templates/admin/backups_list.jinja2:7
+msgid "Backups management"
+msgstr "Управление бэкапами"
+
+#: pyrengine/templates/admin/backups_list.jinja2:9
+msgid "Backup blog now"
+msgstr "Забэкапить сейчас"
+
+#: pyrengine/templates/admin/backups_list.jinja2:12
+msgid "Restoring backup, please wait"
+msgstr "Восстановление бэкапа, пожалуйста ждите"
+
+#: pyrengine/templates/admin/backups_list.jinja2:13
+msgid "Creating backup, please wait"
+msgstr "Создание бэкапа, пожалуйста\tждите"
+
+#: pyrengine/templates/admin/backups_list.jinja2:15
+msgid "Backup archives"
+msgstr "Архивы бэкапов"
+
+#: pyrengine/templates/admin/backups_list.jinja2:17
+msgid "Click backup file name to download."
+msgstr "Нажмите на имя файла бэкапа, чтобы его скачать."
+
+#: pyrengine/templates/admin/backups_list.jinja2:20
+#: pyrengine/templates/admin/files_list.jinja2:38
+msgid "Select/deselect all files"
+msgstr "Выделить/снять выделение со всех файлов"
+
+#: pyrengine/templates/admin/backups_list.jinja2:22
+msgid "Backup filename"
+msgstr "Имя файла бэкапа"
+
+#: pyrengine/templates/admin/backups_list.jinja2:23
+#: pyrengine/templates/admin/files_list.jinja2:43
+msgid "File size"
+msgstr "Размер файла"
+
+#: pyrengine/templates/admin/backups_list.jinja2:29
+msgid "restore"
+msgstr "восстановить"
+
+#: pyrengine/templates/admin/backups_list.jinja2:30
+msgid "Download backup"
+msgstr "Скачать бэкап"
+
+#: pyrengine/templates/admin/backups_list.jinja2:31
+#: pyrengine/templates/admin/files_list.jinja2:54
+msgid "{0} bytes"
+msgstr "{0} байтов"
+
+#: pyrengine/templates/admin/backups_list.jinja2:38
+#: pyrengine/templates/admin/files_list.jinja2:60
+msgid "delete selected"
+msgstr "удалить выделенное"
+
+#: pyrengine/templates/admin/base.jinja2:3
+msgid "admin area"
+msgstr "администраторская"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:4
+#: pyrengine/templates/admin/edit_file_props.jinja2:7
+msgid "Edit file properties"
+msgstr "Редактирование свойств файла"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:7
+#: pyrengine/templates/admin/files_list.jinja2:4
+#: pyrengine/templates/admin/files_list.jinja2:8
+#: pyrengine/templates/widgets/actions.jinja2:7
+msgid "Files management"
+msgstr "Управление файлами"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:12
+#: pyrengine/templates/admin/files_list.jinja2:19
+msgid ""
+"Name of the file (required, case-sensitive, if file with that name exists"
+" it will be replaced)"
+msgstr ""
+"Имя файла (обязательно, зависит от регистра, если файл с таким именем "
+"существует, он будет заменён)"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:12
+#: pyrengine/templates/admin/files_list.jinja2:19
+msgid "File will be accessed using specified name"
+msgstr "Файл будет доступен по указанному имени"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:14
+#: pyrengine/templates/admin/files_list.jinja2:21
+msgid "File access type"
+msgstr "Тип доступа к файлу"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:14
+#: pyrengine/templates/admin/files_list.jinja2:21
+msgid "What should happen when user open URL to the file in web browser"
+msgstr ""
+"Что должно произойти, когда пользователь обратится к файлу по его URL "
+"через браузер"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:14
+#: pyrengine/templates/admin/files_list.jinja2:21
+msgid "display file download dialog (suitable for documents, archives)"
+msgstr "показывать диалог сохранения (подходит для архивов, документов)"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:14
+#: pyrengine/templates/admin/files_list.jinja2:21
+msgid "leave processing to web browser (suitable for pictures)"
+msgstr "пусть браузер сам решает, что делать (подходит для картинок)"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:16
+msgid "File content type"
+msgstr "Тип файла (content type)"
+
+#: pyrengine/templates/admin/edit_file_props.jinja2:19
+msgid "submit"
+msgstr "отправить"
+
+#: pyrengine/templates/admin/files_list.jinja2:15
+msgid "Choose file to upload"
+msgstr "Выберите файл"
+
+#: pyrengine/templates/admin/files_list.jinja2:17
+msgid "<- First choose file (other fields will be filled automatically)"
+msgstr "← Сначала выберите файл, а другие поля будут заполнены автоматически"
+
+#: pyrengine/templates/admin/files_list.jinja2:24
+#: pyrengine/templates/admin/files_list.jinja2:33
+msgid "upload file"
+msgstr "закачать файл"
+
+#: pyrengine/templates/admin/files_list.jinja2:26
+msgid "cancel"
+msgstr "отменить"
+
+#: pyrengine/templates/admin/files_list.jinja2:41
+msgid "Filename"
+msgstr "Имя файла"
+
+#: pyrengine/templates/admin/files_list.jinja2:42
+msgid "Content type"
+msgstr "Тип файла"
+
+#: pyrengine/templates/admin/files_list.jinja2:49
+#: pyrengine/templates/blog/article_snippet.jinja2:27
+#: pyrengine/templates/blog/index.jinja2:11
+#: pyrengine/templates/blog/view_article.jinja2:35
+#: pyrengine/templates/widgets/pages.jinja2:3
+msgid "edit"
+msgstr "править"
+
+#: pyrengine/templates/admin/files_list.jinja2:50
+msgid "Download file"
+msgstr "Скачать файл"
+
+#: pyrengine/templates/admin/settings.jinja2:4
+#: pyrengine/templates/admin/settings.jinja2:8
+msgid "Site settings"
+msgstr "Настройки сайта"
+
+#: pyrengine/templates/admin/settings.jinja2:36
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:22
+#: pyrengine/templates/blog/edit_article.jinja2:35
+#: pyrengine/templates/blog/view_article.jinja2:79
+msgid "save"
+msgstr "сохранить"
+
+#: pyrengine/templates/admin/settings.jinja2:44
+msgid "General"
+msgstr "Общие"
+
+#: pyrengine/templates/admin/settings.jinja2:45
+msgid "Blog title"
+msgstr "Заголовок блога"
+
+#: pyrengine/templates/admin/settings.jinja2:46
+msgid "Base blog address"
+msgstr "Базовый URL блога"
+
+#: pyrengine/templates/admin/settings.jinja2:46
+msgid ""
+"URL that will be used in all external communications (notification "
+"messages for example)"
+msgstr ""
+"URL, который будет использоваться во внешних коммуникациях (уведомления "
+"по почте, например)"
+
+#: pyrengine/templates/admin/settings.jinja2:47
+msgid "Copyright string"
+msgstr "Строка копирайта"
+
+#: pyrengine/templates/admin/settings.jinja2:47
+msgid ""
+"A string displayed at the bottom of each blog page, just before \"Powered"
+" by pyrengine\""
+msgstr ""
+"Строка, отображаемая в нижней части каждой страницы блога, прямо перед "
+"надписью «Работает на pyrengine"
+
+#: pyrengine/templates/admin/settings.jinja2:48
+msgid "Number of elements on a page"
+msgstr "Сколько элементов на странице"
+
+#: pyrengine/templates/admin/settings.jinja2:48
+msgid "How much elements (articles etc) display on single page"
+msgstr "Сколько элементов (например, статей) показывать на одной странице"
+
+#: pyrengine/templates/admin/settings.jinja2:49
+msgid "Picture preview width"
+msgstr "Ширина превьюшки для картинки"
+
+#: pyrengine/templates/admin/settings.jinja2:49
+msgid ""
+"Width of automatically generated preview to be used as smaller copy of "
+"original picture."
+msgstr ""
+"Ширина автоматически сгенерённой превьюшки, которая будет использоваться "
+"в качестве уменьшенной копии картинки"
+
+#: pyrengine/templates/admin/settings.jinja2:50
+msgid "[N/A] Google Analytics(tm) ID"
+msgstr "[N/A] Google Analytics™ ID"
+
+#: pyrengine/templates/admin/settings.jinja2:50
+msgid ""
+"Your google analytics ID, value like \"UA-12345678-9\", to disable Google"
+" Analytics just clear the field"
+msgstr ""
+"Идентификатор вашего аккаунта в системе Google Analytics™, значение типа "
+"«UA-12345678-9», чтобы отключить аналитику, очистите это поле"
+
+#: pyrengine/templates/admin/settings.jinja2:51
+msgid "Blog timezone"
+msgstr "Часовой пояс блога"
+
+#: pyrengine/templates/admin/settings.jinja2:51
+msgid ""
+"Timezone to be used for time and date values on the site, "
+"<strong>must</strong> be tzdb-compatible string value like "
+"\"Asia/Novosibirsk\" or \"UTC\"."
+msgstr ""
+"Название часового пояса (в формате tzdb!), например «Asia/Novosibirsk» "
+"или «UTC»."
+
+#: pyrengine/templates/admin/settings.jinja2:52
+msgid "Site language"
+msgstr "Язык сайта"
+
+#: pyrengine/templates/admin/settings.jinja2:53
+msgid "Site theme"
+msgstr "Тема оформления сайта"
+
+#: pyrengine/templates/admin/settings.jinja2:53
+msgid "Default theme"
+msgstr "Тема по умолчанию"
+
+#: pyrengine/templates/admin/settings.jinja2:55
+msgid "Site search widget"
+msgstr "Виджет поиска по сайту"
+
+#: pyrengine/templates/admin/settings.jinja2:57
+msgid "HTML/JavaScript code for the site search widget"
+msgstr "HTML/JavaScript код для виджета поиска"
+
+#: pyrengine/templates/admin/settings.jinja2:57
+msgid ""
+"You should enter HTML code in this text box you received from the "
+"external search provider. To delete site search from the pages just clear"
+" the field."
+msgstr ""
+"Вы должны ввести в это поле HTML-код, полученный вами от поискового "
+"провайдера. Чтобы удалить виджет поиска, просто очистите это поле."
+
+#: pyrengine/templates/admin/settings.jinja2:59
+msgid "Notifications"
+msgstr "Уведомления"
+
+#: pyrengine/templates/admin/settings.jinja2:61
+msgid "Email address for system notifications"
+msgstr "Адрес электронной почты для системных уведомлений"
+
+#: pyrengine/templates/admin/settings.jinja2:61
+msgid ""
+"Email address for the system notification: user added, comment added for "
+"moderation etc"
+msgstr ""
+"Адрес электронной почты, на который будут рассылаться уведомления о "
+"добавлении нового пользователя, новом комментарии и т.п."
+
+#: pyrengine/templates/admin/settings.jinja2:62
+msgid "Email address to be used as sender address"
+msgstr ""
+"Адрес электронной почты, который будет использоваться в качестве адреса "
+"отправителя"
+
+#: pyrengine/templates/admin/settings.jinja2:62
+msgid "This email will be used as FROM address for notification messages"
+msgstr "Этот адрес будет использован в качестве адреса отправителя для уведомлений"
+
+#: pyrengine/templates/admin/settings.jinja2:65
+msgid "Select notifications you want to receive"
+msgstr "Выберите, какие уведомления вы хотите получать"
+
+#: pyrengine/templates/admin/settings.jinja2:67
+msgid "new comment added (including comment moderation requests)"
+msgstr "добавлен новый комментарий (включая требующий модерации)"
+
+#: pyrengine/templates/admin/settings.jinja2:68
+msgid "[N/A] new user registered"
+msgstr "N/A] зарегистрировался новый пользователь"
+
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:4
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:7
+msgid "Widget \"Pinned posts\" parameters"
+msgstr "Параметры виджета «Избранные посты»"
+
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:14
+msgid "Pages list"
+msgstr "Список страниц"
+
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:14
+msgid ""
+"One site definition per line, empty lines are ignored. Incorrect lines "
+"are ignored."
+msgstr ""
+"По одному определению веб-страницы на строку. Некорректные строки "
+"игнорируются"
+
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:16
+msgid ""
+"Every line defines one page, here is the sample: "
+"<code><pre>!http://google.com ! Google web search\n"
+"!http://yandex.ru ! Search in Yandex</pre></code>"
+msgstr ""
+
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:18
+msgid ""
+"You can use any other character as delimiter instead of "
+"<strong>!</strong>, e.g. pipe \"|\":<code><pre>|http://google.com | "
+"Google web search\n"
+"|http://yandex.ru | Search in Yandex</pre></code>"
+msgstr ""
+"Каждая строка задаёт один сайт, например: <code><pre>!http://google.com !"
+" Google web search\n"
+"!http://yandex.ru ! Search in Yandex</pre></code>"
+
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:19
+msgid "The main idea is simple: first character in the line is delimiter."
+msgstr "Главная идея проста: первый символ в строке — это разделитель."
+
+#: pyrengine/templates/blog/article_snippet.jinja2:8
+msgid "Guest:"
+msgstr "Гость:"
+
+#: pyrengine/templates/blog/article_snippet.jinja2:10
+#: pyrengine/templates/blog/index.jinja2:17
+msgid "DATE_TIME_SHORT"
+msgstr "%%Y-%%m-%%d в %%H:%%M"
+
+#: pyrengine/templates/blog/article_snippet.jinja2:12
+#: pyrengine/templates/blog/comments_moderation.jinja2:20
+msgid "IP address:"
+msgstr "IP адрес:"
+
+#: pyrengine/templates/blog/article_snippet.jinja2:14
+#: pyrengine/templates/blog/comments_moderation.jinja2:22
+msgid "X-Forwarded-For"
+msgstr ""
+
+#: pyrengine/templates/blog/article_snippet.jinja2:16
+msgid "Email:"
+msgstr ""
+
+#: pyrengine/templates/blog/article_snippet.jinja2:22
+msgid "reply to this comment"
+msgstr "ответить на этот комментарий"
+
+#: pyrengine/templates/blog/article_snippet.jinja2:25
+#: pyrengine/templates/blog/comments_moderation.jinja2:28
+msgid "approve"
+msgstr "одобрить"
+
+#: pyrengine/templates/blog/article_snippet.jinja2:28
+#: pyrengine/templates/blog/comments_moderation.jinja2:29
+#: pyrengine/templates/blog/index.jinja2:12
+#: pyrengine/templates/blog/view_article.jinja2:36
+msgid "delete"
+msgstr "удалить"
+
+#: pyrengine/templates/blog/comments_moderation.jinja2:3
+#: pyrengine/templates/blog/comments_moderation.jinja2:6
+msgid "Comments moderation"
+msgstr "Модерация комментариев"
+
+#: pyrengine/templates/blog/comments_moderation.jinja2:18
+msgid "E-mail"
+msgstr "Электронная почта"
+
+#: pyrengine/templates/blog/comments_moderation.jinja2:19
+#: pyrengine/templates/blog/view_article.jinja2:75
+msgid "Visitor website"
+msgstr "Веб-сайт"
+
+#: pyrengine/templates/blog/comments_moderation.jinja2:24
+msgid "link"
+msgstr "ссылка"
+
+#: pyrengine/templates/blog/comments_moderation.jinja2:33
+msgid "expand..."
+msgstr "раскрыть…"
+
+#: pyrengine/templates/blog/edit_article.jinja2:4
+#: pyrengine/templates/widgets/actions.jinja2:5
+msgid "Write a new article"
+msgstr "Написать статью"
+
+#: pyrengine/templates/blog/edit_article.jinja2:4
+msgid "Edit article"
+msgstr "Править статью"
+
+#: pyrengine/templates/blog/edit_article.jinja2:9
+msgid "Subject (required)"
+msgstr "Тема (обязательно)"
+
+#: pyrengine/templates/blog/edit_article.jinja2:10
+msgid "Shortcut (required)"
+msgstr "Шорткат (обязательно)"
+
+#: pyrengine/templates/blog/edit_article.jinja2:10
+msgid ""
+"Short string (part of the URL), alphanumeric characters and “-” are "
+"recommended."
+msgstr ""
+"Короткая строка (часть URL), рекомендуются алфавитно-цифровые символы и "
+"«-»."
+
+#: pyrengine/templates/blog/edit_article.jinja2:11
+msgid "Publishing date and time"
+msgstr "Дата-время публикации"
+
+#: pyrengine/templates/blog/edit_article.jinja2:11
+msgid "Format: YYYY-MM-DD HH:MM"
+msgstr "Формат: ГГГГ-ММ-ДД ЧЧ:ММ"
+
+#: pyrengine/templates/blog/edit_article.jinja2:12
+msgid "Tags (comma separated)"
+msgstr "Теги (через запятую)"
+
+#: pyrengine/templates/blog/edit_article.jinja2:14
+msgid ""
+"Article body (required, markup: *<em>italic</em>*, "
+"**<strong>bold</strong>**, [hyperlink](http://example.com) <a "
+"href=\"{0}\" target=\"_blank\" class=\"new-window\">more</a>)"
+msgstr ""
+"Тело статьи (обязательно, разметка *<em>курсив</em>*, "
+"**<strong>полужирная</strong>**, [ссылка](http://example.com) <a "
+"href=\"/static/article-markup-tip-en.html\" target=\"_blank\" class"
+"=\"new-window\">ещё</a>)"
+
+#: pyrengine/templates/blog/edit_article.jinja2:18
+msgid "Inline code (monospace text)"
+msgstr "Код внутри строки (моноширинный текст)"
+
+#: pyrengine/templates/blog/edit_article.jinja2:19
+msgid "Emphasis (italic)"
+msgstr "Курсив"
+
+#: pyrengine/templates/blog/edit_article.jinja2:20
+msgid "Strong text (bold)"
+msgstr "Полужирный текст"
+
+#: pyrengine/templates/blog/edit_article.jinja2:21
+msgid "Quotation"
+msgstr "Цитирование"
+
+#: pyrengine/templates/blog/edit_article.jinja2:22
+#: pyrengine/templates/blog/edit_article.jinja2:23
+#: pyrengine/templates/blog/edit_article.jinja2:24
+msgid "Insert dinkus"
+msgstr "Вставить разделитель"
+
+#: pyrengine/templates/blog/edit_article.jinja2:25
+msgid "Insert shell code"
+msgstr "Вставить shell code"
+
+#: pyrengine/templates/blog/edit_article.jinja2:26
+msgid "Insert paragraph color text"
+msgstr "Вставить цветной параграф"
+
+#: pyrengine/templates/blog/edit_article.jinja2:27
+msgid "Insert hyperlink template"
+msgstr "Вставить шаблон гиперссылки"
+
+#: pyrengine/templates/blog/edit_article.jinja2:31
+msgid "draft article"
+msgstr "черновик"
+
+#: pyrengine/templates/blog/edit_article.jinja2:31
+msgid "if checked article will not be available to everyone"
+msgstr "если включено, сохранённая статья будет видна только вам"
+
+#: pyrengine/templates/blog/edit_article.jinja2:32
+msgid "allow visitors comments"
+msgstr "разрешить комментарии"
+
+#: pyrengine/templates/blog/edit_article.jinja2:34
+msgid "save and continue editing"
+msgstr "сохранить в фоновом режиме"
+
+#: pyrengine/templates/blog/edit_article.jinja2:36
+msgid "preview"
+msgstr "предварительный просмотр"
+
+#: pyrengine/templates/blog/index.jinja2:3
+msgid "Recent articles"
+msgstr "Недавние статьи"
+
+#: pyrengine/templates/blog/index.jinja2:15
+#: pyrengine/templates/blog/view_article.jinja2:39
+msgid "draft"
+msgstr "черновик"
+
+#: pyrengine/templates/blog/index.jinja2:20
+msgid "continue reading"
+msgstr "читать дальше"
+
+#: pyrengine/templates/blog/index.jinja2:24
+#: pyrengine/templates/blog/index.jinja2:26
+msgid "Comments:"
+msgstr "Комментарии:"
+
+#: pyrengine/templates/blog/index.jinja2:29
+msgid "not approved comments:"
+msgstr "ещё не одобренных комментариев"
+
+#: pyrengine/templates/blog/index.jinja2:37
+msgid "No articles here."
+msgstr "Ничего нет."
+
+#: pyrengine/templates/blog/index.jinja2:41
+msgid "<-newer"
+msgstr "←новые"
+
+#: pyrengine/templates/blog/index.jinja2:42
+msgid "older->"
+msgstr "старые→"
+
+#: pyrengine/templates/blog/view_article.jinja2:53
+msgid "Comments"
+msgstr "Комментарии"
+
+#: pyrengine/templates/blog/view_article.jinja2:68
+msgid "Display name of the visitor"
+msgstr "Отображаемое имя посетителя"
+
+#: pyrengine/templates/blog/view_article.jinja2:69
+msgid "Comment date and time"
+msgstr "Дата-время комментария"
+
+#: pyrengine/templates/blog/view_article.jinja2:70
+msgid "subscribed"
+msgstr "подписан"
+
+#: pyrengine/templates/blog/view_article.jinja2:72
+msgid "Email address of the visitor"
+msgstr "Адрес электропочты посетителя"
+
+#: pyrengine/templates/blog/view_article.jinja2:73
+msgid "Visitor ip address"
+msgstr "IP-адрес посетителя"
+
+#: pyrengine/templates/blog/view_article.jinja2:74
+msgid "Visitor X-Forwarded-For address"
+msgstr "Адрес из заголовка X-Forwarded-For"
+
+#: pyrengine/templates/blog/view_article.jinja2:80
+msgid "close"
+msgstr "закрыть"
+
+#: pyrengine/templates/blog/view_article.jinja2:92
+msgid "leave comment"
+msgstr "оставить комментарий"
+
+#: pyrengine/templates/blog/view_article.jinja2:99
+msgid ""
+"Comment text (allowed markup: *<em>italic</em>*, "
+"**<strong>bold</strong>**, [hyperlink](http://example.com) or "
+"&lt;http://example.com>)"
+msgstr ""
+"Текст комментария (допустимая разметка: *<em>курсив</em>*, "
+"**<strong>полужирная</strong>**, [ссылка](http://example.com) или  "
+"&lt;http://example.com>)"
+
+#: pyrengine/templates/blog/view_article.jinja2:101
+msgid ""
+"<strong>Please pay attention that comments with more than one hyperlink "
+"(including field \"website\") will be put on moderation.</strong>"
+msgstr ""
+"Посетители-анонимы, обратите внимение, что более чем одна гиперссылка в "
+"тексте (включая оную из поля «веб-сайт») приведёт к блокировке "
+"комментария для модерации. Зайдите на сайта с использованием аккаунта на "
+"twitter, например, чтобы посылать комментарии без этого ограничения."
+
+#: pyrengine/templates/blog/view_article.jinja2:106
+#: pyrengine/templates/blog/view_article.jinja2:114
+msgid "Subscribe to answers"
+msgstr "Подписаться на ответы"
+
+#: pyrengine/templates/blog/view_article.jinja2:112
+msgid "Your name (required, 50 characters or less)"
+msgstr "Имя (обязательно, 50 символов или меньше)"
+
+#: pyrengine/templates/blog/view_article.jinja2:113
+msgid ""
+"Your email (optional, won't be published, required if you want to receive"
+" answers)"
+msgstr "Опциональный email, на который получать ответы (не будет опубликован)"
+
+#: pyrengine/templates/blog/view_article.jinja2:115
+msgid "Your website"
+msgstr "Веб-сайт"
+
+#: pyrengine/templates/blog/view_article.jinja2:117
+msgid "post comment"
+msgstr "отправить комментарий"
+
+#: pyrengine/templates/blog/view_article.jinja2:122
+msgid "commenting is disabled"
+msgstr "комментирование отключено"
+
+#: pyrengine/templates/email/admin_new_comment.jinja2:1
+msgid "EMAIL# ADMIN SUBJECT NEW COMMENT TO THE ARTICLE"
+msgstr ""
+"Новый комментарий к статье «%%(article_title)s» от посетителя "
+"%%(comment_author_name)s на сайте «%%(site_title)s»"
+
+#: pyrengine/templates/email/admin_new_comment.jinja2:5
+msgid "EMAIL# ADMIN NEW COMMENT TO THE ARTICLE"
+msgstr ""
+"Новый комментарий к статье <a "
+"href=\"%%(article_url)s\">%%(article_title)s</a>."
+
+#: pyrengine/templates/email/admin_new_comment.jinja2:7
+msgid "EMAIL# ADMIN VISITOR ON DATE WROTE THE FOLLOWING"
+msgstr ""
+"<strong>{comment_author_name} (%%(comment_author_email)s</strong> "
+"<em>%%(comment_date)s</em> написал:"
+
+#: pyrengine/templates/email/admin_new_comment.jinja2:11
+#: pyrengine/templates/email/comment_response.jinja2:11
+msgid "EMAIL# DIRECT LINK TO COMMENT"
+msgstr "<a href=\"%%(comment_url)s\">Прямая ссылка на комментарий.</a>"
+
+#: pyrengine/templates/email/comment_response.jinja2:1
+#, fuzzy
+msgid "EMAIL# SUBJECT SOMEONE ANSWERED TO YOUR COMMENT"
+msgstr "<a href=\"%%(comment_url)s\">Прямая ссылка на комментарий.</a>"
+
+#: pyrengine/templates/email/comment_response.jinja2:5
+#, fuzzy
+msgid "EMAIL# USER ANSWERED TO YOUR COMMENT FOR THE ARTICLE"
+msgstr ""
+"Новый комментарий к статье <a "
+"href=\"%%(article_url)s\">%%(article_title)s</a>."
+
+#: pyrengine/templates/email/comment_response.jinja2:7
+#, fuzzy
+msgid "EMAIL# VISITOR ON DATE WROTE THE FOLLOWING"
+msgstr ""
+"<strong>{comment_author_name} (%%(comment_author_email)s</strong> "
+"<em>%%(comment_date)s</em> написал:"
+
+#: pyrengine/templates/email/email_verification.jinja2:1
+msgid "EMAIL# SUBJECT PLEASE VERIFY YOUR EMAIL ADDRESS FOR THE SITE"
+msgstr "Подтвердите свой email на сайте «{site_title}»"
+
+#: pyrengine/templates/email/email_verification.jinja2:5
+msgid "EMAIL# TO RECEIVE NOTIFICATIONS FROM SITE YOU MUST CONFIRM THIS ADDRESS"
+msgstr ""
+"Чтобы получать уведомления с сайта «{site_title}», вы должны подтвердить "
+"свой email <em>{email}</em>."
+
+#: pyrengine/templates/email/email_verification.jinja2:7
+msgid "EMAIL# PLEASE CLICK HERE TO VERIFY ADDRESS"
+msgstr "Нажмите здесь, чтобы подтвердить email"
+
+#: pyrengine/templates/widgets/actions.jinja2:4
+msgid "Actions"
+msgstr "Действия"
+
+#: pyrengine/templates/widgets/actions.jinja2:6
+msgid "Comments moderation ({})"
+msgstr "Модерация комментариев"
+
+#: pyrengine/templates/widgets/actions.jinja2:8
+msgid "Backups"
+msgstr "Бэкапы"
+
+#: pyrengine/templates/widgets/actions.jinja2:9
+msgid "Settings"
+msgstr "Настройки"
+
+#: pyrengine/templates/widgets/actions.jinja2:10
+msgid "Sign out"
+msgstr "Выйти"
+
+#: pyrengine/templates/widgets/pages.jinja2:2
+msgid "Pinned posts"
+msgstr "Избранные посты"
+
+#~ msgid "AJAX_REQUEST_ERROR"
+#~ msgstr ""
+
+#~ msgid "Write new article"
+#~ msgstr ""
+
+#~ msgid "if checked article will be visible to blog administrator only"
+#~ msgstr ""
+
+#~ msgid "EMAIL# ADMIN SUBJECT NEW COMMENT TO THE ARTICLE"
+#~ msgstr ""
+#~ "Новый комментарий к статье «{article_title}»"
+#~ " от посетителя {comment_author_name} на "
+#~ "сайте «{site_title}»"
+
+#~ msgid "EMAIL# ADMIN NEW COMMENT TO THE ARTICLE"
+#~ msgstr ""
+#~ "Новый комментарий к статье <a "
+#~ "href=\"{article_url}\">{article_title}</a>."
+
+#~ msgid "EMAIL# DIRECT LINK TO COMMENT"
+#~ msgstr "<a href=\"{comment_url}\">Прямая ссылка на комментарий.</a>"
+
+#~ msgid "file URL"
+#~ msgstr ""
+
+#~ msgid "Tags:"
+#~ msgstr ""
+

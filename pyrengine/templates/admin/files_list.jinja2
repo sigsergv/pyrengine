@@ -1,0 +1,63 @@
+{% extends 'admin/base.jinja2' %}
+{% import 'macros/forms.jinja2' as forms %}
+
+{% block title %}{{ _('Files management') }}{% endblock %}
+
+{% block content %}
+
+<h2>{{ _('Files management') }}</h2>
+
+<div id="upload-file-form" style="display:none" class="inline-form">
+<form action="{{ url_for('admin.upload_file') }}" id="upload-form"\
+  method="post" onsubmit="return pyrengine.checkFileUploadForm('{{ url_for('admin.upload_file_check_ajax') }}','upload-form');"
+  enctype="multipart/form-data">
+  <dl class="form">
+    <dt>{{ _('Choose file to upload') }}</dt>
+    <dd><input type="file" id="fid-filedata" onchange="pyrengine.uploadFileSelected()" name="filedata"/> 
+    <span class="hint">{{ _('<- First choose file (other fields will be filled automatically)') }}</span></dd>
+
+    {{ forms.textfield('filename', '', _('Name of the file (required, case-sensitive, if file with that name exists it will be replaced)'), _('File will be accessed using specified name')) }}
+
+    {{ forms.selector(dltype, 'auto', _('File access type'), _('What should happen when user open URL to the file in web browser'), [ ('download', _('display file download dialog (suitable for documents, archives)')), ('auto', _('leave processing to web browser (suitable for pictures)'))]) }}
+    
+    <dd style="padding-top: 8px;">
+      <button class="button" onclick="$('#upload-form').submit(); return false;"><span class="fa fa-upload"></span> {{ _('upload file') }}</button>
+
+    <a href="#" onclick="$('#upload-file-form').hide(0); $('#show-upload-form-link').show(0); return false;">{{ _('cancel') }}</a></dd>
+  </dl>
+  
+</form>
+</div>
+
+<div>
+  <button class="button" id="show-upload-form-link" onclick="$('#upload-file-form').show(0); $('#show-upload-form-link').hide(0); return false;"><span class="fa fa-upload"></span> {{ _('upload file') }}</button>
+</div>
+
+<table border="0" class="items-list" cellpadding="0" cellspacing="0" id="files-table">
+<tr>
+    <th><input type="checkbox" onclick="pyrengine.selectDeselectAll('files-table');" id="select-all-files-cb" title="{{ _('Select/deselect all files') }}"/></th>
+    <th></th>
+    <th></th>
+    <th>{{ _('Filename') }}</th>
+    <th>{{ _('Content type') }}</th>
+    <th>{{ _('File size') }}</th>
+</tr>
+
+{% for f in files %}
+<tr id="list-tr-{{ f.id }}" data-row-value="{{ f.id }}">
+  <td><input type="checkbox" value="{{ f.id }}" class="list-cb"/></td>
+  <td><a href="{{ url_for('admin.edit_file_props', file_id=f.id) }}" class="border-icon" title="{{ _('edit') }}"><span class="fa fa-pencil"></span></a>
+  <td><a href="{{ url_for('blog.download_file', filename=f.name) }}" title="{{ _('Download file') }}"><span class="fa fa-download"></span></a></td>
+  </td>
+  <td>{{ f.name }}</td>
+  <td class="files-content-type" title="{{ f.content_type }}">{{ f.content_type }}</td> 
+  <td><acronym title="{{ _('{0} bytes').format(f.size) }}">{{ f.size | filesizeformat }}</td>
+</tr>
+{% endfor %}
+</table>
+
+<div>
+  <button class="button" onclick="pyrengine.deleteSelectedFiles('files-table', '{{ url_for('admin.delete_files_ajax') }}'); return false;" id="delete-selected-btn"><span class="fa fa-trash-o"></span> {{ _('delete selected') }}</button>
+</div>
+
+{% endblock %}

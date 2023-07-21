@@ -1,0 +1,72 @@
+{% extends 'admin/base.jinja2' %}
+{% import 'macros/forms.jinja2' as forms %}
+
+{% block title %}{{ _('Site settings') }}{% endblock %}
+
+
+{% block content %}
+<h2>{{ _('Site settings') }}</h2>
+
+<script language="javascript">
+(function(){
+    var settingsTop = 0;
+
+    $(document).ready(function() {
+        settingsTop = $('#settings-save-block').offset().top;
+        // alert(settingsTop);
+    });
+    $(window).scroll(function() {
+        var top = $(window).scrollTop();
+        var el = $('#settings-save-button-block');
+        if (top <= settingsTop) {
+            el.removeClass('save-box-panel-float');
+            el.addClass('save-box-panel-top');
+        } else {
+            el.addClass('save-box-panel-float');
+            el.removeClass('save-box-panel-top');
+        }
+        //.css('top', $(this).scrollTop() + "px")
+    });
+})();
+</script>
+
+<div id="settings-save-block">
+  <div id="settings-save-button-block">
+    <div class="save-button">
+      <button class="button" onclick="$('#form').submit(); return false;"><span class="fa fa-save"></span> {{ _('save') }}</button>
+    </div>
+    <div class="notify" style="display:none;" id="eid-notify"></div>
+  </div>
+</div>
+
+<form id="form" action="/" onsubmit="pyrengine.saveSettingsAjax('{{ url_for('admin.settings_save_ajax') }}'); return false;">
+<dl class="form">
+  <h3>{{ _('General') }}</h3>
+  {{ forms.textfield('site_title', settings['site_title'], _('Blog title'), '', errors['site_title']) }}
+  {{ forms.textfield('site_base_url', settings['site_base_url'], _('Base blog address'), _('URL that will be used in all external communications (notification messages for example)'), errors['site_base_url']) }}
+  {{ forms.textfield('site_copyright', settings['site_copyright'], _('Copyright string'), _('A string displayed at the bottom of each blog page, just before "Powered by pyrengine"'), errors['site_copyright']) }}
+  {{ forms.textfield('elements_on_page', settings['elements_on_page'], _('Number of elements on a page'), _('How much elements (articles etc) display on single page'), errors['elements_on_page']) }}
+  {{ forms.textfield('image_preview_width', settings['image_preview_width'], _('Picture preview width'), _('Width of automatically generated preview to be used as smaller copy of original picture.'), errors['image_preview_width']) }}
+  {{ forms.textfield('google_analytics_id', settings['google_analytics_id'], _('[N/A] Google Analytics(tm) ID'), _('Your google analytics ID, value like "UA-12345678-9", to disable Google Analytics just clear the field'), errors['google_analytics_id']) }}
+  {{ forms.textfield('timezone', settings['timezone'], _('Blog timezone'), _('Timezone to be used for time and date values on the site, <strong>must</strong> be tzdb-compatible string value like "Asia/Novosibirsk" or "UTC".'), errors['timezone']) }}
+  {{ forms.selector('ui_lang', settings['ui_lang'], _('Site language'), '', [('en', 'English'), ('ru', 'Русский')]) }}
+  {{ forms.selector('ui_theme', settings['ui_theme'], _('Site theme'), '', [('default', _('Default theme'))]) }}
+
+  <h3>{{ _('Site search widget') }}</h3>
+
+  {{ forms.textarea('site_search_widget_code', settings['site_search_widget_code'], _('HTML/JavaScript code for the site search widget'), _('You should enter HTML code in this text box you received from the external search provider. To delete site search from the pages just clear the field.'), errors['site_search_widget_code'], 'height:150px;') }}
+
+  <h3>{{ _('Notifications') }}</h3>
+
+  {{ forms.textfield('admin_notifications_email', settings['admin_notifications_email'], _('Email address for system notifications'), _('Email address for the system notification: user added, comment added for moderation etc'), errors['admin_notifications_email']) }}
+  {{ forms.textfield('notifications_from_email', settings['notifications_from_email'], _('Email address to be used as sender address'), _('This email will be used as FROM address for notification messages'), errors['notifications_from_email']) }}
+
+    
+  <dt>{{ _('Select notifications you want to receive') }}</dt>
+
+  {{ forms.checkbox('admin_notify_new_comments', settings['admin_notify_new_comments'] == 'true', '', _('new comment added (including comment moderation requests)')) }}
+  {{ forms.checkbox('admin_notify_new_user', settings['admin_notify_new_user'] == 'true', '', _('[N/A] new user registered')) }}
+
+</dl>
+</form>
+{% endblock %}
