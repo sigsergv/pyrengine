@@ -1,0 +1,23 @@
+{
+    "folders":
+    [
+        {
+            "follow_symlinks": true,
+            "path": ".",
+            "file_exclude_patterns": [
+                "*.sublime-workspace",
+                "*.mo"
+            ],
+            "folder_exclude_patterns": [
+                "__pycache__",
+                "storage",
+                "data",
+                "*.egg-info",
+                ".venv"
+            ]
+        }
+    ],
+    "settings": {
+        "rulers": [80, 100]
+    }
+}
