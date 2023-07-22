@@ -1,0 +1,32 @@
+# English translations for pyrengine.
+# Copyright (C) 2023 Sergey Stolyarov
+# This file is distributed under the same license as the pyrengine project.
+# Sergey Stolyarov <sergei@regolit.com>, 2023.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: sergei@regolit.com\n"
+"POT-Creation-Date: 2023-07-22 15:38+0700\n"
+"PO-Revision-Date: 2023-07-22 13:13+0700\n"
+"Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
+"Language: en\n"
+"Language-Team: en <LL@li.org>\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Generated-By: Babel 2.12.1\n"
+
+#: app/main/routes.py:10
+msgid "Recent articles"
+msgstr ""
+
+#: app/templates/base.html:22
+msgid "Powered by pyrengine"
+msgstr ""
+
+#: app/templates/widgets/actions.html:2
+msgid "Actions"
+msgstr ""
+
