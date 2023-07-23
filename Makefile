@@ -10,6 +10,9 @@ default:
 run:
 	flask run 
 
+flask-shell:
+	flask shell
+
 babel-collect:
 	pybabel extract -F babel.cfg -o translations/messages.pot app
 	pybabel update -i translations/messages.pot -d translations
@@ -17,4 +20,4 @@ babel-collect:
 babel-compile:
 	pybabel compile -d translations
 
-.PHONY: run babel-collect babel-compile
+.PHONY: run babel-collect babel-compile flask-shell

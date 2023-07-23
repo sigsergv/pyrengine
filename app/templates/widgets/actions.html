@@ -1,3 +1,8 @@
+{% if current_user.is_authenticated %}
 <div class="widget widget-actions">
 <div class="section">{{ _('Actions') }}</div>
+  <div class="action-item"><a href="{{ url_for('main.write_article') }}">{{ _('Write new article') }}</a></div>
+  <div class="action-item"><a href="{{ url_for('admin.files') }}">{{ _('Files management') }}</a></div>
+  <div class="action-item"><a href="#" onclick="pyrengine.logout(); return false;">{{ _('Sign out') }}</a></div>
 </div>
+{% endif %}

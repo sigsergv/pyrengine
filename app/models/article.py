@@ -25,7 +25,7 @@ class Article(db.Model):
     is_draft = db.Column(db.Boolean, default=True)
     is_splitted = db.Column(db.Boolean, default=False)
 
-    comments = db.relationship('Comment')
+    comments = db.relationship('Comment', back_populates='article')
     user = db.relationship('User')
     tags = db.relationship('Tag')
 
@@ -88,7 +88,7 @@ class Comment(db.Model):
     # uf True then all answers to this comment will be send to email
     is_subscribed = db.Column(db.Boolean, default=False)
 
-    article = db.relationship('Article')
+    article = db.relationship('Article', back_populates='comments')
     user = db.relationship('User')
     ## parent = relationship('Comment', remote_side=[id])
     children = db.relationship('Comment', backref=db.backref('parent', remote_side=[id]),

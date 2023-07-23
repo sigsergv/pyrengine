@@ -1,0 +1,13 @@
+(function(){
+
+var translations = {
+	'AJAX_REQUEST_ERROR': '{{ _('AJAX_REQUEST_ERROR') }}'
+};
+
+window._tr = function(s) {
+	if (translations[s]) {
+		return translations[s];
+	}
+	return s;
+}
+})();

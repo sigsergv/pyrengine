@@ -2,14 +2,7 @@ import uuid
 import hashlib
 
 from app.extensions import db
-
-def md5(s):
-    return hashlib.md5(s.encode('utf8')).hexdigest()
-
-
-def sha1(s):
-    return hashlib.sha1(s).hexdigest().encode('utf8')
-
+from app.utils import sha3_224
 
 class User(db.Model):
     __tablename__ = 'pbuser'
@@ -24,65 +17,86 @@ class User(db.Model):
     # user kind (class, type), possible values: "local", "twitter"
     kind = db.Column(db.String(20))
 
-    roles = db.relationship('Role')
+    def is_authenticated(self):
+        return True
 
-    def detach(self):
-        dbsession = Session.object_session(self)
-        if dbsession is None:
-            return
+    def is_anonymous(self):
+        return False
 
-        for x in self.roles:
-            dbsession.expunge(x)
+    def get_id(self):
+        return self.login
 
-        dbsession.expunge(self)
+    def is_active(self):
+        return True
 
-    def has_role(self, r):
-        return r in self.get_roles()
+    # roles = db.relationship('Role')
 
-    def get_roles(self):
-        if self._str_roles is None:
-            self._str_roles = [x.name for x in self.roles]
+    # def detach(self):
+    #     dbsession = Session.object_session(self)
+    #     if dbsession is None:
+    #         return
 
-        return self._str_roles
+    #     for x in self.roles:
+    #         dbsession.expunge(x)
+
+    #     dbsession.expunge(self)
+
+    # def has_role(self, r):
+    #     return r in self.get_roles()
+
+    # def get_roles(self):
+    #     if self._str_roles is None:
+    #         self._str_roles = [x.name for x in self.roles]
+
+    #     return self._str_roles
 
 
 class AnonymousUser:
     kind = 'anonymous'
 
-    def has_role(self, r):
+    def is_authenticated(self):
         return False
 
-anonymous = AnonymousUser()
+    def is_anonymous(self):
+        return True
+
+    def get_id(self):
+        return 'anonymous'
+
+    def is_active(self):
+        return True
+
+# anonymous = AnonymousUser()
 
 
-class Role(db.Model):
-    __tablename__ = 'pbuserrole'
+# class Role(db.Model):
+#     __tablename__ = 'pbuserrole'
 
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('pbuser.id'))
-    name = db.Column(db.String(50))
+#     id = db.Column(db.Integer, primary_key=True)
+#     user_id = db.Column(db.Integer, db.ForeignKey('pbuser.id'))
+#     name = db.Column(db.String(50))
 
-    def __init__(self, id, user_id, name):
-        self.id = id
-        self.user_id = user_id
-        self.name = name
+#     def __init__(self, id, user_id, name):
+#         self.id = id
+#         self.user_id = user_id
+#         self.name = name
 
 
-class VerifiedEmail(db.Model):
-    __tablename__ = 'pbverifiedemail'
+# class VerifiedEmail(db.Model):
+#     __tablename__ = 'pbverifiedemail'
 
-    # stripperd lowcased email address
-    id = db.Column(db.Integer, primary_key=True)
-    email = db.Column(db.Unicode(255), unique=True)
-    is_verified = db.Column(db.Boolean)
-    last_verify_date = db.Column(db.Integer)
-    verification_code = db.Column(db.String(255))
+#     # stripperd lowcased email address
+#     id = db.Column(db.Integer, primary_key=True)
+#     email = db.Column(db.Unicode(255), unique=True)
+#     is_verified = db.Column(db.Boolean)
+#     last_verify_date = db.Column(db.Integer)
+#     verification_code = db.Column(db.String(255))
 
-    def __init__(self, email):
-        self.last_verify_date = int(time())
-        self.email = email
-        self.is_verified = False
-        self.verification_code = str(uuid.uuid4())
+#     def __init__(self, email):
+#         self.last_verify_date = int(time())
+#         self.email = email
+#         self.is_verified = False
+#         self.verification_code = str(uuid.uuid4())
 
 
 # def find_local_user(login, password):
