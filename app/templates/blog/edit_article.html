@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ title }}{% endblock %}
+
+{% block content %}
+<form action="{{ submit_url }}" method="POST" id="form" onsubmit="return pyrengine.articleCheckForm();">
+  <dl class="form">
+    <dt>{{ _('Subject (required)') }}</dt>
+    <div id="error-title" class="error" style="{% if not errors['title'] %}display: none;{% endif %}">{{ errors['title'] }}</div>
+    <dd><input type="text" name="title" id="fid-title" value="{{ form['title'] }}"></dd>
+
+    <dt><acronym title="{{ _('Short string (part of the URL), alphanumeric characters and “-” are recommended.') }}">{{ _('Shortcut (required)') }}</acronym></dt>
+    <div id="error-shortcut" class="error" style="{% if not errors['shortcut'] %}display: none;{% endif %}">{{ errors['shortcut'] }}</div>
+    <dd><input type="text" name="shortcut" id="fid-shortcut" value="{{ form['shortcut'] }}"></dd>
+
+    <dt><acronym title="{{ _('Format: YYYY-MM-DD HH:MM') }}">{{ _('Publishing date and time') }}</acronym></dt>
+    <div id="error-published" class="error" style="{% if not errors['published'] %}display: none;{% endif %}">{{ errors['published'] }}</div>
+    <dd><input type="text" name="published" id="fid-published" value="{{ form['published'] }}"></dd>
+
+    <dt>{{ _('Tags (comma separated)') }}</dt>
+    <div id="error-tags" class="error" style="display: none;"></div>
+    <dd><input type="text" name="tags" id="fid-tags" value="{{ form['tags'] }}"></dd>
+
+    <div>{{ _('Article body (required, markup: *<em>italic</em>*, **<strong>bold</strong>**, [hyperlink](http://example.com) <a href="/static/article-markup-tip-en.html" target="_blank" class="new-window">more</a>)') }}</div>
+
+    <!-- body text control buttons -->
+    <div class="editor-text-controls">
+      <span class="button" onclick="pyrengine.editorWrap('fid-body', '`');" title="{{ _('Inline code (monospace text)') }}">`$x`</span>
+      <span class="button" onclick="pyrengine.editorWrap('fid-body', '*');" title="{{ _('Emphasis (italic)') }}"><em>I</em>&nbsp;</span>
+      <span class="button" onclick="pyrengine.editorWrap('fid-body', '**');" title="{{ _('Strong text (bold)') }}"><strong>B</strong></span>
+      <span class="button" onclick="pyrengine.editorBlockquote('fid-body');" title="{{ _('Quotation') }}">&gt;</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '❈ ❈ ❈ {@class=center}\n');" title="{{ _('Insert dinkus') }}">❈ ❈ ❈</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '────────────────── {@class=center}\n');" title="{{ _('Insert dinkus') }}">──</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '══════════════════ {@class=center}\n');" title="{{ _('Insert dinkus') }}">══</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '~~~~~\n:::shell-session\n[user@shell]% \n~~~~~\n');" title="{{ _('Insert shell code') }}">sh $</span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '{@style=color:red;}');" title="{{ _('Insert paragraph color text') }}"><span style="color: red;">red</span></span>
+      <span class="button" onclick="pyrengine.editorReplace('fid-body', '[TEXT](https://)');" title="{{ _('Insert hyperlink template') }}">&lt;a&gt;</span>
+    </div>
+
+    <div id="error-body" class="error" style="{% if not errors['body'] %}display: none;{% endif %}">{{ errors['body'] }}</div>
+    <dd><textarea type="text" name="body" id="fid-body">{{ form['body'] }}</textarea></dd>
+
+    <dd><label><input type="checkbox" name="is_draft" id="fid-is_draft"{% if form['is_draft'] %} checked="checked"{% endif %}> <acronym title="{{ _('if checked article will not be available to everyone') }}">{{ _('draft article') }}</acronym></label></dd>
+    <dd><label><input type="checkbox" name="is_commentable" id="fid-is_commentable"{% if form['is_commentable'] %} checked="checked"{% endif %}> {{ _('allow visitors comments') }}</label></dd>
+    
+    <dd>{% if mode == 'edit' %}<button class="button" onclick="pyrengine.saveArticle('{{ save_url_ajax }}'); return false;">{{ _('save and continue editing') }}</button> {% endif %}<button class="button" onclick="$('#form').submit(); return false;"><span class="fa fa-save"></span> {{ _('save') }}</button>
+
+    <button class="button" onclick="pyrengine.previewArticle(); return false;"><span class="fa fa-flask"></span> {{ _('preview') }}</button></dd>
+  </dl>
+</form>
+{% endblock %}
