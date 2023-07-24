@@ -1,5 +1,5 @@
 __pycache__
 .venv
 *.sublime-workspace
-translations/messages.pot
+app/translations/messages.pot
 *.mo

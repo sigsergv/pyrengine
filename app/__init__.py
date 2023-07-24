@@ -1,6 +1,6 @@
 import click
 
-from flask import Flask
+from flask import Flask, g
 from flask_migrate import Migrate
 from flask_babel import Babel
 from flask.cli import with_appcontext
@@ -22,7 +22,7 @@ def create_app():
     # Initialize Flask extensions here
     db.init_app(app)
     migrate = Migrate(app, db)
-    babel = Babel(app)
+    babel = Babel(app, locale_selector=get_locale)
     login_manager.init_app(app)
 
     # Register blueprints here
@@ -50,9 +50,28 @@ def init_db_command():
     # command will fail if database is already populated.
     db.session.add(models.Config(id='site_copyright', value='Copyright © 2023 SITE OWNER'))
     db.session.add(models.Config(id='site_title', value='YOUR BLOG'))
+    db.session.add(models.Config(id='elements_on_page', value='10'))
+    db.session.add(models.Config(id='timezone', value='Asia/Novosibirsk'))
+    db.session.add(models.Config(id='site_base_url', value='http://127.0.0.1:5000'))
+    db.session.add(models.Config(id='admin_notifications_email', value='test@example.org'))
+    db.session.add(models.Config(id='site_search_widget_code', value=''))
+    db.session.add(models.Config(id='notifications_from_email', value='no-reply@example.com'))
+    db.session.add(models.Config(id='admin_notify_new_comments', value='false'))
+    db.session.add(models.Config(id='admin_notify_new_user', value='false'))
+    # db.session.add(models.Config(id='comment_answer_msg_subject_tpl', value='{comment_author_name} is answered on subscribed message on site {site_title}'))
+    # db.session.add(models.Config(id='comment_answer_msg_body_tpl', value='On {comment_date} visitor {comment_author_name}  is answered on your comment on the article “{article_link}”:\n\n================\n{comment_text}\n================\n\nDirect link to comment: {comment_link}'))
+    db.session.add(models.Config(id='admin_notify_new_comment_subject_tpl', value='New comment to the article “{article_title}” {comment_author_name} {comment_author_email} — {site_title}'))
+    db.session.add(models.Config(id='admin_notify_new_comment_body_tpl', value='On {comment_date} visitor {comment_author_name} (email: {comment_author_email}) left comment on the article\n“{article_link}”:\n\n================\n{comment_text}\n================\n\nDirect link to comment: {comment_link}'))
+    db.session.add(models.Config(id='image_preview_width', value='300'))
+    db.session.add(models.Config(id='google_analytics_id', value=''))
+    db.session.add(models.Config(id='ui_lang', value='ru'))
+    db.session.add(models.Config(id='ui_theme', value='default'))
     db.session.add(models.User(login='admin', password=hash_password('setup'), display_name='Administrator',
         email='admin@example.org', kind='local'))
 
     db.session.commit()
     click.echo('Initialized the database.')
 
+def get_locale():
+    ui_lang = models.config.get('ui_lang')
+    return ui_lang

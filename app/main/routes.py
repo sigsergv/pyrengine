@@ -10,8 +10,7 @@ from flask_login import (login_user, logout_user, login_required, current_user)
 @bp.route('/')
 def index():
     ctx = {
-        'h': jinja_helpers,
-        'title': _('Recent articles')
+        'h': jinja_helpers
     }
     return render_template('posts/index.html', **ctx)
 
@@ -25,8 +24,7 @@ def write_article():
 def login():
     if request.method == 'GET':
         ctx = {
-            'h': jinja_helpers,
-            'title': _('Recent articles')
+            'h': jinja_helpers
         }
         return render_template('account/login.html', **ctx)
     else:
@@ -47,7 +45,6 @@ def login():
         if u is None:
             ctx = {
                 'h': jinja_helpers,
-                'title': _('Recent articles'),
                 'error': _('User not found'),
                 'login': login
             }

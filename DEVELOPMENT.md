@@ -7,7 +7,7 @@ Base OS: Debian 12 Bookworm.
 Install required packages:
 
 ~~~~
-$ sudo apt install python3 python3-dev postgresql-15
+$ sudo apt install python3 python3-dev postgresql-15 libpq-dev
 ~~~~
 
 Install venv:
@@ -47,6 +47,11 @@ Configure database in linux:
 ~~~~
 $ sudo -u postgres createdb pyrengine
 $ sudo -u postgres createuser pyrengine_user -P
+$ sudo -u postgres psql pyrengine postgres
+psql (15.3 (Debian 15.3-0+deb12u1))
+Type "help" for help.
+
+pyrengine=# GRANT USAGE, CREATE ON SCHEMA public TO pyrengine_user;
 ~~~~
 
 In macos Posgtres.app:
@@ -75,6 +80,19 @@ Using macos Posgtres.app:
 $ /Applications/Postgres.app/Contents/Versions/15/bin/psql -h 127.0.0.1 pyrengine pyrengine_user
 ~~~~
 
+
+## Initialize application database
+
+Use this commands to initialize database and populate with sample data:
+
+~~~~
+(.venv) $ flask db upgrade
+(.venv) $ flask init-db
+~~~~
+
+
+# Development runtime
+
 ## Start application in development mode
 
 Start project:
@@ -87,12 +105,11 @@ Start project:
 (.venv) $ flask run
 ~~~~
 
-Or via Makefile:
+Or via Makefile (no need to initialize environment variables):
 
 ~~~~
 (.venv) $ make run
 ~~~~
-
 
 Start Flask shell:
 
@@ -102,8 +119,14 @@ Start Flask shell:
 (.venv) $ flask shell
 ~~~~
 
+Or via Makefile (no need to initialize environment variables):
 
-# Translation and internationalization
+~~~~
+(.venv) $ make flask-shell
+~~~~
+
+
+## Translation and internationalization
 
 See detailed help at <https://python-babel.github.io/flask-babel/>.
 
@@ -120,10 +143,29 @@ Compile translations:
 ~~~~
 
 
+## Reset and database cleanup
+
+To quickly drop all databases use this command in `psql` console:
+
+~~~~
+DO $$ DECLARE
+    r RECORD;
+BEGIN
+    -- if the schema you operate on is not "current", you will want to
+    -- replace current_schema() in query with 'schematodeletetablesfrom'
+    -- *and* update the generate 'DROP...' accordingly.
+    FOR r IN (SELECT tablename FROM pg_tables WHERE schemaname = current_schema()) LOOP
+        EXECUTE 'DROP TABLE IF EXISTS ' || quote_ident(r.tablename) || ' CASCADE';
+    END LOOP;
+END $$;
+~~~~
 
 # Working with SQLAlchemy
 
 ## Initialize migrations
+
+This task should be performed during early stages of development only. When database schema is finished
+commit the directory `migrations`.
 
 ~~~~
 (.venv) $ rm -rf migrations

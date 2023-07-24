@@ -14,10 +14,10 @@ flask-shell:
 	flask shell
 
 babel-collect:
-	pybabel extract -F babel.cfg -o translations/messages.pot app
-	pybabel update -i translations/messages.pot -d translations
+	pybabel extract -F babel.cfg -o app/translations/messages.pot app
+	pybabel update -i app/translations/messages.pot -d app/translations
 
 babel-compile:
-	pybabel compile -d translations
+	pybabel compile -d app/translations
 
 .PHONY: run babel-collect babel-compile flask-shell

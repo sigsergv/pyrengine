@@ -10,7 +10,7 @@
   <link rel="stylesheet" type="text/css" href="/static/styles/blog.regolit.com/blog.css">
   <link rel="stylesheet" type="text/css" href="/static/font-awesome/css/font-awesome.min.css">
   <!--rel rss-->
-  <title>{{ title }} — {{ h.get_config('site_title') }}</title>
+  <title>{% block title %}{% endblock %} — {{ h.get_config('site_title') }}</title>
   <!--google analytics-->
 </head>
 
