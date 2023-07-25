@@ -7,7 +7,7 @@
   <script language="javascript" src="/static/js/tr-{{get_locale()}}.js"></script>
   <script language="javascript" src="/static/js/pyrengine.js"></script>
   <link rel="icon" type="image/png" href="/favicon.png">
-  <link rel="stylesheet" type="text/css" href="/static/styles/blog.regolit.com/blog.css">
+  <link rel="stylesheet" type="text/css" href="/static/styles/{{ h.get_config('ui_theme') }}/blog.css">
   <link rel="stylesheet" type="text/css" href="/static/font-awesome/css/font-awesome.min.css">
   <!--rel rss-->
   <title>{% block title %}{% endblock %} — {{ h.get_config('site_title') }}</title>
@@ -29,8 +29,8 @@
     <!-- <include file="/widgets/pages.mako"/> -->
     <!-- <include file="/widgets/search.mako"/> -->
     <!-- <include file="/widgets/account.mako"/> -->
-    {% include 'widgets/actions.html' %}
-    <!-- <include file="/widgets/tags_cloud.mako"/> -->
+    {% include 'widgets/actions.jinja2' %}
+    {% include 'widgets/tags_cloud.jinja2' %}
   </div>
 
 

@@ -9,6 +9,26 @@ var tr = function(s) {
 
 window.pyrengine = {};
 
+/**
+ * Update element text, show it and then hide after timeout
+ */
+var pyrengine_notify = function(elem, text, afterfunc, timeout) {
+	if (!timeout) {
+		timeout = 3000;
+	}
+	elem.html(text);
+	elem.slideDown(300).delay(timeout).slideUp(300);
+};
+
+var pyrengine_field_error = function(field, msg) {
+	if (msg === null) {
+		$('#error-'+field).html('').hide(0);
+	} else {
+		$('#error-'+field).html(msg).show(0);
+	}
+};
+
+
 window.pyrengine.logout = function() {
 	$.ajax({
 		url: '/logout',
@@ -105,14 +125,33 @@ window.pyrengine.saveArticle = function(url) {
 		params['is_commentable'] = 1;
 	}
 
+	pyrengine_field_error('body', null);
+	pyrengine_field_error('title', null);
+	pyrengine_field_error('shortcut', null);
+	pyrengine_field_error('published', null);
+
 	$.ajax({
 		url: url,
 		type: 'POST',
 		data: params,
 		dataType: 'json'
 	}).done(function(data) {
-		if (!data.errors) {
-			Pyrone_notify($('#eid-article-notify'), tr('ARTICLE_SAVED'));
+		if (data.success) {
+			pyrengine_notify($('#eid-article-notify'), tr('ARTICLE_SAVED'));
+		} else {
+			pyrengine_notify($('#eid-article-warning'), tr('ARTICLE_SAVE_FAILED'));
+			var error_messages = {};
+			$.each(data.errors, function(ind, e) {
+				var field = e[0],
+					msg = e[1];
+				if (!error_messages[field]) {
+					error_messages[field] = [];
+				}
+				error_messages[field].push(msg)
+			});
+		}
+		for (field in error_messages) {
+			pyrengine_field_error(field, error_messages[field].join('<br>'))
 		}
 		save_button.removeAttr('disabled');
 		// return focus back to editing window
@@ -129,7 +168,7 @@ window.pyrengine.previewArticle = function() {
 	var body = $('#fid-body').val();
 
 	$.ajax({
-		url: '/article-preview',
+		url: '/article/preview',
 		type: 'POST',
 		data: {
 			body: body
@@ -141,5 +180,162 @@ window.pyrengine.previewArticle = function() {
 		alert(tr('AJAX_REQUEST_ERROR'));
 	});
 };
+
+
+window.pyrengine.replyToArticleComment = function(comment_id) {
+	var comment_block = $('#c-'+comment_id),
+		comment_form = $('#eid-comment-form'),
+		link = $('#eid-leave-comment-link-bottom'),
+		parent_comment_field = $('#fid-parent-comment');
+	
+	if (!comment_block.get(0)) {
+		return;
+	}
+	comment_block.append(comment_form);
+	
+	if (comment_id === -1) {
+		link.hide(0);
+		parent_comment_field.val('');
+	} else {
+		parent_comment_field.val(comment_id);
+		link.show(0);
+	}
+	$('#fid-comment-body').focus();
+};
+
+
+window.pyrengine.submitArticleCommentEditForm = function(url_template) {
+	var comment_id = $('#c-edit-comment_id').val();
+	
+	if (comment_id == '') {
+		return;
+	}
+	
+	var submit_url = url_template.replace(/666/, comment_id),
+		params = {},
+		fields = ['body', 'name', 'email', 'website', 'date', 'ip', 'xffip'];
+	
+	$.each(fields, function(ind, fn) {
+		params[fn] = $('#c-edit-'+fn).val();
+	});
+	
+	if ($('#c-edit-is_subscribed').prop('checked')) {
+		params['is_subscribed'] = 'true';
+	}
+	
+	$.ajax({
+		url: submit_url,
+		type: 'POST',
+		data: params,
+		dataType: 'json'
+	}).done(function(json) {
+		inner = $('#c-inner-'+comment_id),
+		edit_form = $('#c-edit');
+	
+		edit_form.hide(0);
+		inner.show(0);
+		
+		// re-render comment
+		if (json.rendered) {
+			inner.html(json.rendered);
+		}
+	}).fail(function() {
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});
+};
+
+
+window.pyrengine.cancelArticleCommentEditForm = function() {
+	var comment_id = $('#c-edit-comment_id').val(),
+		inner = $('#c-inner-'+comment_id),
+		edit_form = $('#c-edit');
+	
+	edit_form.hide(0);
+	inner.show(0);
+};
+
+
+window.pyrengine.postArticleComment = function() {
+	var body = $('#fid-comment-body').val();
+	var e = $('#eid-comment-error');
+	
+	if (body == '') {
+		var body_el = $('#fid-comment-body');
+		body_el.focus();
+		pyrengine_notify(e, tr('COMMENT_BODY_IS_REQUIRED'));
+		return;
+	}
+	
+	var f = $('#eid-comment-form'),
+		url = f.prop('action') + '/ajax',
+		article_id = $('#fid-article_id').val(),
+		parent = $('#fid-parent-comment').val(),
+		display_name = $('#fid-comment-displayname').val(),
+		email = $('#fid-comment-email').val(),
+		website = $('#fid-comment-website').val(),
+		is_subscribed = $('#fid-is_subscribed').prop('checked');
+	
+	var params = {s: article_id};
+	params[article_id.substring(3, 14)] = body;
+	params[article_id.substring(4, 12)] = parent;
+	params[article_id.substring(0, 5)] = display_name;
+	params[article_id.substring(13, 25)] = email;
+	params[article_id.substring(15, 21)] = website;
+	if (typeof is_subscribed != 'undefined') {
+		params[article_id.substring(19, 27)] = 'true';
+	}
+	
+	var display_name_field = $('#fid-comment-displayname');
+	
+	if (display_name_field.prop('type') == 'text' && display_name == '') {
+		display_name_field.focus();
+		pyrengine_notify(e, tr('COMMENT_DISPLAY_NAME_IS_REQUIRED'));
+		return;
+	}
+	
+	var disable_ids = ['fid-comment-displayname', 'fid-comment-email', 'fid-comment-website',
+		'fid-comment-body', 'eid-post-comment-button', 'fid-is_subscribed'];
+
+	function setFieldsDisabled(disable) {
+		$.each(disable_ids, function(ind, fid) {
+			$('#'+fid).prop('disabled', disable);
+		});
+	}
+
+	setFieldsDisabled(true);
+	var backup_button_title = $('#eid-post-comment-button').val();
+
+	$('#eid-post-comment-button').val(tr('POSTING_COMMENT'));
+	$('body').css('cursor', 'progress');
+
+	$.ajax({
+		url: url,
+		type: 'POST',
+		data: params,
+		dataType: 'json'
+	}).done(function(json) {
+		if (json.error) {
+			alert(json.error);
+			setFieldsDisabled(false);
+			$('#eid-post-comment-button').val(backup_button_title);
+			$('body').css('cursor', 'default');
+			return;
+		}
+		if (!json.approved) {
+			// clear fields
+			$('#fid-comment-body').val('');
+			pyrengine_notify($('#eid-comment-notify'), 
+				tr('COMMENT_IS_WAITING_FOR_APPROVAL'), $.noop, 10000);
+			// display alert
+		} else {
+			window.location.replace(json.url);
+		}		
+	}).fail(function(){
+		alert(tr('AJAX_REQUEST_ERROR'));
+		setFieldsDisabled(false);
+		$('#eid-post-comment-button').val(backup_button_title);
+		$('body').css('cursor', 'default');
+	});
+}
 
 })();

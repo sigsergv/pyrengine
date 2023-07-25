@@ -1,6 +1,8 @@
 from time import time
 from app.extensions import db
-from app.utils import markup
+from app.utils import (markup, cache)
+from sqlalchemy import func
+from math import log as lg
 
 from .user import User
 
@@ -105,3 +107,45 @@ class Comment(db.Model):
     def __init__(self):
         # self.user_id = None
         self.published = int(time())
+
+
+def get_public_tags_cloud(force_reload=False):
+    """
+    return tags cloud: list of tuples-pairs ("tag", "tag_weight"), tag_weight - is a number divisible by 5,
+    0 <= tag_weight <= 100
+    Only for published articles.
+    """
+    value = cache.get_value('tags_cloud')
+    if value is None or len(value) == 0 or force_reload:
+        dbsession = db.session
+        q = dbsession.query(func.count(Tag.id), Tag.tag).join(Article).filter(Article.is_draft==False).group_by(Tag.tag)
+        items = list()
+        counts = list()
+        total = 0
+        for rec in q.all():
+            if rec[0] <= 0:
+                continue
+            total += rec[0]
+            items.append((rec[1], int(rec[0])))
+            counts.append(int(rec[0]))
+
+        if len(counts) != 0:
+            min_count = min(counts)
+            max_counts = max(counts)
+
+            if min_count == max_counts:
+                # i.e. all tags counts are the same, so they have the same weight
+                weights = [(x[0], 50) for x in items]
+            else:
+                lmm = lg(max_counts) - lg(min_count)
+
+                weights = [(x[0], (lg(x[1])-lg(min_count)) / lmm) for x in items]
+                weights = [(x[0], int(5*(int(100*x[1])/5))) for x in weights]
+
+            value = weights
+        else:
+            value = []
+
+        cache.set_value('tags_cloud', value)
+
+    return value

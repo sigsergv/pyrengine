@@ -7,6 +7,7 @@ import pytz
 import datetime
 import calendar
 
+from flask import url_for
 
 CHAR_SAMPLE = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
@@ -29,7 +30,6 @@ def timestamp_to_str(ts, fmt='%Y-%m-%d %H:%M'):
     """
     Convert UTC seconds to time string in local timezone
     """
-    print(ts)
     tz = get_config('timezone')
     tts = datetime.datetime.utcfromtimestamp(ts)  # seconds -> time_struct
     utc_dt = pytz.utc.localize(tts).astimezone(tz)  # utc time -> local time
@@ -49,4 +49,19 @@ def str_to_timestamp(t_str):
     dt_utc = dt_loc.astimezone(pytz.utc)
 
     return calendar.timegm(dt_utc.timetuple())
+
+
+def user_has_permission(user, p):
+    if p == 'editor' and user.is_authenticated():
+        return True
+
+    if p == 'admin' and user.is_authenticated():
+        return True
+
+    return False
+
+
+def article_url(article):
+    return url_for('blog.view_article', shortcut_date=article.shortcut_date, shortcut=article.shortcut)
+
 

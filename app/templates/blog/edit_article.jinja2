@@ -1,4 +1,4 @@
-{% extends 'base.html' %}
+{% extends 'base.jinja2' %}
 
 {% block title %}{% if mode == 'create' %}{{ _('Write a new article') }}{% else %}{{ _('Edit article') }}{% endif %}{% endblock %}
 
@@ -40,10 +40,10 @@
     <div id="error-body" class="error" style="{% if not errors['body'] %}display: none;{% endif %}">{{ errors['body'] }}</div>
     <dd><textarea type="text" name="body" id="fid-body">{{ form['body'] }}</textarea></dd>
 
-    <dd><label><input type="checkbox" name="is_draft" id="fid-is_draft"{% if form['is_draft'] %} checked="checked"{% endif %}> <acronym title="{{ _('if checked article will be visible to blog administrator only') }}">{{ _('draft article') }}</acronym></label></dd>
-    <dd><label><input type="checkbox" name="is_commentable" id="fid-is_commentable"{% if form['is_commentable'] %} checked="checked"{% endif %}> {{ _('allow visitors comments') }}</label></dd>
-    
-    <dd>{% if mode == 'edit' %}<button class="button" onclick="pyrengine.saveArticle('{{ save_url_ajax }}'); return false;">{{ _('save and continue editing') }}</button> {% endif %}<button class="button" onclick="$('#form').submit(); return false;"><span class="fa fa-save"></span> {{ _('save') }}</button>
+    {{ h.form_checkbox('is_draft', None, form['is_draft'], None, label=_('draft article'), label_help=_('if checked article will not be available to everyone')) | safe }}
+    {{ h.form_checkbox('is_commentable', None, form['is_commentable'], None, label=_('allow visitors comments')) | safe }}
+
+    <dd>{% if mode == 'edit' %}<button class="button" onclick="pyrengine.saveArticle('{{ url_for('blog.edit_article_ajax', article_id=article_id) }}'); return false;">{{ _('save and continue editing') }}</button> {% endif %}<button class="button" onclick="$('#form').submit(); return false;"><span class="fa fa-save"></span> {{ _('save') }}</button>
 
     <button class="button" onclick="pyrengine.previewArticle(); return false;"><span class="fa fa-flask"></span> {{ _('preview') }}</button></dd>
   </dl>
