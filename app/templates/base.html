@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <script language="javascript" src="/static/js/jquery.min.js"></script>
   <script language="javascript" src="/static/js/jquery/field-selection.js"></script>
-  <script language="javascript" src="{{ url_for('main.js_translations') }}"></script>
+  <script language="javascript" src="/static/js/tr-{{get_locale()}}.js"></script>
   <script language="javascript" src="/static/js/pyrengine.js"></script>
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" type="text/css" href="/static/styles/blog.regolit.com/blog.css">
@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div id="topbar"><div class="title"><a href="{{ url_for('main.index') }}">SITE TITLE</a></div></div>
+  <div id="topbar"><div class="title"><a href="{{ url_for('blog.index') }}">SITE TITLE</a></div></div>
 
   <div id="contentbar">
     <div id="content">

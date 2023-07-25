@@ -1,30 +1,75 @@
 import re
 
 from flask import (render_template, make_response, request, redirect, url_for)
-from app.main import bp
-from app.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp)
+from app.blog import bp
+from app.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, markup)
 from app.models import (User, Article, Tag)
+from app.models.config import get as get_config
 from app.extensions import db
-from app import jinja_helpers
+
 from flask_babel import gettext as _
 from flask_login import (login_user, logout_user, login_required, current_user)
 from time import time
 
 @bp.route('/')
 def index():
+    """
+    Display list of articles sorted by publishing date ascending,
+    show rendered previews, not complete articles
+    """
     ctx = {
-        'h': jinja_helpers
+        'articles': [],
+        'prev_page': None,
+        'next_page': None
     }
+    page_size = int(get_config('elements_on_page'))
+    start_page = 0
+    if 'start' in request.args:
+        try:
+            start_page = int(request.args['start'])
+            if start_page < 0:
+                start_page = 0
+        except ValueError:
+            start_page = 0
+    
+    dbsession = db.session
+    user = current_user
+
+    q = dbsession.query(Article).options(db.joinedload(Article.tags)).options(db.joinedload(Article.user)).order_by(Article.published.desc())
+    if user.is_anonymous:
+        q = q.filter(Article.is_draft==False)
+
+    ctx['articles'] = q[(start_page * page_size):(start_page+1) * page_size + 1]
+
+    #for article in ctx['articles']:
+    #    log.debug(article.shortcut_date)
+
+    if len(ctx['articles']) > page_size:
+        ctx['prev_page'] = route_url('blog_latest', request, _query=[('start', start_page+1)])
+        ctx['articles'].pop()
+
+    ctx['next_page'] = None
+    if start_page > 0:
+        ctx['next_page'] = route_url('blog_latest', request, _query=[('start', start_page-1)])
+
+    ctx['page_title'] = _('Latest articles')
+
     return render_template('blog/index.html', **ctx)
+
+
+@bp.route('/tag/<tag>')
+def articles_by_tag():
+    return ''
+
+@bp.route('/markup-help')
+def markup_help():
+    return render_template('blog/markup-help.html')
 
 
 @bp.route('/login', methods=['GET', 'POST'])
 def login():
     if request.method == 'GET':
-        ctx = {
-            'h': jinja_helpers
-        }
-        return render_template('account/login.html', **ctx)
+        return render_template('account/login.html')
     else:
         form = request.form
         login = request.form.get('login')
@@ -42,13 +87,12 @@ def login():
         
         if u is None:
             ctx = {
-                'h': jinja_helpers,
                 'error': _('User not found'),
                 'login': login
             }
             return render_template('account/login.html', **ctx)
         else:
-            return redirect(url_for('main.index'))
+            return redirect(url_for('blog.index'))
 
 
 @bp.route('/logout', methods=['POST'])
@@ -62,11 +106,9 @@ def logout():
 @login_required
 def write_article():
     ctx = {
-        'h': jinja_helpers,
-        'title': _('Write new article'),
-        'submit_url': url_for('main.write_article'),
+        'submit_url': url_for('blog.write_article'),
         'mode': 'create',
-        'save_url_ajax': url_for('main.save_article_ajax'),
+        'save_url_ajax': url_for('blog.save_article_ajax'),
         'errors': {}
     }
     if request.method == 'GET':
@@ -87,13 +129,14 @@ def write_article():
 
         article = Article()
         article.user = current_user
-        for field_name in ('title', 'shortcut', 'body', 'is_draft', 'is_commentable'):
+        for field_name in ('title', 'shortcut', 'is_draft', 'is_commentable'):
             setattr(article, field_name, ctx['form'][field_name])
         article.published = str_to_timestamp(ctx['form']['published'])
         date_re = re.compile('^([0-9]{4})-([0-9]{2})-([0-9]{2}) ([0-9]{2}):([0-9]{2})$')
         mo = date_re.match(ctx['form']['published'])
         v = [int(x) for x in mo.groups()[0:3]]
         article.shortcut_date = '{0:04d}/{1:02d}/{2:02d}'.format(*v)
+        article.set_body(ctx['form']['body'])
         
         dbsession = db.session
         q = dbsession.query(Article).filter(Article.shortcut_date == article.shortcut_date)\
@@ -126,16 +169,31 @@ def write_article():
             return render_template('blog/edit_article.html', **ctx)
 
 
+@bp.route('/article/<article_id>/edit', methods=['POST'])
+@login_required
+def edit_article(article_id):
+    return 'EDIT'
+
+
+@bp.route('/article/<article_id>/delete', methods=['POST'])
+@login_required
+def delete_article_ajax(article_id):
+    return 'DELETE'
+
+
 @bp.route('/save-article', methods=['POST'])
+@login_required
 def save_article_ajax():
     pass
 
 
-@bp.route('/js/translations')
-def js_translations():
-    resp = make_response(render_template('js_translations.html'))
-    resp.headers['Content-type'] = 'text/javascript; charset=utf-8'
-    return resp
+@bp.route('/article/preview', methods=['POST'])
+@login_required
+def preview_article():
+    preview, complete = markup.render_text_markup(request.form['body'])
+
+    return complete
+
 
 
 def _verify_article_form(form):

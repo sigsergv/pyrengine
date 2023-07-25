@@ -29,6 +29,7 @@ def timestamp_to_str(ts, fmt='%Y-%m-%d %H:%M'):
     """
     Convert UTC seconds to time string in local timezone
     """
+    print(ts)
     tz = get_config('timezone')
     tts = datetime.datetime.utcfromtimestamp(ts)  # seconds -> time_struct
     utc_dt = pytz.utc.localize(tts).astimezone(tz)  # utc time -> local time

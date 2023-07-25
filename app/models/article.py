@@ -1,5 +1,6 @@
 from time import time
 from app.extensions import db
+from app.utils import markup
 
 from .user import User
 
@@ -29,30 +30,30 @@ class Article(db.Model):
     user = db.relationship('User')
     tags = db.relationship('Tag')
 
-    def __init__(self, shortcut='', title='', is_draft=True, is_commentable=True):
-        self.shortcut = shortcut
-        self.title = title
-        self.is_commentable = is_commentable
-        self.is_draft = is_draft
+    # def __init__(self, shortcut='', title='', is_draft=True, is_commentable=True):
+    #     self.shortcut = shortcut
+    #     self.title = title
+    #     self.is_commentable = is_commentable
+    #     self.is_draft = is_draft
 
-        self.published = int(time())  # UTC time
-        self.updated = int(time())  # UTC time
+    #     self.published = int(time())  # UTC time
+    #     self.updated = int(time())  # UTC time
     
-    # def set_body(self, body):
-    #     """
-    #     Set article body: parse, render, split into preview and complete parts etc
-    #     """
-    #     self.body = body
-    #     preview, complete = markup.render_text_markup(body)
-    #     self.rendered_preview = preview
-    #     self.rendered_body = complete
-    #     self.is_splitted = preview is not None
+    def set_body(self, body):
+        """
+        Set article body: parse, render, split into preview and complete parts etc
+        """
+        self.body = body
+        preview, complete = markup.render_text_markup(body)
+        self.rendered_preview = preview
+        self.rendered_body = complete
+        self.is_splitted = preview is not None
 
-    # def get_html_preview(self):
-    #     if self.rendered_preview is None:
-    #         return self.rendered_body
-    #     else:
-    #         return self.rendered_preview
+    def get_html_preview(self):
+        if self.rendered_preview is None:
+            return self.rendered_body
+        else:
+            return self.rendered_preview
 
 
 class Tag(db.Model):

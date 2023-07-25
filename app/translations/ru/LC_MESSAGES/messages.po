@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-07-24 12:41+0700\n"
+"POT-Creation-Date: 2023-07-25 16:17+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: ru\n"
@@ -19,16 +19,32 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/main/routes.py:48
+#: app/blog/routes.py:55
+msgid "Latest articles"
+msgstr ""
+
+#: app/blog/routes.py:90
 msgid "User not found"
+msgstr ""
+
+#: app/blog/routes.py:116
+msgid "New article title"
+msgstr ""
+
+#: app/blog/routes.py:146
+msgid "Article with the same shortcut already exists."
+msgstr ""
+
+#: app/blog/routes.py:204
+msgid "Field is required."
+msgstr ""
+
+#: app/blog/routes.py:209
+msgid "Invalid date format."
 msgstr ""
 
 #: app/templates/base.html:24
 msgid "Powered by pyrengine"
-msgstr ""
-
-#: app/templates/js_translations.html:4
-msgid "AJAX_REQUEST_ERROR"
 msgstr ""
 
 #: app/templates/account/login.html:3
@@ -47,16 +63,147 @@ msgstr "Пароль"
 msgid "sign in"
 msgstr ""
 
-#: app/templates/posts/index.html:3
+#: app/templates/blog/edit_article.html:3 app/templates/widgets/actions.html:4
+msgid "Write a new article"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:3
+msgid "Edit article"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:8
+msgid "Subject (required)"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:12
+msgid ""
+"Short string (part of the URL), alphanumeric characters and “-” are "
+"recommended."
+msgstr ""
+
+#: app/templates/blog/edit_article.html:12
+msgid "Shortcut (required)"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:16
+msgid "Format: YYYY-MM-DD HH:MM"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:16
+msgid "Publishing date and time"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:20
+msgid "Tags (comma separated)"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:24
+msgid ""
+"Article body (required, markup: *<em>italic</em>*, "
+"**<strong>bold</strong>**, [hyperlink](http://example.com) <a "
+"href=\"{0}\" target=\"_blank\" class=\"new-window\">more</a>)"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:28
+msgid "Inline code (monospace text)"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:29
+msgid "Emphasis (italic)"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:30
+msgid "Strong text (bold)"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:31
+msgid "Quotation"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:32
+#: app/templates/blog/edit_article.html:33
+#: app/templates/blog/edit_article.html:34
+msgid "Insert dinkus"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:35
+msgid "Insert shell code"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:36
+msgid "Insert paragraph color text"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:37
+msgid "Insert hyperlink template"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:43
+msgid "if checked article will be visible to blog administrator only"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:43
+msgid "draft article"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:44
+msgid "allow visitors comments"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:46
+msgid "save and continue editing"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:46
+msgid "save"
+msgstr ""
+
+#: app/templates/blog/edit_article.html:48
+msgid "preview"
+msgstr ""
+
+#: app/templates/blog/index.html:6
 msgid "Recent articles"
 msgstr ""
 
-#: app/templates/widgets/actions.html:3
-msgid "Actions"
+#: app/templates/blog/index.html:14
+msgid "edit"
 msgstr ""
 
-#: app/templates/widgets/actions.html:4
-msgid "Write new article"
+#: app/templates/blog/index.html:15
+msgid "delete"
+msgstr ""
+
+#: app/templates/blog/index.html:18
+msgid "draft"
+msgstr ""
+
+#: app/templates/blog/index.html:20
+msgid "DATE_TIME_SHORT"
+msgstr "%%Y-%%m-%%d в %%H:%%M"
+
+#: app/templates/blog/index.html:23
+msgid "continue reading"
+msgstr ""
+
+#: app/templates/blog/index.html:24
+msgid "Tags:"
+msgstr ""
+
+#: app/templates/blog/index.html:27 app/templates/blog/index.html:29
+msgid "Comments:"
+msgstr ""
+
+#: app/templates/blog/index.html:38
+msgid "<-newer"
+msgstr "←новые"
+
+#: app/templates/blog/index.html:39
+msgid "older->"
+msgstr "старые→"
+
+#: app/templates/widgets/actions.html:3
+msgid "Actions"
 msgstr ""
 
 #: app/templates/widgets/actions.html:5
@@ -66,4 +213,10 @@ msgstr ""
 #: app/templates/widgets/actions.html:6
 msgid "Sign out"
 msgstr ""
+
+#~ msgid "AJAX_REQUEST_ERROR"
+#~ msgstr ""
+
+#~ msgid "Write new article"
+#~ msgstr ""
 

@@ -1,5 +1,12 @@
 (function() {
 
+var tr = function(s) {
+    if (translations[s]) {
+        return translations[s];
+    }
+    return s;
+};
+
 window.pyrengine = {};
 
 window.pyrengine.logout = function() {
@@ -9,7 +16,7 @@ window.pyrengine.logout = function() {
 	}).done(function(){
 		window.location.replace('/');
 	}).fail(function() {
-		alert(_tr('AJAX_REQUEST_ERROR'));
+		alert(tr('AJAX_REQUEST_ERROR'));
 	});
 };
 
@@ -122,7 +129,7 @@ window.pyrengine.previewArticle = function() {
 	var body = $('#fid-body').val();
 
 	$.ajax({
-		url: '/preview/article',
+		url: '/article-preview',
 		type: 'POST',
 		data: {
 			body: body

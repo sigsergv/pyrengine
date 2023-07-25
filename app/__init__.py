@@ -8,7 +8,7 @@ from flask_login import LoginManager
 
 from app.extensions import db
 from app.utils import hash_password
-from app import models
+from app import (models, jinja_helpers)
 
 login_manager = LoginManager()
 
@@ -23,10 +23,12 @@ def create_app():
     db.init_app(app)
     migrate = Migrate(app, db)
     babel = Babel(app, locale_selector=get_locale)
+    app.jinja_env.globals['get_locale'] = get_locale
+    app.jinja_env.globals['h'] = jinja_helpers
     login_manager.init_app(app)
 
     # Register blueprints here
-    from app.main import bp as main_bp
+    from app.blog import bp as main_bp
     from app.admin import bp as admin_bp
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
