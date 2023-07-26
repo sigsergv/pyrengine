@@ -1,4 +1,6 @@
 import click
+import logging
+import os
 
 from flask import Flask, g
 from flask_migrate import Migrate
@@ -8,13 +10,15 @@ from flask_login import LoginManager
 
 from app.extensions import db
 from app.utils import hash_password
-from app import (models, jinja_helpers)
+from app import (models, jinja_helpers, notifications)
 
 login_manager = LoginManager()
 
+# if os.getenv('FLASK_DEBUG') == '1':
+logging.basicConfig(level=logging.DEBUG)
+
 def create_app():
     app = Flask(__name__)
-    #app.config.from_object(config_class)
     app.config.from_envvar('PYRENGINE_SETTINGS')
 
     app.cli.add_command(init_db_command)
@@ -26,6 +30,7 @@ def create_app():
     app.jinja_env.globals['get_locale'] = get_locale
     app.jinja_env.globals['h'] = jinja_helpers
     login_manager.init_app(app)
+    notifications.init_app(app)
 
     # Register blueprints here
     from app.blog import bp as main_bp
@@ -73,6 +78,7 @@ def init_db_command():
 
     db.session.commit()
     click.echo('Initialized the database.')
+
 
 def get_locale():
     ui_lang = models.config.get('ui_lang')

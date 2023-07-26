@@ -52,10 +52,10 @@ def str_to_timestamp(t_str):
 
 
 def user_has_permission(user, p):
-    if p == 'editor' and user.is_authenticated():
+    if p == 'editor' and user.is_authenticated:
         return True
 
-    if p == 'admin' and user.is_authenticated():
+    if p == 'admin' and user.is_authenticated:
         return True
 
     return False
@@ -64,4 +64,7 @@ def user_has_permission(user, p):
 def article_url(article):
     return url_for('blog.view_article', shortcut_date=article.shortcut_date, shortcut=article.shortcut)
 
+
+def normalize_email(email):
+    return email
 

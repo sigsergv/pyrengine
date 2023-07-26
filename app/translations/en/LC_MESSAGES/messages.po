@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-07-25 16:17+0700\n"
+"POT-Creation-Date: 2023-07-26 20:54+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: en\n"
@@ -18,198 +18,312 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/blog/routes.py:55
+#: app/blog/routes.py:60
 msgid "Latest articles"
 msgstr ""
 
-#: app/blog/routes.py:90
+#: app/blog/routes.py:168
 msgid "User not found"
 msgstr ""
 
-#: app/blog/routes.py:116
+#: app/blog/routes.py:194
 msgid "New article title"
 msgstr ""
 
-#: app/blog/routes.py:146
+#: app/blog/routes.py:226 app/blog/routes.py:278
 msgid "Article with the same shortcut already exists."
 msgstr ""
 
-#: app/blog/routes.py:204
+#: app/blog/routes.py:387
 msgid "Field is required."
 msgstr ""
 
-#: app/blog/routes.py:209
+#: app/blog/routes.py:392
 msgid "Invalid date format."
 msgstr ""
 
-#: app/templates/base.html:24
+#: app/blog/routes.py:448
+msgid "Empty comment body is not allowed."
+msgstr ""
+
+#: app/blog/routes.py:485
+msgid "Answering to not approved comment"
+msgstr ""
+
+#: app/templates/base.jinja2:24
 msgid "Powered by pyrengine"
 msgstr ""
 
-#: app/templates/account/login.html:3
+#: app/templates/account/login.jinja2:3
 msgid "Sign in"
 msgstr ""
 
-#: app/templates/account/login.html:14
+#: app/templates/account/login.jinja2:14
 msgid "Login name"
 msgstr ""
 
-#: app/templates/account/login.html:16
+#: app/templates/account/login.jinja2:16
 msgid "Password"
 msgstr ""
 
-#: app/templates/account/login.html:18
+#: app/templates/account/login.jinja2:18
 msgid "sign in"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:3 app/templates/widgets/actions.html:4
+#: app/templates/blog/edit_article.jinja2:3
+#: app/templates/widgets/actions.jinja2:4
 msgid "Write a new article"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:3
+#: app/templates/blog/edit_article.jinja2:3
 msgid "Edit article"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:8
+#: app/templates/blog/edit_article.jinja2:8
 msgid "Subject (required)"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:12
+#: app/templates/blog/edit_article.jinja2:12
 msgid ""
 "Short string (part of the URL), alphanumeric characters and “-” are "
 "recommended."
 msgstr ""
 
-#: app/templates/blog/edit_article.html:12
+#: app/templates/blog/edit_article.jinja2:12
 msgid "Shortcut (required)"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:16
+#: app/templates/blog/edit_article.jinja2:16
 msgid "Format: YYYY-MM-DD HH:MM"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:16
+#: app/templates/blog/edit_article.jinja2:16
 msgid "Publishing date and time"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:20
+#: app/templates/blog/edit_article.jinja2:20
 msgid "Tags (comma separated)"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:24
+#: app/templates/blog/edit_article.jinja2:24
 msgid ""
 "Article body (required, markup: *<em>italic</em>*, "
 "**<strong>bold</strong>**, [hyperlink](http://example.com) <a "
 "href=\"{0}\" target=\"_blank\" class=\"new-window\">more</a>)"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:28
+#: app/templates/blog/edit_article.jinja2:28
 msgid "Inline code (monospace text)"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:29
+#: app/templates/blog/edit_article.jinja2:29
 msgid "Emphasis (italic)"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:30
+#: app/templates/blog/edit_article.jinja2:30
 msgid "Strong text (bold)"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:31
+#: app/templates/blog/edit_article.jinja2:31
 msgid "Quotation"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:32
-#: app/templates/blog/edit_article.html:33
-#: app/templates/blog/edit_article.html:34
+#: app/templates/blog/edit_article.jinja2:32
+#: app/templates/blog/edit_article.jinja2:33
+#: app/templates/blog/edit_article.jinja2:34
 msgid "Insert dinkus"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:35
+#: app/templates/blog/edit_article.jinja2:35
 msgid "Insert shell code"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:36
+#: app/templates/blog/edit_article.jinja2:36
 msgid "Insert paragraph color text"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:37
+#: app/templates/blog/edit_article.jinja2:37
 msgid "Insert hyperlink template"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:43
-msgid "if checked article will be visible to blog administrator only"
-msgstr ""
-
-#: app/templates/blog/edit_article.html:43
+#: app/templates/blog/edit_article.jinja2:43
 msgid "draft article"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:44
+#: app/templates/blog/edit_article.jinja2:43
+msgid "if checked article will not be available to everyone"
+msgstr ""
+
+#: app/templates/blog/edit_article.jinja2:44
 msgid "allow visitors comments"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:46
+#: app/templates/blog/edit_article.jinja2:46
 msgid "save and continue editing"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:46
+#: app/templates/blog/edit_article.jinja2:46
+#: app/templates/blog/view_article.jinja2:81
 msgid "save"
 msgstr ""
 
-#: app/templates/blog/edit_article.html:48
+#: app/templates/blog/edit_article.jinja2:48
 msgid "preview"
 msgstr ""
 
-#: app/templates/blog/index.html:6
+#: app/templates/blog/index.jinja2:6
 msgid "Recent articles"
 msgstr ""
 
-#: app/templates/blog/index.html:14
+#: app/templates/blog/index.jinja2:14 app/templates/blog/view_article.jinja2:36
 msgid "edit"
 msgstr ""
 
-#: app/templates/blog/index.html:15
+#: app/templates/blog/index.jinja2:15 app/templates/blog/view_article.jinja2:37
 msgid "delete"
 msgstr ""
 
-#: app/templates/blog/index.html:18
+#: app/templates/blog/index.jinja2:18 app/templates/blog/view_article.jinja2:40
 msgid "draft"
 msgstr ""
 
-#: app/templates/blog/index.html:20
+#: app/templates/blog/index.jinja2:20
 msgid "DATE_TIME_SHORT"
 msgstr "%%Y-%%m-%%d in %%H:%%M"
 
-#: app/templates/blog/index.html:23
+#: app/templates/blog/index.jinja2:23
 msgid "continue reading"
 msgstr ""
 
-#: app/templates/blog/index.html:24
+#: app/templates/blog/index.jinja2:24
 msgid "Tags:"
 msgstr ""
 
-#: app/templates/blog/index.html:27 app/templates/blog/index.html:29
+#: app/templates/blog/index.jinja2:27 app/templates/blog/index.jinja2:29
 msgid "Comments:"
 msgstr ""
 
-#: app/templates/blog/index.html:38
+#: app/templates/blog/index.jinja2:37
+msgid "No articles here."
+msgstr ""
+
+#: app/templates/blog/index.jinja2:41
 msgid "<-newer"
 msgstr ""
 
-#: app/templates/blog/index.html:39
+#: app/templates/blog/index.jinja2:42
 msgid "older->"
 msgstr ""
 
-#: app/templates/widgets/actions.html:3
+#: app/templates/blog/view_article.jinja2:54
+msgid "Comments"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:70
+msgid "Display name of the visitor"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:71
+msgid "Comment date and time"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:72
+msgid "subscribed"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:74
+msgid "Email address of the visitor"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:75
+msgid "Visitor ip address"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:76
+msgid "Visitor X-Forwarded-For address"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:77
+msgid "Visitor website"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:82
+msgid "close"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:94
+msgid "leave comment"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:101
+msgid ""
+"Comment text (allowed markup: *<em>italic</em>*, "
+"**<strong>bold</strong>**, [hyperlink](http://example.com) or "
+"&lt;http://example.com>)"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:103
+msgid ""
+"<strong>Please pay attention that comments with more than one hyperlink "
+"(including field \"website\") will be put on moderation.</strong>"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:108
+#: app/templates/blog/view_article.jinja2:119
+msgid "Subscribe to answers"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:114
+msgid "Your name (required, 50 characters or less)"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:117
+msgid ""
+"Your email (optional, won't be published, required if you want to receive"
+" answers)"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:121
+msgid "Your website"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:124
+msgid "post comment"
+msgstr ""
+
+#: app/templates/blog/view_article.jinja2:129
+msgid "commenting is disabled"
+msgstr ""
+
+#: app/templates/email/admin_new_comment.jinja2:1
+msgid "EMAIL# ADMIN SUBJECT NEW COMMENT TO THE ARTICLE"
+msgstr ""
+"New comment to article «%%(article_title)s» from %%(comment_author_name)s on "
+"the site «%%(site_title)s»"
+
+#: app/templates/email/admin_new_comment.jinja2:5
+msgid "EMAIL# ADMIN NEW COMMENT TO THE ARTICLE"
+msgstr "New comment to the article <a href=\"%%(article_url)s\">%%(article_title)s</a>."
+
+#: app/templates/email/admin_new_comment.jinja2:7
+msgid "EMAIL# ADMIN VISITOR ON DATE WROTE THE FOLLOWING"
+msgstr ""
+"<strong>%%(comment_author_name)s (%%(comment_author_email)s)</strong> on "
+"<em>{comment_date}</em> wrote:"
+
+#: app/templates/email/admin_new_comment.jinja2:11
+msgid "EMAIL# DIRECT LINK TO COMMENT"
+msgstr "<a href=\"%%(comment_url)s\">Direct link to the comment.</a>"
+
+#: app/templates/widgets/actions.jinja2:3
 msgid "Actions"
 msgstr ""
 
-#: app/templates/widgets/actions.html:5
+#: app/templates/widgets/actions.jinja2:5
 msgid "Files management"
 msgstr ""
 
-#: app/templates/widgets/actions.html:6
+#: app/templates/widgets/actions.jinja2:6
 msgid "Sign out"
 msgstr ""
 
@@ -218,4 +332,21 @@ msgstr ""
 
 #~ msgid "Write new article"
 #~ msgstr ""
+
+#~ msgid "if checked article will be visible to blog administrator only"
+#~ msgstr ""
+
+#~ msgid "EMAIL# ADMIN SUBJECT NEW COMMENT TO THE ARTICLE"
+#~ msgstr ""
+#~ "New comment to article «{article_title}» "
+#~ "from {comment_author_name} on the site "
+#~ "«{site_title}»"
+
+#~ msgid "EMAIL# ADMIN NEW COMMENT TO THE ARTICLE"
+#~ msgstr ""
+#~ "New comment to the article <a "
+#~ "href=\"{article_url}\">{article_title}</a>."
+
+#~ msgid "EMAIL# DIRECT LINK TO COMMENT"
+#~ msgstr "<a href=\"{comment_url}\">Direct link to the comment.</a>"
 

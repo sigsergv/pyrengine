@@ -97,12 +97,12 @@ class Comment(db.Model):
     children = db.relationship('Comment', backref=db.backref('parent', remote_side=[id]),
         cascade='all, delete-orphan', passive_deletes=True)
 
-    # def set_body(self, body):
-    #     """
-    #     Set comment body
-    #     """
-    #     self.body = body
-    #     self.rendered_body = markup.render_text_markup_mini(body)
+    def set_body(self, body):
+        """
+        Set comment body
+        """
+        self.body = body
+        self.rendered_body = markup.render_text_markup_mini(body)
 
     def __init__(self):
         # self.user_id = None

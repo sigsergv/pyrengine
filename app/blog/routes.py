@@ -3,11 +3,13 @@ import uuid
 
 from flask import (render_template, make_response, request, redirect, url_for, abort)
 from app.blog import bp
-from app.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, markup, user_has_permission, article_url)
-from app.models import (User, Article, Comment, Tag)
+from app import notifications
+from app.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, markup, user_has_permission, article_url, normalize_email)
+from app.models import (User, Article, Comment, Tag, VerifiedEmail)
 from app.models.config import get as get_config
 from app.models.article import get_public_tags_cloud
 from app.extensions import db
+from sqlalchemy import func
 
 from flask_babel import gettext as _
 from flask_login import (login_user, logout_user, login_required, current_user)
@@ -38,7 +40,8 @@ def index():
     user = current_user
 
     q = dbsession.query(Article).options(db.joinedload(Article.tags)).options(db.joinedload(Article.user)).order_by(Article.published.desc())
-    if user.is_anonymous():
+    print(current_user)
+    if user.is_anonymous:
         q = q.filter(Article.is_draft==False)
 
     ctx['articles'] = q[(start_page * page_size):(start_page+1) * page_size + 1]
@@ -64,8 +67,8 @@ def articles_by_tag(tag):
     return ''
 
 
-@bp.route('/markup-help')
-def markup_help():
+@bp.route('/help/article-markup')
+def article_markup_help():
     return render_template('blog/markup-help.jinja2')
 
 
@@ -183,7 +186,7 @@ def write_article():
     ctx = {
         'submit_url': url_for('blog.write_article'),
         'mode': 'create',
-        'save_url_ajax': url_for('blog.save_article_ajax'),
+        # 'save_url_ajax': url_for('blog.write_article_ajax'),
         'errors': {}
     }
     if request.method == 'GET':
@@ -396,6 +399,238 @@ def edit_comment_ajax(comment_id):
     return {}
 
 
-@bp.route('/article/<int:article_id>/comment/add')
+
+@bp.route('/article/<int:article_id>/comment/add', methods=['POST'])
 def add_article_comment(article_id):
+    """
+    Honeypot
+    """
     return ''
+
+
+@bp.route('/article/<int:article_id>/comment/add/ajax', methods=['POST'])
+def add_article_comment_ajax(article_id):
+    dbsession = db.session
+
+    q = dbsession.query(Article).filter(Article.id == article_id)
+    user = current_user
+    if not user_has_permission(user, 'editor') or not user_has_permission(user, 'admin'):
+        q = q.filter(Article.is_draft==False)
+    article = q.first()
+
+    if article is None or not article.is_commentable:
+        return abort(404)
+
+    if 's' not in request.form:
+        return abort(400)
+
+    json = {}
+
+    key = request.form['s']
+
+    # all data elements are constructed from the string "key" as substrings
+    body_ind = key[3:14]
+    parent_ind = key[4:12]
+    display_name_ind = key[0:5]
+    email_ind = key[13:25]
+    website_ind = key[15:21]
+    is_subscribed_ind = key[19:27]
+
+    for ind in (body_ind, parent_ind, display_name_ind, email_ind, website_ind):
+        if ind not in request.form:
+            return HTTPBadRequest()
+
+    body = request.form[body_ind]
+
+    if len(body) == 0:
+        return {
+            'success': False,
+            'error': _('Empty comment body is not allowed.')
+        }
+
+    comment = Comment()
+    comment.set_body(body)
+
+    cookies = []
+
+    if not user.is_anonymous:
+        comment.user_id = user.id
+    else:
+        # get "email", "display_name" and "website" arguments
+        comment.display_name = request.form[display_name_ind]
+        comment.email = request.form[email_ind]
+        comment.website = request.form[website_ind]
+
+        # remember email, display_name and website in browser cookies
+        cookies.append( ('comment_display_name', comment.display_name, 31536000) )
+        cookies.append( ('comment_email', comment.email, 31536000) )
+        cookies.append( ('comment_website', comment.website, 31536000) )
+        # request.response.set_cookie('comment_display_name', comment.display_name, max_age=31536000)
+        # request.response.set_cookie('comment_email', comment.email, max_age=31536000)
+        # request.response.set_cookie('comment_website', comment.website, max_age=31536000)
+
+    # set parent comment
+    parent_id = request.form[parent_ind]
+    try:
+        parent_id = int(parent_id)
+    except ValueError:
+        parent_id = None
+
+    if parent_id:
+        parent = dbsession.query(Comment).filter(Comment.id == parent_id)\
+            .filter(Comment.article_id == article_id).first()
+        if parent is not None:
+            if not parent.is_approved:
+                #
+                data = { 'error': _('Answering to not approved comment')}
+                return json.dumps(data)
+
+    comment.parent_id = parent_id
+    comment.article_id = article_id
+
+    if is_subscribed_ind in request.form:
+        comment.is_subscribed = True
+
+    # this list contains notifications
+    ns = []
+
+    # if user has subscribed to answer then check is his/her email verified
+    # if doesn't send verification message to the email
+    if is_subscribed_ind in request.form:
+        vrf_email = ''
+        if not user.is_anonymous:
+            vrf_email = user.email
+        elif request.form[email_ind]:
+            vrf_email = request.form[email_ind]
+
+        vrf_email = normalize_email(vrf_email)
+        if vrf_email:
+            # email looks ok so proceed
+
+            send_evn = False
+
+            vf = dbsession.query(VerifiedEmail).filter(VerifiedEmail.email == vrf_email).first()
+            vf_token = ''
+            if vf is not None:
+                if not vf.is_verified:
+                    diff = time() - vf.last_verify_date
+                    #if diff > 86400:
+                    if diff > 1:
+                        # delay between verifications requests must be more than 24 hours
+                        send_evn = True
+                    vf.last_verify_date = time()
+                    vf_token = vf.verification_code
+
+            else:
+                send_evn = True
+                vf = VerifiedEmail(vrf_email)
+                vf_token = vf.verification_code
+                dbsession.add(vf)
+
+            if send_evn:
+                ns.append(notifications.gen_email_verification_notification(request, vrf_email, vf_token))
+
+    cookies.append( ('is_subscribed', 'true' if comment.is_subscribed else 'false', 31536000) )
+    # request.response.set_cookie('is_subscribed', 'true' if comment.is_subscribed else 'false', max_age=31536000)
+
+    # automatically approve comment if user has role "admin", "writer" or "editor"
+    if user_has_permission(user, 'admin') or user_has_permission(user, 'editor'):
+        comment.is_approved = True
+
+    # TODO: also automatically approve comment if it's considered as safe:
+    # i.e. without hyperlinks, spam etc
+
+    # check how much hyperlinks in the body string
+    if len(re.findall('https?://', body, flags=re.IGNORECASE)) <= 1:
+        comment.is_approved = True
+
+    # record commenter ip address
+    comment.ip_address = request.environ.get('REMOTE_ADDR', 'unknown')
+    comment.xff_ip_address = request.environ.get('X_FORWARDED_FOR', None)
+
+    dbsession.add(comment)
+    _update_comments_counters(article)
+    dbsession.flush()
+    dbsession.expunge(comment)  # remove object from the session, object state is preserved
+    dbsession.expunge(article)
+
+    # comment added, now send notifications
+    loop_limit = 100
+    comment = dbsession.query(Comment).get(comment.id)
+    parent = comment.parent
+    admin_email = get_config('admin_notifications_email')
+    vf_q = dbsession.query(VerifiedEmail)
+    notifications_emails = []
+
+    while parent is not None and loop_limit > 0:
+        loop_limit -= 1
+        c = parent
+        parent = c.parent
+        # walk up the tree
+        if not c.is_subscribed:
+            continue
+        # find email
+        email = None
+        if c.user is None:
+            email = c.email
+        else:
+            email = c.user.email
+
+        if email is None or email == admin_email:
+            continue
+
+        email = normalize_email(email)
+
+        if email in notifications_emails:
+            continue
+
+        vf = vf_q.filter(VerifiedEmail.email == email).first()
+        if vf is not None and vf.is_verified:
+            # send notification to "email"
+            ns.append(notifications.gen_comment_response_notification(request, article, comment, c, email))
+
+    admin_notifications_email = normalize_email(get_config('admin_notifications_email'))
+
+    for nfn in ns:
+        if nfn is None:
+            continue
+
+        if nfn.to == admin_notifications_email:
+            continue
+        nfn.send()
+
+    # create special notification for the administrator
+    nfn = notifications.gen_new_comment_admin_notification(article, comment)
+    if nfn is not None:
+        nfn.send()
+
+    # cosntruct comment_id
+    # we're not using route_url() for the article because stupid Pyramid urlencodes fragments
+    comment_url = article_url(article) + '?commentid=' + str(comment.id)
+
+    # return rendered comment
+    data = {
+        'body': comment.rendered_body,
+        'approved': comment.is_approved,
+        'id': comment.id,
+        'url': comment_url
+        }
+
+    resp = make_response(data)
+    for cookie_name, cookie_value, cookie_max_age in cookies:
+        resp.set_cookie(cookie_name, cookie_value, max_age=cookie_max_age)
+
+    return resp
+
+
+def _update_comments_counters(article):
+    """
+    Re-count total and approved comments and update corresponding counters for the article
+    """
+    dbsession = db.session
+    approved_cnt = dbsession.query(func.count(Comment.id))\
+        .filter(Comment.article == article)\
+        .filter(Comment.is_approved==True).scalar()
+    total_cnt = dbsession.query(func.count(Comment.id)).filter(Comment.article == article).scalar()
+    article.comments_approved = approved_cnt
+    article.comments_total = total_cnt

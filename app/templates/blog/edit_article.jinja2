@@ -21,7 +21,7 @@
     <div id="error-tags" class="error" style="display: none;"></div>
     <dd><input type="text" name="tags" id="fid-tags" value="{{ form['tags'] }}"></dd>
 
-    <div>{{ _('Article body (required, markup: *<em>italic</em>*, **<strong>bold</strong>**, [hyperlink](http://example.com) <a href="{0}" target="_blank" class="new-window">more</a>)').format(url_for('blog.markup_help')) }}</div>
+    <div>{{ _('Article body (required, markup: *<em>italic</em>*, **<strong>bold</strong>**, [hyperlink](http://example.com) <a href="{0}" target="_blank" class="new-window">more</a>)').format(url_for('blog.article_markup_help')) }}</div>
 
     <!-- body text control buttons -->
     <div class="editor-text-controls">

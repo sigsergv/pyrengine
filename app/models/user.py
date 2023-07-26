@@ -17,15 +17,18 @@ class User(db.Model):
     # user kind (class, type), possible values: "local", "twitter"
     kind = db.Column(db.String(20))
 
+    @property
     def is_authenticated(self):
         return True
 
+    @property
     def is_anonymous(self):
         return False
 
     def get_id(self):
         return self.login
 
+    @property
     def is_active(self):
         return True
 
@@ -51,20 +54,20 @@ class User(db.Model):
     #     return self._str_roles
 
 
-class AnonymousUser:
-    kind = 'anonymous'
+# class AnonymousUser:
+#     kind = 'anonymous'
 
-    def is_authenticated(self):
-        return False
+#     def is_authenticated(self):
+#         return False
 
-    def is_anonymous(self):
-        return True
+#     def is_anonymous(self):
+#         return True
 
-    def get_id(self):
-        return 'anonymous'
+#     def get_id(self):
+#         return 'anonymous'
 
-    def is_active(self):
-        return True
+#     def is_active(self):
+#         return True
 
 # anonymous = AnonymousUser()
 
@@ -82,21 +85,21 @@ class AnonymousUser:
 #         self.name = name
 
 
-# class VerifiedEmail(db.Model):
-#     __tablename__ = 'pbverifiedemail'
+class VerifiedEmail(db.Model):
+    __tablename__ = 'pbverifiedemail'
 
-#     # stripperd lowcased email address
-#     id = db.Column(db.Integer, primary_key=True)
-#     email = db.Column(db.Unicode(255), unique=True)
-#     is_verified = db.Column(db.Boolean)
-#     last_verify_date = db.Column(db.Integer)
-#     verification_code = db.Column(db.String(255))
+    # stripperd lowcased email address
+    id = db.Column(db.Integer, primary_key=True)
+    email = db.Column(db.Unicode(255), unique=True)
+    is_verified = db.Column(db.Boolean)
+    last_verify_date = db.Column(db.Integer)
+    verification_code = db.Column(db.String(255))
 
-#     def __init__(self, email):
-#         self.last_verify_date = int(time())
-#         self.email = email
-#         self.is_verified = False
-#         self.verification_code = str(uuid.uuid4())
+    def __init__(self, email):
+        self.last_verify_date = int(time())
+        self.email = email
+        self.is_verified = False
+        self.verification_code = str(uuid.uuid4())
 
 
 # def find_local_user(login, password):
