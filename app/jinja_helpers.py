@@ -27,3 +27,8 @@ def form_checkbox(name, title, value, errors, help=None, label=None, label_help=
 
     html += '<dd>{cb}</dd>'.format(cb=cb)
     return html
+
+
+def user_link(user):
+    name = user.display_name or user.login
+    return f'<span class="name"><span class="user-link fa fa-user"></span> {name}</span>'

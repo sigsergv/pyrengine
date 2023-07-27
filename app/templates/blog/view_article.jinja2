@@ -56,10 +56,9 @@ $(document).ready(function() {
 <div class="article-comments">
   {% for comment in comments %}
   <div class="article-comment{% if not comment.is_approved %} not-approved{% endif %}" id="c-{{ comment.id }}" style="margin-left: {{ 50*comment._indent }}px">
-    <div id="c-inner-{{ comment.id }}">
-    ${cm.render(comment, admin_permission)}
-    </div>
+  {% include '/blog/article_snippet.jinja2' %}
   </div>
+
   {% endfor %}
 
   {% if admin_permission %}

@@ -28,6 +28,38 @@ var pyrengine_field_error = function(field, msg) {
 	}
 };
 
+/**
+ * @param {String} target_id id of node where append confirm box
+ * @param {Function} callback required callback to be called when user clicks confirm box
+ */
+ var create_confirm_link = function(target_id, callback) {
+	var confirm_id = 'confirmlink-' + target_id;
+	if ($('#'+confirm_id).get(0)) {
+		return;
+	}
+
+	var target = document.getElementById(target_id);
+	if (!target) {
+		return;
+	}
+	target = $(target);
+
+	var confirmation_el = $('<a>⇒ OK</a>').attr({
+		href: '#',
+		id: confirm_id
+	}).addClass('confirm-icon')
+	  .click(function(e) {
+	  	  callback.call();
+	  	  confirmation_el.remove();
+	  	  return false;
+	  });
+	target.after(confirmation_el);
+
+	setTimeout(function(){
+		confirmation_el.remove();
+	}, 1000);
+}
+
 
 window.pyrengine.logout = function() {
 	$.ajax({
@@ -329,13 +361,108 @@ window.pyrengine.postArticleComment = function() {
 			// display alert
 		} else {
 			window.location.replace(json.url);
-		}		
+		}
+		$('body').css('cursor', 'default');
 	}).fail(function(){
 		alert(tr('AJAX_REQUEST_ERROR'));
 		setFieldsDisabled(false);
 		$('#eid-post-comment-button').val(backup_button_title);
 		$('body').css('cursor', 'default');
 	});
+};
+
+
+window.pyrengine.replyToComment = function(comment_id) {
+	var comment_block = $('#c-'+comment_id),
+		comment_form = $('#eid-comment-form'),
+		link = $('#eid-leave-comment-link-bottom'),
+		parent_comment_field = $('#fid-parent-comment');
+	
+	if (!comment_block.get(0)) {
+		return;
+	}
+	comment_block.append(comment_form);
+	
+	if (comment_id === -1) {
+		link.hide(0);
+		parent_comment_field.val('');
+	} else {
+		parent_comment_field.val(comment_id);
+		link.show(0);
+	}
+	$('#fid-comment-body').focus();
+};
+
+
+window.pyrengine.approveComment = function(url, comment_id) {
+	$.ajax({
+		url: url,
+		type: 'POST'
+	}).done(function() {
+		// mark corresponding comment as approved
+		var c_el = $('#c-'+comment_id),
+			ca_el = $('#ca-'+comment_id);
+		if (c_el) {
+			c_el.removeClass('not-approved');
+		}
+		if (ca_el) {
+			ca_el.hide(0);
+		}
+
+	}).fail(function() {
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});
+};
+
+
+window.pyrengine.showCommentEditForm = function(url, url_fetch, comment_id) {
+	// replace comment element with editing form
+	var inner = $('#c-inner-'+comment_id),
+		comment_el = $('#c-'+comment_id),
+		edit_form = $('#c-edit');
+	
+	// start loading comment data
+	$.ajax({
+		url: url_fetch,
+		dataType: 'json',
+		type: 'POST'
+	}).done(function(json){
+		// fill form fields and show form
+		$('#c-edit-comment_id').val(comment_id);
+		$('#c-edit-body').val(json.body);
+		$('#c-edit-name').val(json.display_name);
+		$('#c-edit-email').val(json.email);
+		$('#c-edit-website').val(json.website);
+		$('#c-edit-date').val(json.date);
+		$('#c-edit-ip').val(json.ip_address);
+		$('#c-edit-xffip').val(json.xff_ip_address);
+		$('#c-edit-is_subscribed').prop('checked', json.is_subscribed === true);
+		inner.hide(0);
+		comment_el.append(edit_form);
+		edit_form.show();
+	}).fail(function(){
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});
+};
+
+var deleteComment = function(url, comment_id) {
+	$.ajax({
+		url: url,
+		type: 'POST'
+	}).done(function() {
+		// delete corresponding comment block
+		var c_el = $('#c-'+comment_id);
+		c_el.css('background-color', '#f33');
+		c_el.hide(0);
+	}).fail(function() {
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});
+};
+
+
+window.pyrengine.deleteComment = function(url, comment_id) {
+	create_confirm_link('cd-'+comment_id, function() { deleteComment(url, comment_id); });
 }
+
 
 })();

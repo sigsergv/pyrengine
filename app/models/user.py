@@ -3,6 +3,7 @@ import hashlib
 
 from app.extensions import db
 from app.utils import sha3_224
+from time import time
 
 class User(db.Model):
     __tablename__ = 'pbuser'

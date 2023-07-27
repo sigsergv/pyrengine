@@ -532,6 +532,10 @@ button.button {
 .center {
     text-align: center;
 }
+
+span.user-link {
+	color: #800080;
+}
 /* pygments styles */
 pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }

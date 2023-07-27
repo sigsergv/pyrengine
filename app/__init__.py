@@ -83,3 +83,4 @@ def init_db_command():
 def get_locale():
     ui_lang = models.config.get('ui_lang')
     return ui_lang
+

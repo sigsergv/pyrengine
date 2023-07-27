@@ -4,7 +4,8 @@ import uuid
 from flask import (render_template, make_response, request, redirect, url_for, abort)
 from app.blog import bp
 from app import notifications
-from app.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, markup, user_has_permission, article_url, normalize_email)
+from app.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, timestamp_to_dt, markup, user_has_permission, article_url, normalize_email)
+from app.utils.PyRSS2Gen import RSS2, RSSItem
 from app.models import (User, Article, Comment, Tag, VerifiedEmail)
 from app.models.config import get as get_config
 from app.models.article import get_public_tags_cloud
@@ -60,6 +61,48 @@ def index():
     ctx['page_title'] = _('Latest articles')
 
     return render_template('blog/index.jinja2', **ctx)
+
+
+
+@bp.route('/rss/latest')
+def latest_rss():
+    dbsession = db.session
+
+    q = dbsession.query(Article).options(db.joinedload(Article.tags))\
+        .options(db.joinedload(Article.user))\
+        .filter(Article.is_draft==False).order_by(Article.updated.desc())
+    articles = q[0:10]
+    rss_title = get_config('site_title') + ' - ' + _('Latest articles feed')
+    site_base_url = get_config('site_base_url')
+    items = []
+
+    '''
+    feed = Rss201rev2Feed(
+        title=rss_title,
+        link=site_base_url,
+        description='',
+        language='en')
+    '''
+
+    for a in articles:
+        link = article_url(a)
+        tags_list = []
+        for t in a.tags:
+            tags_list.append(t.tag)
+        items.append(RSSItem(title=a.title, link=link, description=a.rendered_preview, pubDate=timestamp_to_dt(a.published),
+            guid=str(a.id)))
+
+    feed = RSS2(
+        title=rss_title,
+        link=site_base_url,
+        description='',
+        items=items,
+        generator='pyrengine'
+        )
+
+    # response = Response(body=feed.to_xml(encoding='utf-8'), content_type='application/rss+xml')
+    resp = make_response(feed.to_xml(encoding='utf-8'), )
+    return resp
 
 
 @bp.route('/tag/<tag>')
@@ -125,6 +168,7 @@ def _view_article(article):
         'article': article
     }
     ctx['comments'] = scope['thread']
+    # ctx['comments_html'] = 'COMMENTS'
 
     signature = str(uuid.uuid4()).replace('-', '')
     is_subscribed = False
@@ -394,11 +438,6 @@ def _verify_article_form(form):
     return errors
 
 
-@bp.route('/comment/<comment_id>/edit/ajax')
-def edit_comment_ajax(comment_id):
-    return {}
-
-
 
 @bp.route('/article/<int:article_id>/comment/add', methods=['POST'])
 def add_article_comment(article_id):
@@ -465,9 +504,6 @@ def add_article_comment_ajax(article_id):
         cookies.append( ('comment_display_name', comment.display_name, 31536000) )
         cookies.append( ('comment_email', comment.email, 31536000) )
         cookies.append( ('comment_website', comment.website, 31536000) )
-        # request.response.set_cookie('comment_display_name', comment.display_name, max_age=31536000)
-        # request.response.set_cookie('comment_email', comment.email, max_age=31536000)
-        # request.response.set_cookie('comment_website', comment.website, max_age=31536000)
 
     # set parent comment
     parent_id = request.form[parent_ind]
@@ -528,7 +564,7 @@ def add_article_comment_ajax(article_id):
                 dbsession.add(vf)
 
             if send_evn:
-                ns.append(notifications.gen_email_verification_notification(request, vrf_email, vf_token))
+                ns.append(notifications.gen_email_verification_notification(vrf_email, vf_token))
 
     cookies.append( ('is_subscribed', 'true' if comment.is_subscribed else 'false', 31536000) )
     # request.response.set_cookie('is_subscribed', 'true' if comment.is_subscribed else 'false', max_age=31536000)
@@ -553,6 +589,7 @@ def add_article_comment_ajax(article_id):
     dbsession.flush()
     dbsession.expunge(comment)  # remove object from the session, object state is preserved
     dbsession.expunge(article)
+    dbsession.commit()
 
     # comment added, now send notifications
     loop_limit = 100
@@ -623,6 +660,120 @@ def add_article_comment_ajax(article_id):
     return resp
 
 
+@bp.route('/article/comment/<int:comment_id>/approve/ajax', methods=['POST'])
+@login_required
+def approve_comment_ajax(comment_id):
+    dbsession = db.session
+    comment = dbsession.query(Comment).get(comment_id)
+    if comment is None:
+        abort(404)
+
+    # also find corresponding article
+    article = dbsession.query(Article).get(comment.article_id)
+
+    if article is None:
+        abort(404)
+
+    comment.is_approved = True
+
+    _update_comments_counters(article)
+    dbsession.commit()
+
+    data = {}
+    return data
+
+
+@bp.route('/article/comment/<int:comment_id>/edit/ajax', methods=['POST'])
+@login_required
+def edit_comment_ajax(comment_id):
+    """
+    Update comment and return updated and rendered data
+    """
+    dbsession = db.session
+
+    comment = dbsession.query(Comment).options(db.joinedload(Comment.user)).get(comment_id)
+
+    # passed POST parameters are: 'body', 'name', 'email', 'website', 'date', 'ip', 'xffip'
+    params = {
+        'body': 'body', 
+        'name': 'display_name',
+        'email': 'email',
+        'website': 'website',
+        'ip': 'ip_address',
+        'xffip': 'xff_ip_address'
+        }
+
+    for k, v in params.items():
+        value = request.form[k]
+        if value == '':
+            value = None
+        setattr(comment, v, value)
+
+    comment.set_body(request.form['body'])
+    comment.is_subscribed = 'is_subscribed' in request.form
+
+    comment.published = str_to_timestamp(request.form['date'])
+    dbsession.flush()
+
+    #comment_user = None
+    #if comment.user is not None:
+    #    comment_user = dbsession.query(User).options(joinedload('roles')).get(comment.user)
+
+    dbsession.expunge(comment)
+    if comment.user is not None:
+        dbsession.expunge(comment.user)
+
+    data = {}
+
+    # without "unicode" or "str" it generates broken HTML
+    # because render() returns webhelpers.html.builder.literal
+    renderer_dict = {'comment': comment}
+    if comment.user is not None:
+        comment._real_email = comment.user.email
+    else:
+        comment._real_email = comment.email
+
+    if comment._real_email == '':
+        comment._real_email = None
+
+    dbsession.commit()
+
+    data['rendered'] = render_template('/blog/article_comment.jinja2', **renderer_dict)
+    return data
+
+@bp.route('/article/comment/<int:comment_id>/fetch/ajax', methods=['POST'])
+@login_required
+def comment_fetch_ajax(comment_id):
+    dbsession = db.session
+
+    comment = dbsession.query(Comment).get(comment_id)
+
+    attrs = ('display_name', 'email', 'website', 'body', 'ip_address', 'xff_ip_address', 'is_subscribed')
+    data = {}
+    for a in attrs:
+        data[a] = getattr(comment, a)
+
+    data['date'] = timestamp_to_str(comment.published)
+
+    return data
+
+
+@bp.route('/article/comment/<comment_id>/delete/ajax', methods=['POST'])
+@login_required
+def delete_comment_ajax(comment_id):
+    dbsession = db.session
+    comment = dbsession.query(Comment).get(comment_id)
+    if comment is None:
+        return HTTPNotFound()
+
+    dbsession.delete(comment)
+    dbsession.commit()
+    article = dbsession.query(Article).get(comment.article_id)
+    _update_comments_counters(article)
+
+    data = {}
+    return data
+
 def _update_comments_counters(article):
     """
     Re-count total and approved comments and update corresponding counters for the article
@@ -634,3 +785,4 @@ def _update_comments_counters(article):
     total_cnt = dbsession.query(func.count(Comment.id)).filter(Comment.article == article).scalar()
     article.comments_approved = approved_cnt
     article.comments_total = total_cnt
+

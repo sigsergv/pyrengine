@@ -1,0 +1,31 @@
+  
+    <div id="c-inner-{{ comment.id }}">
+      <a name="comment-{{ comment.id }}"></a>
+      <div class="title">
+        {% if comment.user is not none %}
+          {{ h.user_link(comment.user) }}
+        {% else %}
+          {{ _('Guest:') }} <span class="name">{{ comment.display_name }}</span>
+        {% endif %}
+        | <span class="date">{{ h.timestamp_to_str(comment.published, _('DATE_TIME_SHORT')) }}</span>
+        {% if admin_permission %}
+        | {{ _('IP address:') }} <span class="name comment-ip-address">{{ comment.ip_address }}</span>
+          {% if comment.xff_ip_address is not none %}
+            ({{ _('X-Forwarded-For') }} <span class="name comment-ip-address">{{ comment.xff_ip_address }}</span>)
+          {% endif %}
+        | {{ _('Email:') }} <span class="name comment-email">{% if comment._real_email is none %}∅{% else %}{{ comment._real_email }}{% endif %}</span>
+        {% endif %}
+      </div>
+      <div class="body">{{ comment.rendered_body | safe }}</div>
+      <div class="links">
+        <a href="#comment-{{ comment.id }}"><span class="fa fa-link"></span></a>
+        <a href="#" onclick="pyrengine.replyToComment('{{ comment.id }}'); return false;">{{ _('reply to this comment') }}</a>
+        {% if admin_permission %}
+          {% if not comment.is_approved %}
+          <a href="#" onclick="pyrengine.approveComment('{{ url_for('blog.approve_comment_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" id="ca-{{ comment.id }}" class="border-icon">{{ _('approve') }}</a>  
+          {% endif %}
+          <a href="#" onclick="pyrengine.showCommentEditForm('{{ url_for('blog.edit_comment_ajax', comment_id=comment.id) }}', '{{ url_for('blog.comment_fetch_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" title="{{ _('edit') }}"><span class="fa fa-pencil"></span></a>
+          <a href="#" onclick="pyrengine.deleteComment('{{ url_for('blog.delete_comment_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" id="cd-{{ comment.id }}" title="{{ _('delete') }}"><span class="fa fa-trash-o"></span></a>
+        {% endif %}
+      </div>
+    </div>

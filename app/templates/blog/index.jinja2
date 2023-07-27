@@ -28,6 +28,9 @@
     {% else %}
       {{ _('Comments:') }} 0
     {% endif %}
+    {% if admin_permission %}
+      / {{ _('not approved comments:') }} <span class="hint">{% if article.comments_total-article.comments_approved == 0 %}0{% else %}{{ article.comments_total-article.comments_approved }}{% endif %}</span>
+    {%  endif %}
   </div>
 </div>
 <div class="article-preview-after"></div>
