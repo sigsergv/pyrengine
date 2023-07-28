@@ -20,4 +20,11 @@ babel-collect:
 babel-compile:
 	pybabel compile -d app/translations
 
+clean-init-db:
+	rm -rf migrations
+	flask db init
+	flask db migrate -m "Initial migration."
+	flask db upgrade
+	flask init-db
+
 .PHONY: run babel-collect babel-compile flask-shell
