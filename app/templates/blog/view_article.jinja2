@@ -1,4 +1,5 @@
 {% extends 'base.jinja2' %}
+{% import 'macros/forms.jinja2' as forms %}
 
 {% set editor_permission = h.user_has_permission(current_user, 'editor') %}
 {% set admin_permission = h.user_has_permission(current_user, 'admin') %}
@@ -65,15 +66,15 @@ $(document).ready(function() {
   <!-- edit comment form here -->
   <div class="article-inline-comment-edit" id="c-edit" style="display: none;">
   <form>
-  <input type="hidden" id="c-edit-comment_id"/>
-  <div> <input type="text" id="c-edit-name" class="display-name" title="{{ _('Display name of the visitor') }}"/> 
-    <input type="text" id="c-edit-date" title="{{ _('Comment date and time') }}" class="date"/>
+  <input type="hidden" id="c-edit-comment_id">
+  <div> <input type="text" id="c-edit-name" class="display-name" title="{{ _('Display name of the visitor') }}"> 
+    <input type="text" id="c-edit-date" title="{{ _('Comment date and time') }}" class="date">
     <label><input id="c-edit-is_subscribed" type="checkbox">{{ _('subscribed') }}</label>
   </div> 
   <div> <input type="text" id="c-edit-email" class="display-name" title="{{ _('Email address of the visitor') }}">
-    <input type="text" id="c-edit-ip" title="{{ _('Visitor ip address') }}" class="ip"/>
-    <input type="text" id="c-edit-xffip" title="{{ _('Visitor X-Forwarded-For address') }}" class="ip"/> 
-    <input type="text" id="c-edit-website" title="{{ _('Visitor website') }}" class="display-name"/> 
+    <input type="text" id="c-edit-ip" title="{{ _('Visitor ip address') }}" class="ip">
+    <input type="text" id="c-edit-xffip" title="{{ _('Visitor X-Forwarded-For address') }}" class="ip"> 
+    <input type="text" id="c-edit-website" title="{{ _('Visitor website') }}" class="display-name"> 
   </div>
   
   <div><textarea id="c-edit-body" class="body"></textarea></div>
@@ -92,8 +93,8 @@ $(document).ready(function() {
     <a name="leave-comment"></a>
     <a href="#" id="eid-leave-comment-link-bottom" style="display:none;" onclick="pyrengine.replyToArticleComment(-1); return false;">{{ _('leave comment') }}</a>
     <form action="{{ url_for('blog.add_article_comment', article_id=article.id) }}" method="POST" id="eid-comment-form">
-      <input type="hidden" id="fid-parent-comment" value=""/>
-      <input type="hidden" id="fid-article_id" value="{{ signature }}"/>
+      <input type="hidden" id="fid-parent-comment" value="">
+      <input type="hidden" id="fid-article_id" value="{{ signature }}">
       <dl class="form">
         <dd><div id="eid-comment-error" style="display: none;" class="error"></div></dd>
         <dd><div id="eid-comment-notify" style="display: none;" class="notify"></div></dd>
@@ -104,21 +105,16 @@ $(document).ready(function() {
         </dt>
         <dd><textarea name="body" class="small" id="fid-comment-body"></textarea></dd>
         {% if user_authenticated %}
-        {{ h.form_checkbox('is_subscribed', None, is_subscribed, {}, None, _('Subscribe to answers')) | safe }}
+        {{ forms.checkbox('is_subscribed', is_subscribed, none, _('Subscribe to answers'), '') }}
         <!--<dd>${h.user_link(user)|n}</dd>-->
-        <input type="hidden" id="fid-comment-displayname" value=""/>
-        <input type="hidden" id="fid-comment-email" value=""/>
-        <input type="hidden" id="fid-comment-website" value=""/>
+        <input type="hidden" id="fid-comment-displayname" value="">
+        <input type="hidden" id="fid-comment-email" value="">
+        <input type="hidden" id="fid-comment-website" value="">
         {% else %}
-        <dt>{{ _('Your name (required, 50 characters or less)') }}</dt>
-        <dd><input type="text" id="fid-comment-displayname" value="{{ comment_display_name }}"/></dd>
-      
-        <dt>{{ _("Your email (optional, won't be published, required if you want to receive answers)") }}</dt>
-        <dd><input type="text" id="fid-comment-email" value="{{ comment_email }}"/></dd>
-        {{ h.form_checkbox('is_subscribed', None, is_subscribed, {}, None, _('Subscribe to answers')) | safe }} 
-      
-        <dt>{{ _('Your website') }}</dt>
-        <dd><input type="text" id="fid-comment-website" value="{{ comment_website }}"/></dd>
+        {{ forms.textfield('comment-displayname', comment_display_name, _('Your name (required, 50 characters or less)')) }}
+        {{ forms.textfield('comment-email', comment_email, _("Your email (optional, won't be published, required if you want to receive answers)")) }}
+        {{ forms.checkbox('is_subscribed', is_subscribed, none, _('Subscribe to answers'), '') }}
+        {{ forms.textfield('comment-website', comment_website, _('Your website')) }}
         {% endif %}
         <dd><button class="button" onclick="pyrengine.postArticleComment(); return false;"><span class="fa fa-comment-o"></span> {{ _('post comment') }}</button>
       </dl>

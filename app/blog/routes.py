@@ -112,7 +112,7 @@ def articles_by_tag(tag):
 
 @bp.route('/help/article-markup')
 def article_markup_help():
-    return render_template('blog/markup-help.jinja2')
+    return render_template('blog/markup_help.jinja2')
 
 
 @bp.route('/<path:shortcut_date>/<shortcut>')

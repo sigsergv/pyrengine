@@ -1,25 +1,15 @@
 {% extends 'base.jinja2' %}
+{% import 'macros/forms.jinja2' as forms %}
 
 {% block title %}{% if mode == 'create' %}{{ _('Write a new article') }}{% else %}{{ _('Edit article') }}{% endif %}{% endblock %}
 
 {% block content %}
 <form action="{{ submit_url }}" method="POST" id="form" onsubmit="return pyrengine.articleCheckForm();">
   <dl class="form">
-    <dt>{{ _('Subject (required)') }}</dt>
-    <div id="error-title" class="error" style="{% if not errors['title'] %}display: none;{% endif %}">{{ errors['title'] }}</div>
-    <dd><input type="text" name="title" id="fid-title" value="{{ form['title'] }}"></dd>
-
-    <dt><acronym title="{{ _('Short string (part of the URL), alphanumeric characters and “-” are recommended.') }}">{{ _('Shortcut (required)') }}</acronym></dt>
-    <div id="error-shortcut" class="error" style="{% if not errors['shortcut'] %}display: none;{% endif %}">{{ errors['shortcut'] }}</div>
-    <dd><input type="text" name="shortcut" id="fid-shortcut" value="{{ form['shortcut'] }}"></dd>
-
-    <dt><acronym title="{{ _('Format: YYYY-MM-DD HH:MM') }}">{{ _('Publishing date and time') }}</acronym></dt>
-    <div id="error-published" class="error" style="{% if not errors['published'] %}display: none;{% endif %}">{{ errors['published'] }}</div>
-    <dd><input type="text" name="published" id="fid-published" value="{{ form['published'] }}"></dd>
-
-    <dt>{{ _('Tags (comma separated)') }}</dt>
-    <div id="error-tags" class="error" style="display: none;"></div>
-    <dd><input type="text" name="tags" id="fid-tags" value="{{ form['tags'] }}"></dd>
+    {{ forms.textfield('title', form['title'], _('Subject (required)'), '', errors['title']) }}
+    {{ forms.textfield('shortcut', form['shortcut'], _('Shortcut (required)'), _('Short string (part of the URL), alphanumeric characters and “-” are recommended.'), errors['shortcut']) }}
+    {{ forms.textfield('published', form['published'], _('Publishing date and time'), _('Format: YYYY-MM-DD HH:MM'), errors['published']) }}
+    {{ forms.textfield('tags', form['tags'], _('Tags (comma separated)'), '', errors['tags']) }}
 
     <div>{{ _('Article body (required, markup: *<em>italic</em>*, **<strong>bold</strong>**, [hyperlink](http://example.com) <a href="{0}" target="_blank" class="new-window">more</a>)').format(url_for('blog.article_markup_help')) }}</div>
 
@@ -37,15 +27,13 @@
       <span class="button" onclick="pyrengine.editorReplace('fid-body', '[TEXT](https://)');" title="{{ _('Insert hyperlink template') }}">&lt;a&gt;</span>
     </div>
 
-    <div id="error-body" class="error" style="{% if not errors['body'] %}display: none;{% endif %}">{{ errors['body'] }}</div>
-    <dd><textarea type="text" name="body" id="fid-body">{{ form['body'] }}</textarea></dd>
+    {{ forms.textarea('body', form['body'], '', '', errors['body']) }}
+    {{ forms.checkbox('is_draft', form['is_draft'], none, _('draft article'), _('if checked article will not be available to everyone')) }}
+    {{ forms.checkbox('is_commentable', form['is_commentable'], none, _('allow visitors comments')) }}
 
-    {{ h.form_checkbox('is_draft', None, form['is_draft'], None, label=_('draft article'), label_help=_('if checked article will not be available to everyone')) | safe }}
-    {{ h.form_checkbox('is_commentable', None, form['is_commentable'], None, label=_('allow visitors comments')) | safe }}
-
-    <dd>{% if mode == 'edit' %}<button class="button" onclick="pyrengine.saveArticle('{{ url_for('blog.edit_article_ajax', article_id=article_id) }}'); return false;">{{ _('save and continue editing') }}</button> {% endif %}<button class="button" onclick="$('#form').submit(); return false;"><span class="fa fa-save"></span> {{ _('save') }}</button>
-
-    <button class="button" onclick="pyrengine.previewArticle(); return false;"><span class="fa fa-flask"></span> {{ _('preview') }}</button></dd>
+    <dd>{% if mode == 'edit' %}{{ forms.button(_('save and continue editing'), '', "pyrengine.saveArticle('" + url_for('blog.edit_article_ajax', article_id=article_id) + "'); return false;") }} {% endif %}
+    {{ forms.button(_('save'), 'fa fa-save', "$('#form').submit(); return false;") }}
+    {{ forms.button(_('preview'), 'fa fa-flask', "pyrengine.previewArticle(); return false;") }}
   </dl>
 </form>
 
