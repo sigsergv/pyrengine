@@ -1,7 +1,9 @@
 {% if current_user.is_authenticated %}
+{% set not_approved_comments = h.get_not_approved_comments_count() %}
 <div class="widget widget-actions">
 <div class="section">{{ _('Actions') }}</div>
   <div class="action-item"><a href="{{ url_for('blog.write_article') }}">{{ _('Write a new article') }}</a></div>
+  <div class="action-item"><a href="{{ url_for('blog.comments_moderation') }}">{{ _('Comments moderation ({})').format(not_approved_comments) }}</a></div>
   <div class="action-item"><a href="{{ url_for('admin.files') }}">{{ _('Files management') }}</a></div>
   <div class="action-item"><a href="#" onclick="pyrengine.logout(); return false;">{{ _('Sign out') }}</a></div>
 </div>

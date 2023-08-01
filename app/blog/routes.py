@@ -774,6 +774,37 @@ def delete_comment_ajax(comment_id):
     data = {}
     return data
 
+@bp.route('/comments/moderation', methods=['POST', 'GET'])
+def comments_moderation():
+    if request.method == 'GET':
+        ctx = {
+            'comments': []
+        }
+
+        dbsession = db.session
+        comments = dbsession.query(Comment).filter(Comment.is_approved==False).all()
+            
+        for x in comments:
+            # set real email
+            if x.user is not None:
+                x._real_email = x.user.email
+            else: 
+                x._real_email = x.email
+            if x._real_email == '':
+                x._real_email = None
+            
+            # truncate comment text
+            trunc_pos = 200
+            x._truncated_body = None
+            if len(x.rendered_body) > trunc_pos:
+                x._truncated_body = x.rendered_body[0:trunc_pos]
+            
+            ctx['comments'].append(x)
+
+        return render_template('blog/comments_moderation.jinja2', **ctx)
+    else:
+        return ''
+
 def _update_comments_counters(article):
     """
     Re-count total and approved comments and update corresponding counters for the article

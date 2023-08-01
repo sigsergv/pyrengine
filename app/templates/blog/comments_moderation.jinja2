@@ -1,0 +1,40 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}{{ _('Comments moderation') }}{% endblock %}
+
+{% block content %}
+<div class="comments-moderation-queue">
+
+{% for comment in comments %}
+<div class="comment" id="c-{{ comment.id }}">
+  <div class="title">
+  {% if comment.user is not none %}
+  <span class="name">{{ h.user_link(comment.user) | safe }}</span>
+  {% else %}
+  <span class="name">{{ comment.display_name }}</span>
+  {% endif %}
+  | <span class="name comment-email">{{ _('E-mail') }}: {% if comment._real_email is none %}∅{% else %}comment._real_email{% endif %} </span>
+  | <span class="name">{{ _('Visitor website') }}: {% if comment.website %}comment.website{% else %}∅{% endif %}</span>
+  | {{ _('IP address:') }} <span class="name comment-ip-address">{{ comment.ip_address }}</span>
+    {% if comment.xff_ip_address is not none %}
+      ({{ _('X-Forwarded-For') }} <span class="name comment-ip-address">{{ comment.xff_ip_address }}</span>)
+    {% endif %}
+  | <a href="{{ h.article_url(comment.article) }}#comment-{{ comment.id }}">{{ _('link') }}</a>
+  </div>
+
+  <div class="links">
+    <a href="#" onclick="pyrengine.approveComment('{{ url_for('blog.approve_comment_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" id="ca-{{ comment.id }}" class="border-icon">{{ _('approve') }}</a>
+    <a href="#" onclick="pyrengine.deleteComment('{{ url_for('blog.delete_comment_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" id="cd-{{ comment.id }}" class="border-icon">{{ _('delete') }}</a>
+  </div>
+
+  {% if comment._truncated_body is not none %}
+    <div class="body" id="c-c-{{ comment.id }}"><p>{{ comment._truncated_body }} <a href="#" onclick="Pyrone_article_expandModeratedComment('{{ comment.id }}'); return false;">{{ _('expand...') }}</a></p></div>
+    <div class="body" id="c-e-{{ comment.id }}" style="display: none;">{{ comment.rendered_body | safe }}</div>
+  {% else %}
+    <div class="body">{{ comment.rendered_body | safe }}</div>
+  {% endif %}
+</div>
+{% endfor %}
+
+</div>
+{% endblock %}
