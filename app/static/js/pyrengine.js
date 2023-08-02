@@ -28,6 +28,48 @@ var pyrengine_field_error = function(field, msg) {
 	}
 };
 
+var pyrengine_get_selected_rows = function(table_id) {
+	var table = $('#'+table_id);
+	if (!table.get(0)) {
+		return false;
+	}
+	
+	var nodes = table.find('input[class=list-cb]'),
+		res = [];
+
+	nodes.each(function(ind, el) {
+		if (el.checked) {
+			res.push(el.value);
+		}
+	});
+	return res;
+};
+
+var pyrengine_create_link_notify_box = function(target_id, message) {
+	var notify_id = 'notifybox-' + target_id;
+	if ($('#'+notify_id).get(0)) {
+		return;
+	}
+	var target = $('#'+target_id);
+	if (!target.get(0)) {
+		return;
+	}
+
+	var notify_el = $('<SPAN></SPAN>').attr({
+		href: '#',
+		id: notify_id
+	}).text(message).addClass('notify-icon')
+	  .click(function(e) {
+	  	  notify_el.remove();
+	  	  return false;
+	  });
+	target.after(notify_el);
+
+	setTimeout(function(){
+		notify_el.remove();
+	}, 1000);
+};
+
 /**
  * @param {String} target_id id of node where append confirm box
  * @param {Function} callback required callback to be called when user clicks confirm box
@@ -44,7 +86,7 @@ var pyrengine_field_error = function(field, msg) {
 	}
 	target = $(target);
 
-	var confirmation_el = $('<a>⇒ OK</a>').attr({
+	var confirmation_el = $('<a> <span class="fa fa-check-circle"> OK</a>').attr({
 		href: '#',
 		id: confirm_id
 	}).addClass('confirm-icon')
@@ -70,6 +112,38 @@ window.pyrengine.logout = function() {
 	}).fail(function() {
 		alert(tr('AJAX_REQUEST_ERROR'));
 	});
+};
+
+
+window.pyrengine.selectDeselectAll = function(table_id)
+{
+	var table = $('#'+table_id);
+	if (!table.get(0)) {
+		return false;
+	}
+
+	var nodes = table.find('input[class=list-cb]').filter('[disabled!=disabled]'),
+		checked_count = 0,
+		not_checked_count = 0;
+
+	nodes.each(function(ind, el) {
+		if (el.checked) {
+			checked_count++;
+		} else {
+			not_checked_count++;
+		}
+	});
+
+	var new_state;
+
+	if (checked_count > 0 && not_checked_count == 0) {
+		// i.e. all rows selected, so clear selection
+		new_state = false;
+	} else {
+		// select all otherwise
+		new_state = true;
+	}
+	nodes.prop('checked', new_state);
 };
 
 
@@ -459,11 +533,85 @@ var deleteComment = function(url, comment_id) {
 		alert(tr('AJAX_REQUEST_ERROR'));
 	});
 };
-
-
 window.pyrengine.deleteComment = function(url, comment_id) {
 	create_confirm_link('cd-'+comment_id, function() { deleteComment(url, comment_id); });
 }
 
+var startBackupRestore = function(url) {
+	// display mask layer or something like
+	$('#eid-progress').show();
+
+	$.ajax({
+		url: url,
+		type: 'POST',
+		dataType: 'json'
+	}).done(function(json) {
+		$('#eid-progress').hide();
+		if (json.error) {
+			$('#eid-error').text(json.error);
+			// $('#eid-error').show().delay(5000).hide();
+			return;
+		}
+		alert(tr('BACKUP_RESTORE_COMPLETE'));
+		location.assign('/');
+	}).fail(function(){
+		$('#eid-progress').hide();
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});
+}
+window.pyrengine.startBackupRestore = function(url, restore_link_id) {
+	// ask confirmation
+	create_confirm_link(restore_link_id, function() {startBackupRestore(url);});
+};
+
+
+window.pyrengine.backupNow = function(url) {
+	$('#eid-backup-progress').show();
+	$.ajax({
+		url: url,
+		type: 'POST'
+	}).done(function() {
+		$('#eid-backup-progress').hide();
+		location.reload(true);
+	}).fail(function() {
+		$('#eid-backup-progress').hide();
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});
+};
+
+var pyrengine_file_list_delete_selected = function(table_id, url) {
+	// find all checkboxes in the table
+	var selected_uids = pyrengine_get_selected_rows(table_id);
+	if (selected_uids.length == 0) {
+		return;
+	}
+
+	$.ajax({
+		url: url,
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			uids: selected_uids.join(',')
+		}
+	}).done(function(data){
+		$.each(data.deleted, function(ind, id) {
+			var el = $('tr[data-row-value="'+id+'"]');
+			el.remove();
+		});
+	}).fail(function() {
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});	
+};
+
+var pyrengine_backup_list_delete_selected = pyrengine_file_list_delete_selected;
+window.pyrengine.deleteSelectedBackups = function (table_id, url) {
+	var selected_uids = pyrengine_get_selected_rows(table_id);
+	if (selected_uids.length == 0) {
+		pyrengine_create_link_notify_box('delete-selected-btn', tr('SELECT_ITEMS_FIRST'));
+		return;
+	}
+	// ask confirmation
+	create_confirm_link('delete-selected-btn', function() { pyrengine_backup_list_delete_selected(table_id, url);});
+};
 
 })();

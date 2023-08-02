@@ -14,6 +14,7 @@ def user_link(user):
     name = user.display_name or user.login
     return f'<span class="name"><span class="user-link fa fa-user"></span> {name}</span>'
 
+
 def get_not_approved_comments_count():
     dbsession = db.session
     cnt = dbsession.query(func.count(Comment.id)).filter(Comment.is_approved==False).scalar()

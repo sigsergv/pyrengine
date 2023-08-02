@@ -3,3 +3,4 @@ __pycache__
 *.sublime-workspace
 app/translations/messages.pot
 *.mo
+/storage
