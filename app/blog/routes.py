@@ -51,12 +51,12 @@ def index():
     #    log.debug(article.shortcut_date)
 
     if len(ctx['articles']) > page_size:
-        ctx['prev_page'] = route_url('blog_latest', request, _query=[('start', start_page+1)])
+        ctx['prev_page'] = url_for('blog.index', start=start_page+1)
         ctx['articles'].pop()
 
     ctx['next_page'] = None
     if start_page > 0:
-        ctx['next_page'] = route_url('blog_latest', request, _query=[('start', start_page-1)])
+        ctx['next_page'] = url_for('blog.indx', start=start_page+1)
 
     ctx['page_title'] = _('Latest articles')
 
@@ -642,7 +642,6 @@ def add_article_comment_ajax(article_id):
         nfn.send()
 
     # cosntruct comment_id
-    # we're not using route_url() for the article because stupid Pyramid urlencodes fragments
     comment_url = article_url(article) + '?commentid=' + str(comment.id)
 
     # return rendered comment

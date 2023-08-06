@@ -28,7 +28,7 @@ $(document).ready(function() {
 });
 </script>
 
-<div class="notify" style="display:none;" id="notify-block"></div>
+<div class="panel notify" style="display:none;" id="notify-block"></div>
 
 <div class="article">
   <div class="title">
@@ -38,7 +38,7 @@ $(document).ready(function() {
      <a href="#" onclick="pyrengine.deleteArticle('{{ url_for('blog.delete_article_ajax', article_id=article.id) }}', '{{ article.id }}'); return false;" class="border-icon" title="{{ _('delete') }}"><span class="fa fa-trash-o"></span></a>
     </div>
     {% endif %}
-    {{ article.title }} {% if article.is_draft %}<span class="warning">{{ _('draft') }}</span>{% endif %}
+    {{ article.title }} {% if article.is_draft %}<span class="panel warning">{{ _('draft') }}</span>{% endif %}
   </div>
   
   <div class="subtitle">
@@ -97,7 +97,7 @@ $(document).ready(function() {
       <input type="hidden" id="fid-article_id" value="{{ signature }}">
       <dl class="form">
         <dd><div id="eid-comment-error" style="display: none;" class="error"></div></dd>
-        <dd><div id="eid-comment-notify" style="display: none;" class="notify"></div></dd>
+        <dd><div id="eid-comment-notify" style="display: none;" class="panel notify"></div></dd>
         <dt>{{ _('Comment text (allowed markup: *<em>italic</em>*, **<strong>bold</strong>**, [hyperlink](http://example.com) or &lt;http://example.com>)')|safe }}
         {% if not user_authenticated %}
         {{_('<strong>Please pay attention that comments with more than one hyperlink (including field "website") will be put on moderation.</strong>') | safe }}

@@ -15,7 +15,7 @@
 </head>
 
 <body>
-  <div id="topbar"><div class="title"><a href="{{ url_for('blog.index') }}">SITE TITLE</a></div></div>
+  <div id="topbar"><div class="title"><a href="{{ url_for('blog.index') }}">{{ h.get_config('site_title') }}</a></div></div>
 
   <div id="contentbar">
     <div id="content">

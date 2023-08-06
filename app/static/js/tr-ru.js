@@ -7,5 +7,6 @@ var translations = {
 	'COMMENT_BODY_IS_REQUIRED': 'Текст комментария обязателен.',
 	'COMMENT_DISPLAY_NAME_IS_REQUIRED': 'Поле "Ваше имя" обязательно в комментарии.',
 	'POSTING_COMMENT': 'Отправка комментария.',
-	'COMMENT_IS_WAITING_FOR_APPROVAL': 'Комментарий сохранён и ждёт модерации.'
+	'COMMENT_IS_WAITING_FOR_APPROVAL': 'Комментарий сохранён и ждёт модерации.',
+	'BACKUP_RESTORE_COMPLETE': 'Бэкап успешно восстановлен, сайт будет перезагружен.'
 };

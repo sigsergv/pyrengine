@@ -540,6 +540,7 @@ window.pyrengine.deleteComment = function(url, comment_id) {
 var startBackupRestore = function(url) {
 	// display mask layer or something like
 	$('#eid-progress').show();
+	$('#eid-error').hide();
 
 	$.ajax({
 		url: url,
@@ -547,8 +548,9 @@ var startBackupRestore = function(url) {
 		dataType: 'json'
 	}).done(function(json) {
 		$('#eid-progress').hide();
-		if (json.error) {
+		if (!json.success) {
 			$('#eid-error').text(json.error);
+			$('#eid-error').show();
 			// $('#eid-error').show().delay(5000).hide();
 			return;
 		}

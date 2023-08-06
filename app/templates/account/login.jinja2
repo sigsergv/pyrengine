@@ -5,7 +5,7 @@
 {% block content %}
 
 {% if error %}
-<div class="warning">{{ error }}</div>
+<div class="panel warning">{{ error }}</div>
 {% endif %}
 
 <form action="{{ url_for('blog.login') }}" method="POST">

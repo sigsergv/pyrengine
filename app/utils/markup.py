@@ -10,32 +10,24 @@ from app.utils.md_subscript import SubscriptExtension
 
 log = logging.getLogger(__name__)
 
-MARKUP_CONTINUE_MARKER = "<cut>"
-
 def slugify(value, separator):
     return hashlib.md5(value.encode('utf-8')).hexdigest()
+    
+MARKUP_CONTINUE_MARKER = "<cut>"
+
 
 def render_text_markup_mini(text):
     """
     Render text using reduced markup elements set
     """
-    md = markdown.Markdown(safe_mode=True, enable_attributes=True, output_format='html')
-    return md.convert(text)
+    md_mini = markdown.Markdown(safe_mode=True, enable_attributes=True, output_format='html')
+    return md_mini.convert(text)
 
 
 def render_text_markup(text):
     """
     render article text, return tuple (html_preview, html_body)
     """
-    text = pre_render_text_markup(text)
-    ind = text.find(MARKUP_CONTINUE_MARKER)
-    if ind != -1:
-        preview_part = text[:ind]
-        complete_text = text.replace(MARKUP_CONTINUE_MARKER, "", 1)
-    else:
-        preview_part = None
-        complete_text = text
-
     md = markdown.Markdown(
         extensions=['footnotes', 'wikilinks', 'def_list', 'toc', 'legacy_attrs',
         'codehilite', 'fenced_code', SubscriptExtension()],
@@ -50,6 +42,15 @@ def render_text_markup(text):
         safe_mode=True,
         enable_attributes=True,
         output_format='html5')
+
+    text = pre_render_text_markup(text)
+    ind = text.find(MARKUP_CONTINUE_MARKER)
+    if ind != -1:
+        preview_part = text[:ind]
+        complete_text = text.replace(MARKUP_CONTINUE_MARKER, "", 1)
+    else:
+        preview_part = None
+        complete_text = text
 
     preview_html = None
     if preview_part is not None:

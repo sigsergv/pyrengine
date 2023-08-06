@@ -1,6 +1,7 @@
 from flask import (render_template, abort)
 from app.admin import bp
-from app.backups import (list_backups, backup_file_name)
+from app import backups
+from app.utils import cache
 
 from flask_login import (login_user, logout_user, login_required, current_user)
 
@@ -17,9 +18,9 @@ def files():
 
 @bp.route('/backups')
 @login_required
-def backups():
+def backups_list():
     ctx = {
-        'backups': list_backups()
+        'backups': backups.list_backups()
     }
     return render_template('admin/backups_list.jinja2', **ctx)
 
@@ -33,13 +34,23 @@ def backup_now():
 @bp.route('/backups/restore/<backup_id>', methods=['POST'])
 @login_required
 def restore_backup(backup_id):
-    return {}
+    res = backups.restore_backup(backup_id)
+    if res is True:
+        # clear cache and logout
+        cache.clear_cache()
+        # logout_user()
+        return {'success': True}
+    else:
+        return {
+            'success': False,
+            'error': res
+        }
 
 
 @bp.route('/backups/download/<backup_id>', methods=['GET'])
 @login_required
 def download_backup(backup_id):
-    full_path = backup_file_name(backup_id)
+    full_path = backups.backup_file_name(backup_id)
     if full_path is None:
         abort(404)
 

@@ -7,5 +7,7 @@ var translations = {
 	'COMMENT_BODY_IS_REQUIRED': 'Comment body is required.',
 	'COMMENT_DISPLAY_NAME_IS_REQUIRED': 'Field "Your name" in comment is required',
 	'POSTING_COMMENT': 'Posting comment',
-	'COMMENT_IS_WAITING_FOR_APPROVAL': 'Comment is awaiting for approval.'
+	'COMMENT_IS_WAITING_FOR_APPROVAL': 'Comment is awaiting for approval.',
+	'BACKUP_RESTORE_COMPLETE': 'Backup restore successfully, site will be reloaded now.'
+
 };

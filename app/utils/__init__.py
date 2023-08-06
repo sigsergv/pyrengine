@@ -14,15 +14,24 @@ CHAR_SAMPLE = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
 def sha3_224(s: str) -> str:
     return hashlib.sha3_224(s.encode('utf-8')).hexdigest()
 
+def sha1(s):
+    return hashlib.sha1(s.encode('utf-8')).hexdigest()
+
 
 def hash_password(password: str) -> str:
-	salt = ''.join([random.choice(CHAR_SAMPLE) for x in range(8)])
-	return salt + sha3_224(salt + sha3_224(password))
+    salt = ''.join([random.choice(CHAR_SAMPLE) for x in range(8)])
+    return salt + sha3_224(salt + sha3_224(password))
 
 
 def check_hashed_password(password: str, hashed_password: str) -> bool:
-	salt = hashed_password[:8]
-	return hashed_password == (salt + sha3_224(salt + sha3_224(password)))
+    print(len(hashed_password))
+    if len(hashed_password) == 48:
+        # assuming it's sha1 with salt from restored version
+        salt = hashed_password[:8]
+        return hashed_password == (salt + sha1(salt + sha1(password)))
+    else:
+        salt = hashed_password[:8]
+        return hashed_password == (salt + sha3_224(salt + sha3_224(password)))
 
 
 from app.models.config import get as get_config
@@ -77,4 +86,3 @@ def article_url(article):
 
 def normalize_email(email):
     return email
-

@@ -15,7 +15,7 @@
         <a href="#" onclick="pyrengine.deleteArticle('{{ url_for('blog.delete_article_ajax', article_id=article.id) }}', '{{ article.id }}'); return false;" class="border-icon" title="{{ _('delete') }}"><span class="fa fa-trash-o"></span></a>
       </div>
     {% endif %}
-    <a href="{{ h.article_url(article) }}">{{ article.title }}</a>{% if article.is_draft %} <span class="warning">{{_('draft') }}</span>{% endif %}</a>
+    <a href="{{ h.article_url(article) }}">{{ article.title }}</a>{% if article.is_draft %} <span class="panel warning">{{_('draft') }}</span>{% endif %}</a>
   </div>
   <div class="date">{{ '{author} | {date}'.format(author=article.user.display_name, date=h.timestamp_to_str(article.published, _('DATE_TIME_SHORT'))) }}</div>
   <div class="before-preview"></div>
@@ -41,8 +41,8 @@
 {% endif %}
 
 <div class="pager">
-{% if next_page is none %} {{ _('<-newer') }} {% else %} <a href="{{ next_page }}">_('<-newer')</a> {% endif %}
-{% if prev_page is none %} {{ _('older->') }} {% else %} <a href="{{ prev_page }}">_('older->')</a> {% endif %}
+{% if next_page is none %} {{ _('<-newer') }} {% else %} <a href="{{ next_page }}">{{ _('<-newer') }}</a> {% endif %}
+{% if prev_page is none %} {{ _('older->') }} {% else %} <a href="{{ prev_page }}">{{ _('older->') }}</a> {% endif %}
 </div>
 
 {% endblock %}

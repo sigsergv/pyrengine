@@ -10,7 +10,7 @@ from flask_login import LoginManager
 
 from app.extensions import db
 from app.utils import hash_password
-from app import (models, jinja_helpers, notifications, backups)
+from app import (models, jinja_helpers, notifications, backups, files)
 
 STORAGE_PATH = None
 
@@ -35,7 +35,6 @@ def create_app():
     app.jinja_env.globals['h'] = jinja_helpers
     login_manager.init_app(app)
     notifications.init_app(app)
-    backups.init_app(app)
 
     # Register blueprints here
     from app.blog import bp as main_bp
@@ -95,4 +94,6 @@ def init_storage(app):
 
     storage_dir = app.config.get('PYRENGINE_STORAGE_PATH')
     app.config['PYRENGINE_STORAGE_PATH'] = os.path.realpath(storage_dir)
+    backups.init(app)
+    files.init(app)
 

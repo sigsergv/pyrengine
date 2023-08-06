@@ -24,7 +24,7 @@ environment.
 Install required python packages:
 
 ~~~~
-(.venv) $ pip install Flask Flask-SQLAlchemy Flask-Migrate Flask-Babel Flask-Login pytz markdown Pygments humanize
+(.venv) $ pip install Flask Flask-SQLAlchemy Flask-Migrate Flask-Babel Flask-Login pytz markdown Pygments humanize lxml
 ~~~~
 
 Install postgres driver, for linux:

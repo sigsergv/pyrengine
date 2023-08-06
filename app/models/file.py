@@ -1,3 +1,6 @@
+import uuid
+from time import time
+
 from app.extensions import db
 
 class File(db.Model):

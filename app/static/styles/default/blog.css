@@ -115,12 +115,17 @@ div#sidebar div.section {
 
 a.confirm-icon {
 	border: 2px solid black;
+	border-width: 2px 6px 2px 2px;
 	border-radius: 0 8px 8px 0;
 	background-color: #f1d200;
 	color: black;
 	text-decoration: none;
 	padding: 0 2px 0 0;
 	margin: 0 3px 0 2px;
+}
+a.confirm-icon:hover {
+	border-color: green;
+	color: green;
 }
 span.notify-icon {
 	border: 1px solid green;
@@ -377,22 +382,23 @@ table.items-list td {
 span.hint, div.hint {
 	color: #4d4d4d;
 }
-div.notify {
-	border: 2px solid #009c00;
-	border-radius: 4px;
+div.panel {
+	border: 2px solid #009c00;	
+	border-radius: 10px;
 	padding: 10px;
+	font-weight: bold;
+	margin: 5px 0 3px 0;
+}
+div.notify {
+	border-color: #009c00;
 	background-color: #dbffdb;
 	color: #000;
-	font-weight: bold;
 }
 div.warning {
-	color: #a52a2a;
-	border: 2px solid #a52a2a;
-	border-radius: 4px;
-	padding: 10px;
+/*	color: #a52a2a;*/
+	border-color: #a52a2a;
 	background-color: #fff9bf;
 	color: #000;
-	font-weight: bold;
 }
 span.warning {
 	color: white;

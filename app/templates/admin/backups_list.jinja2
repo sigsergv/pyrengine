@@ -8,9 +8,9 @@
 
 <button class="button" onclick="pyrengine.backupNow('{{ url_for('admin.backup_now') }}'); return false;"><span class="fa fa-rocket"></span> {{ _('Backup blog now') }}</button>
 
-<div class="warning" style="display: none;" id="eid-error"></div>
-<div class="notify" style="display: none;" id="eid-progress"><span class="fa fa-spin fa-gear"></span> {{ _('Restoring backup, please wait') }}</div>
-<div class="notify" style="display: none;" id="eid-backup-progress"><span class="fa fa-spin fa-gear"></span> {{ _('Creating backup, please wait') }}</div>
+<div class="panel warning" style="display: none;" id="eid-error"></div>
+<div class="panel notify" style="display: none;" id="eid-progress"><span class="fa fa-spin fa-gear"></span> {{ _('Restoring backup, please wait') }}</div>
+<div class="panel notify" style="display: none;" id="eid-backup-progress"><span class="fa fa-spin fa-gear"></span> {{ _('Creating backup, please wait') }}</div>
 
 <h3>{{ _('Backup archives') }}</h3>
 
@@ -24,10 +24,10 @@
   </tr>
 
 {% for b in backups %}
-  <tr id="list-tr-{{ b['id'] }}" data-row-value="{{ b['filename_b64'] }}">
-    <td><input type="checkbox" value="{{ b['filename_b64'] }}" class="list-cb"/></td>
-    <td><a href="#" class="border-icon" onclick="pyrengine.startBackupRestore('{{ url_for('admin.restore_backup', backup_id=b['filename_b64']) }}', 'rb-{{ b['id'] }}'); return false;" id="rb-{{ b['id'] }}">{{ _('restore') }}</a></td>
-    <td><a href="{{ url_for('admin.download_backup', backup_id=b['filename_b64']) }}" title="{{ _('Download backup') }}">{{ b['filename'] }}</a></td>
+  <tr id="list-tr-{{ b['ind'] }}" data-row-value="{{ b['id'] }}">
+    <td><input type="checkbox" value="{{ b['id'] }}" class="list-cb"/></td>
+    <td><a href="#" class="border-icon" onclick="pyrengine.startBackupRestore('{{ url_for('admin.restore_backup', backup_id=b['id']) }}', 'rb-{{ b['ind'] }}'); return false;" id="rb-{{ b['ind'] }}">{{ _('restore') }}</a></td>
+    <td><a href="{{ url_for('admin.download_backup', backup_id=b['id']) }}" title="{{ _('Download backup') }}">{{ b['filename'] }}</a></td>
     <td><span title="{{ _('{0} bytes').format(b['size']) }}">{{ b['size'] | filesizeformat }}</span></td>
   </tr>
 {% endfor %}
