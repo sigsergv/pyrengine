@@ -1,16 +1,18 @@
 import re
 import uuid
+import os
 
 from flask import (render_template, make_response, request, redirect, url_for, abort)
 from app.blog import bp
 from app import notifications
 from app.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, timestamp_to_dt, markup, user_has_permission, article_url, normalize_email)
 from app.utils.PyRSS2Gen import RSS2, RSSItem
-from app.models import (User, Article, Comment, Tag, VerifiedEmail)
+from app.models import (User, Article, Comment, Tag, VerifiedEmail, File)
 from app.models.config import get as get_config
 from app.models.article import get_public_tags_cloud
 from app.extensions import db
 from sqlalchemy import func
+from app.files import FILES_PATH
 
 from flask_babel import gettext as _
 from flask_login import (login_user, logout_user, login_required, current_user)
@@ -41,7 +43,7 @@ def index():
     user = current_user
 
     q = dbsession.query(Article).options(db.joinedload(Article.tags)).options(db.joinedload(Article.user)).order_by(Article.published.desc())
-    print(current_user)
+    # print(current_user)
     if user.is_anonymous:
         q = q.filter(Article.is_draft==False)
 
@@ -62,6 +64,20 @@ def index():
 
     return render_template('blog/index.jinja2', **ctx)
 
+
+@bp.route('/files/f/<filename>')
+def download_file(filename):
+    dbsession = db.session
+
+    dbfile = dbsession.query(File).filter(File.name==filename).first()
+    if dbfile is None:
+        abort(404)
+
+    full_filename = os.path.join(FILES_PATH, filename)
+    data = open(full_filename, 'rb').read()
+    resp = make_response(data)
+    resp.mimetype = dbfile.content_type
+    return resp
 
 
 @bp.route('/rss/latest')

@@ -18,3 +18,12 @@
 {% macro button(text, icon, onclick) -%}
   <button class="button" onclick="{{ onclick }}">{% if icon %}<span class="{{ icon }}"></span> {% endif %}{{ text }}</button>
 {%- endmacro %}
+
+{% macro selector(name, value, title, title_help, items) -%}
+  <dt>{% if title_help %}<acronym title="{{ title_help }}">{{ title }}</acronym>{% else %}{{ title }}{% endif %}</dt>
+  <dd><select name="{{ name }}">
+  {% for opt_id,opt_label in items %}
+    <option value="{{ opt_id }}">{{ opt_label }}</option>
+  {% endfor %}
+  </select></dd>
+{%- endmacro %}

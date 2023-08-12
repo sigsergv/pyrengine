@@ -616,4 +616,113 @@ window.pyrengine.deleteSelectedBackups = function (table_id, url) {
 	create_confirm_link('delete-selected-btn', function() { pyrengine_backup_list_delete_selected(table_id, url);});
 };
 
+
+var pyrengine_allow_form_upload;
+
+window.pyrengine.checkFileUploadForm = function(url, form_id) {
+	if (pyrengine_allow_form_upload) {
+		pyrengine_allow_form_upload = false;
+		return true;
+	}
+	var form = $('#'+form_id);
+
+	var fnf = $('#fid-filename'),
+		fdf = $('#fid-filedata');
+	
+	// forbid empty form submission
+	if (fdf.val() == '') {
+		var msg = tr('SELECT_FILE_TO_UPLOAD'),
+			e = $('#error-filename');
+		pyrengine_notify(e, msg);
+		fdf.focus();
+		return false;
+	}
+
+	pyrengine_allow_form_upload = true;
+	form.submit();
+};
+
+
+window.pyrengine.uploadFileSelected = function() {
+	var ctf = $('#fid-content_type'), 
+		fnf = $('#fid-filename'), 
+		dltf = $('#fid-dltype'), 
+		e = $('#fid-filedata');
+
+	var filename = '';
+	var res = /[\/\\]([^\/\\]+)$/.exec(e.val());
+	if (res) {
+		filename = res[1];
+	} else {
+		filename = e.val();
+	}
+	fnf.val(filename);
+	// detect values for other fields
+
+	var types = [ [ /\.JPEG$/i, 'image/jpeg' ], [ /\.JPG$/i, 'image/jpeg' ],
+			[ /\.PNG$/i, 'image/png' ], [ /\.GIF$/i, 'image/gif' ] ];
+
+	var content_type = '';
+	$.each(types, function(ind, t) {
+		if (t[0].exec(filename)) {
+			content_type = t[1];
+			return false;
+		}
+	});
+
+	switch (content_type) {
+	case 'image/jpeg':
+	case 'image/png':
+	case 'image/gif':
+		dltf.val('auto');
+		break;
+
+	default:
+		dltf.val('download');
+	}
+
+	if (content_type === '') {
+		content_type = 'application/octet-stream';
+	}
+	
+	fnf.focus();
+};
+
+var deleteSelectedFiles = function(table_id, url) {
+	// find all checkboxes in the table
+	var selected_uids = pyrengine_get_selected_rows(table_id);
+	if (selected_uids.length == 0) {
+		return;
+	}
+
+	$.ajax({
+		url: url,
+		type: 'POST',
+		dataType: 'json',
+		data: {
+			uids: selected_uids.join(',')
+		}
+	}).done(function(data){
+		if (!data.success) {
+			alert(data.error);
+		} else {
+			$.each(data.deleted, function(ind, id) {
+				var el = $('tr[data-row-value="'+id+'"]');
+				el.remove();
+			});
+		}
+	}).fail(function() {
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});	
+};
+window.pyrengine.deleteSelectedFiles = function(table_id, url) {
+	var selected_uids = pyrengine_get_selected_rows(table_id);
+	if (selected_uids.length == 0) {
+		pyrengine_create_link_notify_box('delete-selected-btn', tr('SELECT_ITEMS_FIRST'));
+		return;
+	}
+	// ask confirmation
+	create_confirm_link('delete-selected-btn', function() { deleteSelectedFiles(table_id, url); });
+};
+
 })();

@@ -1,7 +1,18 @@
-from flask import (render_template, abort)
+import os
+
+from mimetypes import guess_type
+from datetime import datetime
+
+from flask import (render_template, abort, request, redirect, url_for)
+from werkzeug.utils import secure_filename
 from app.admin import bp
 from app import backups
-from app.utils import cache
+from app import files
+from app.models import (File)
+from app.utils import cache, dt_to_timestamp
+from app.files import FILES_PATH
+
+from app.extensions import db
 
 from flask_login import (login_user, logout_user, login_required, current_user)
 
@@ -12,8 +23,98 @@ def index():
 
 @bp.route('/files')
 @login_required
-def files():
-    return 'FILES MANAGEMENT'
+def files_list():
+    ctx = {
+    }
+    dbsession = db.session
+    ctx['files'] = dbsession.query(File).all()
+
+    return render_template('admin/files_list.jinja2', **ctx)
+
+
+@bp.route('/files/upload', methods=['POST'])
+@login_required
+def upload_file():
+    form = request.form
+    if 'filedata' not in request.files:
+        abort(400, 'Missing filedata in POST query.')
+    file = request.files['filedata']
+    if file.filename == '':
+        abort(400, 'Missing filename')
+    filename = secure_filename(file.filename)
+    storage_file = os.path.join(FILES_PATH, filename)
+    file.save(storage_file)
+
+    # save to database first
+    content_type = guess_type(filename)[0] or 'application/octet-stream'
+    now = datetime.utcnow()
+    dbsession = db.session
+    dbfile = dbsession.query(File).filter(File.name==filename).first()
+    if dbfile is None:
+        dbfile = File()
+    dbfile.name = filename
+    dbfile.size = os.stat(storage_file).st_size
+    dbfile.dltype = 'download' if request.form.get('dltype', 'auto') == 'download' else 'auto'
+    dbfile.content_type = content_type
+    dbfile.updated = dt_to_timestamp(now)
+    dbsession.add(dbfile)
+    dbsession.commit()
+    return redirect(url_for('admin.files_list'))
+
+
+@bp.route('/files/upload/check')
+@login_required
+def upload_file_check_ajax():
+    return {}
+
+
+@bp.route('/files/<int:file_id>/edit', methods=['GET', 'POST'])
+@login_required
+def edit_file_props(file_id):
+    dbsession = db.session
+    f = dbsession.query(File).get(file_id)
+    if f is None:
+        abort(404)
+
+    ctx = {
+        'file': f,
+        'errors': {}
+    }
+
+    if request.method == 'GET':
+        return render_template('admin/edit_file_props.jinja2', **ctx)
+    else:
+        f.name = secure_filename(request.form['filename'])
+        f.dltype = request.form['dltype']
+        f.content_type = request.form['content_type']
+        dbsession.commit()
+        return redirect(url_for('admin.files_list'))
+
+
+@bp.route('/files/delete', methods=['POST'])
+@login_required
+def delete_files_ajax():
+    dbsession = db.session
+    jctx = {
+        'success': True,
+        'deleted': []
+    }
+    try:
+        uids = [int(x) for x in request.form.get('uids', '').split(',')]
+    except Exception:
+        jctx['success'] = False
+        jctx['error'] = _('Invalid input data')
+    filenames = []
+    for file_id in uids:
+        file = dbsession.query(File).get(file_id)
+        if file is not None:
+            filenames.append(file.name)
+            dbsession.delete(file)
+            jctx['deleted'].append(file_id)
+    dbsession.commit()
+    for fn in filenames:
+        os.unlink(os.path.join(FILES_PATH, fn))
+    return jctx
 
 
 @bp.route('/backups')

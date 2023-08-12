@@ -58,6 +58,13 @@ def timestamp_to_dt(ts):
     return utc_dt
 
 
+def dt_to_timestamp(dt):
+    """
+    Convert datetime (UTC) object to UTC seconds
+    """
+    return calendar.timegm(dt.timetuple())    
+
+
 def str_to_timestamp(t_str):
     """
     Convert time string in local timezone to UTC seconds
