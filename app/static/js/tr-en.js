@@ -1,4 +1,4 @@
-var translations = {
+window.translations = {
     'AJAX_REQUEST_ERROR': 'AJAX request execution error.',
 	'ARTICLE_SAVED': 'Article saved successfully.',
 	'ARTICLE_SAVE_FAILED': 'Article save faile due to errors.',
@@ -8,6 +8,6 @@ var translations = {
 	'COMMENT_DISPLAY_NAME_IS_REQUIRED': 'Field "Your name" in comment is required',
 	'POSTING_COMMENT': 'Posting comment',
 	'COMMENT_IS_WAITING_FOR_APPROVAL': 'Comment is awaiting for approval.',
-	'BACKUP_RESTORE_COMPLETE': 'Backup restore successfully, site will be reloaded now.'
-
+	'BACKUP_RESTORE_COMPLETE': 'Backup restore successfully, site will be reloaded now.',
+	'SETTINGS_SAVED': 'Settings saved successfully.'
 };

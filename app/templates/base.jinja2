@@ -1,11 +1,14 @@
 <!DOCTYPE html>
 <html>
+{% set editor_permission = h.user_has_permission(current_user, 'editor') %}
+{% set admin_permission = h.user_has_permission(current_user, 'admin') %}
 <head>
   <meta charset="UTF-8">
   <script language="javascript" src="/static/js/jquery.min.js"></script>
   <script language="javascript" src="/static/js/jquery/field-selection.js"></script>
   <script language="javascript" src="/static/js/tr-{{get_locale()}}.js"></script>
   <script language="javascript" src="/static/js/pyrengine.js"></script>
+{% if admin_permission %}  <script language="javascript" src="/static/js/pyrengine-admin.js"></script>{% endif %}
   <link rel="icon" type="image/png" href="/favicon.png">
   <link rel="stylesheet" type="text/css" href="/static/styles/{{ h.get_config('ui_theme') }}/blog.css">
   <link rel="stylesheet" type="text/css" href="/static/font-awesome/css/font-awesome.min.css">

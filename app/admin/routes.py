@@ -8,7 +8,7 @@ from werkzeug.utils import secure_filename
 from app.admin import bp
 from app import backups
 from app import files
-from app.models import (File)
+from app.models import (File, Config)
 from app.utils import cache, dt_to_timestamp
 from app.files import FILES_PATH
 
@@ -173,4 +173,47 @@ def download_backup(backup_id):
 @bp.route('/backups/delete', methods=['POST'])
 @login_required
 def delete_backups_ajax():
+    return {}
+
+
+@bp.route('/settings')
+@login_required
+def settings():
+    ctx = {
+        'settings': {},
+        'errors': {}
+    }
+    dbsession = db.session
+    for c in dbsession.query(Config).all():
+        ctx['settings'][c.id] = c.value
+
+    return render_template('admin/settings.jinja2', **ctx)
+
+
+@bp.route('/settings/save', methods=['POST'])
+@login_required
+def settings_save_ajax():
+    dbsession = db.session
+    settings = ('site_title', 'site_base_url', 'site_copyright', 'elements_on_page',
+        'admin_notifications_email', 'notifications_from_email',
+        'image_preview_width', 'google_analytics_id', 'timezone', 'ui_lang', 
+        'site_search_widget_code', 'ui_theme')
+    for name in settings:
+        c = dbsession.query(Config).get(name)
+        if c is None:
+            continue
+        v = request.form.get(name, None)
+        if v is not None:
+            c.value = v
+            dbsession.add(c)
+    bool_settings = ('admin_notify_new_comments', 'admin_notify_new_user')
+    for name in bool_settings:
+        c = dbsession.query(Config).get(name)
+        if c is None:
+            continue
+        v = request.form.get(name, None)
+        if v is not None:
+            c.value = ('true' if v == 'true' else 'false')
+            dbsession.add(c)
+    dbsession.commit()
     return {}

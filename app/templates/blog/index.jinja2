@@ -1,8 +1,5 @@
 {% extends 'base.jinja2' %}
 
-{% set editor_permission = h.user_has_permission(current_user, 'editor') %}
-{% set admin_permission = h.user_has_permission(current_user, 'admin') %}
-
 {% block title %}{{ _('Recent articles') }}{% endblock %}
 
 {% block content %}

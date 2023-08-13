@@ -9,10 +9,10 @@
   <dd><input type="text" name="{{ name }}" id="fid-{{ name }}" value="{{ value }}"></dd>
 {%- endmacro %}
 
-{% macro textarea(name, value, title, title_help, error) -%}
+{% macro textarea(name, value, title, title_help, error, style) -%}
   {% if title is not none %}<dt>{{ title }}</dt>{% endif %}
   <div id="error-{{ name }}" class="error" style="{% if not error %}display: none;{% endif %}">{{ error }}</div>
-  <dd><textarea type="text" name="{{ name }}" id="fid-{{ name }}">{{ value }}</textarea></dd>
+  <dd><textarea type="text" name="{{ name }}" id="fid-{{ name }}"{% if style %}style="{{ style  }}"{% endif %}>{{ value }}</textarea></dd>
 {%- endmacro %}
 
 {% macro button(text, icon, onclick) -%}
