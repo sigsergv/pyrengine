@@ -36,7 +36,7 @@ def render_text_markup(text):
             #'footnotes': [("PLACE_MARKER", "~~~~~~~~")]
             'toc': {
                 'slugify': slugify,
-                'permalink': '¶'
+                'permalink': '¶' # ⚓︎
             }
         },
         safe_mode=True,
