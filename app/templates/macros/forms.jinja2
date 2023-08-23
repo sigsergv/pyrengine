@@ -10,7 +10,7 @@
 {%- endmacro %}
 
 {% macro textarea(name, value, title, title_help, error, style) -%}
-  {% if title is not none %}<dt>{{ title }}</dt>{% endif %}
+  {% if title is not none %}<dt>{% if title_help %}<acronym title="{{ title_help }}">{{ title }}</acronym>{% else %}{{ title }}{% endif %}</dt>{% endif %}
   <div id="error-{{ name }}" class="error" style="{% if not error %}display: none;{% endif %}">{{ error }}</div>
   <dd><textarea type="text" name="{{ name }}" id="fid-{{ name }}"{% if style %}style="{{ style  }}"{% endif %}>{{ value }}</textarea></dd>
 {%- endmacro %}

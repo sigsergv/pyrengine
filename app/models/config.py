@@ -50,13 +50,9 @@ def get(key, force=False):
     return cache.get_value(key)
 
 
-def set(key, value, dbsession=None):
+def set(key, value):
     is_transaction = False
-
-    if dbsession is None:
-        dbsession = db.session
-        is_transaction = True
-        transaction.begin()
+    dbsession = db.session
 
     c = dbsession.query(Config).get(key)
     if c is None:

@@ -5,10 +5,11 @@ from datetime import datetime
 
 from flask import (render_template, abort, request, redirect, url_for)
 from werkzeug.utils import secure_filename
+from app import (backups, files, jinja_helpers)
 from app.admin import bp
-from app import backups
-from app import files
 from app.models import (File, Config)
+from app.models.config import set as set_config
+from app.models.config import get as get_config
 from app.utils import cache, dt_to_timestamp
 from app.files import FILES_PATH
 
@@ -216,4 +217,23 @@ def settings_save_ajax():
             c.value = ('true' if v == 'true' else 'false')
             dbsession.add(c)
     dbsession.commit()
+    return {}
+
+
+@bp.route('/settings/widget/pages')
+@login_required
+def settings_widget_pages():
+    ctx = {
+        'widget_pages_pages_spec': get_config('widget_pages_pages_spec'),
+        'errors': {}
+    }
+    return render_template('admin/settings_pages_widget.jinja2', **ctx)
+
+@bp.route('/settings/widget/pages/save', methods=['POST'])
+@login_required
+def settings_widget_pages_save_ajax():
+    # dbsession = db.session
+    widget_pages_pages_spec = request.form.get('widget_pages_pages_spec', '')
+    set_config('widget_pages_pages_spec', widget_pages_pages_spec)
+    jinja_helpers.get_pages_widget_links(True)
     return {}

@@ -1,0 +1,25 @@
+{% extends 'admin/base.jinja2' %}
+{% import 'macros/forms.jinja2' as forms %}
+
+{% block title %}{{ _('Widget "Pinned posts" parameters') }}{% endblock %}
+
+{% block content %}
+<h2>{{ _('Widget "Pinned posts" parameters') }}</h2>
+<div class="notify" style="display:none;" id="eid-notify"></div>
+
+<!-- render table, up/down buttons -->
+
+<form action="/" onsubmit="pyrengine.settingsWidgetsPagesSave('{{ url_for('admin.settings_widget_pages_save_ajax') }}'); return false;">
+<dl class="form">
+  {{ forms.textarea('widget_pages_pages_spec', widget_pages_pages_spec, _('Pages list'), _('One site definition per line, empty lines are ignored. Incorrect lines are ignored.'), errors['widget_pages_pages_spec']) }}
+
+  <dd>{{ _('Every line defines one page, here is the sample: <code><pre>!http://google.com ! Google web search\n!http://yandex.ru ! Search in Yandex</pre></code>') }}</dd>
+
+  <dd>{{ _('You can use any other character as delimiter instead of <strong>!</strong>, e.g. pipe "|":<code><pre>|http://google.com | Google web search\n|http://yandex.ru | Search in Yandex</pre></code>') }}</dd>
+  <dd>{{ _('The main idea is simple: first character in the line is delimiter.') }}</dd>
+
+
+  <dd style="padding-top: 8px;"><input type="submit" value="{{ _('save') }}"/></dd>
+</dl>
+</form>
+{% endblock %}

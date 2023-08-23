@@ -1,10 +1,10 @@
 (function() {
 
 var tr = function(s) {
-    if (translations[s]) {
-        return translations[s];
-    }
-    return s;
+	if (translations[s]) {
+		return translations[s];
+	}
+	return s;
 };
 
 
@@ -454,5 +454,29 @@ window.pyrengine.saveSettingsAjax = function(url) {
 		alert(tr('AJAX_REQUEST_ERROR'));
 	});	
 };
+
+window.pyrengine.settingsWidgetsPagesSave = function(url) {
+	var e = $('#fid-widget_pages_pages_spec'),
+		widget_pages_pages_spec = e.val();
+	
+	var params = {
+		widget_pages_pages_spec: widget_pages_pages_spec
+	};
+	
+	$.ajax({
+		url: url,
+		type: 'POST',
+		data: params,
+		dataType: 'json'
+	}).done(function(json) {
+		if (json.errors) {
+		} else {
+				pyrengine.notify($('#eid-notify'), tr('SETTINGS_SAVED'), false, 20000);
+		} 
+	}).fail(function() {
+		alert(tr('AJAX_REQUEST_ERROR'));
+	});     
+};
+
 
 })();

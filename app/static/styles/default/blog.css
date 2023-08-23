@@ -393,9 +393,12 @@ div.panel {
 	margin: 5px 0 3px 0;
 }
 div.notify {
-	border-color: #009c00;
+	border: 2px solid #009c00;
+	border-radius: 4px; 
+	padding: 10px;
 	background-color: #dbffdb;
-	color: #000;
+	color: #000; 
+	font-weight: bold;
 }
 div.warning {
 /*	color: #a52a2a;*/
