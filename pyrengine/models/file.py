@@ -1,7 +1,7 @@
 import uuid
 from time import time
 
-from app.extensions import db
+from pyrengine.extensions import db
 
 class File(db.Model):
     __tablename__ = 'pbstoragefile'

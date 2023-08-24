@@ -5,15 +5,15 @@ from datetime import datetime
 
 from flask import (render_template, abort, request, redirect, url_for)
 from werkzeug.utils import secure_filename
-from app import (backups, files, jinja_helpers)
-from app.admin import bp
-from app.models import (File, Config)
-from app.models.config import set as set_config
-from app.models.config import get as get_config
-from app.utils import cache, dt_to_timestamp
-from app.files import FILES_PATH
+from pyrengine import (backups, files, jinja_helpers)
+from pyrengine.admin import bp
+from pyrengine.models import (File, Config)
+from pyrengine.models.config import set as set_config
+from pyrengine.models.config import get as get_config
+from pyrengine.utils import cache, dt_to_timestamp
+from pyrengine.files import FILES_PATH
 
-from app.extensions import db
+from pyrengine.extensions import db
 
 from flask_login import (login_user, logout_user, login_required, current_user)
 

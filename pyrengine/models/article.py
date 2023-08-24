@@ -1,6 +1,6 @@
 from time import time
-from app.extensions import db
-from app.utils import (markup, cache)
+from pyrengine.extensions import db
+from pyrengine.utils import (markup, cache)
 from sqlalchemy import func
 from math import log as lg
 

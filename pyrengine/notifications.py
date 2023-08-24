@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from multiprocessing import Process
 
-from app.utils import (article_url, timestamp_to_str, normalize_email)
+from pyrengine.utils import (article_url, timestamp_to_str, normalize_email)
 from flask import render_template
 # from pyramid.renderers import render
 
@@ -18,7 +18,7 @@ from flask import render_template
 # from pyrone.models.user import normalize_email
 # from pyrone.lib.lang import lang
 # from pyrone.lib import helpers as h
-from app.models.config import get as get_config
+from pyrengine.models.config import get as get_config
 
 log = logging.getLogger(__name__)
 

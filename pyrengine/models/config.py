@@ -1,8 +1,8 @@
 import pytz
 
-from app.extensions import db
-from app.utils import cache
-from app.extensions import db
+from pyrengine.extensions import db
+from pyrengine.utils import cache
+from pyrengine.extensions import db
 
 class Config(db.Model):
     __tablename__ = 'pbconfig'

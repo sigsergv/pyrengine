@@ -4,5 +4,5 @@ from flask import Blueprint
 # delete post (for admin only), etc
 bp = Blueprint('admin', __name__)
 
-from app.admin import routes
+from pyrengine.admin import routes
 

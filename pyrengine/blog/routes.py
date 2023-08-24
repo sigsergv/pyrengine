@@ -3,16 +3,16 @@ import uuid
 import os
 
 from flask import (render_template, make_response, request, redirect, url_for, abort)
-from app.blog import bp
-from app import notifications
-from app.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, timestamp_to_dt, markup, user_has_permission, article_url, normalize_email)
-from app.utils.PyRSS2Gen import RSS2, RSSItem
-from app.models import (User, Article, Comment, Tag, VerifiedEmail, File)
-from app.models.config import get as get_config
-from app.models.article import get_public_tags_cloud
-from app.extensions import db
+from pyrengine.blog import bp
+from pyrengine import notifications
+from pyrengine.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, timestamp_to_dt, markup, user_has_permission, article_url, normalize_email)
+from pyrengine.utils.PyRSS2Gen import RSS2, RSSItem
+from pyrengine.models import (User, Article, Comment, Tag, VerifiedEmail, File)
+from pyrengine.models.config import get as get_config
+from pyrengine.models.article import get_public_tags_cloud
+from pyrengine.extensions import db
 from sqlalchemy import func
-from app.files import FILES_PATH
+from pyrengine.files import FILES_PATH
 
 from flask_babel import gettext as _
 from flask_login import (login_user, logout_user, login_required, current_user)

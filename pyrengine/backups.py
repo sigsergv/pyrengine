@@ -8,9 +8,9 @@ from flask_babel import gettext as _
 from sqlalchemy.exc import IntegrityError
 from sqlalchemy import text
 
-from app.extensions import db
-from app.files import (get_storage_dirs, ALLOWED_DLTYPES)
-from app.models import (User, Article, Comment, Tag, VerifiedEmail, File, Config)
+from pyrengine.extensions import db
+from pyrengine.files import (get_storage_dirs, ALLOWED_DLTYPES)
+from pyrengine.models import (User, Article, Comment, Tag, VerifiedEmail, File, Config)
 
 STORAGE_PATH = None
 BACKUPS_PATH = None

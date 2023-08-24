@@ -34,7 +34,7 @@ def check_hashed_password(password: str, hashed_password: str) -> bool:
         return hashed_password == (salt + sha3_224(salt + sha3_224(password)))
 
 
-from app.models.config import get as get_config
+from pyrengine.models.config import get as get_config
 def timestamp_to_str(ts, fmt='%Y-%m-%d %H:%M'):
     """
     Convert UTC seconds to time string in local timezone

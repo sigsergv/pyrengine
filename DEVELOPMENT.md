@@ -2,7 +2,7 @@
 
 ## Environment setup
 
-Base OS: Debian 12 Bookworm.
+Base OS: Linux, Debian 12 Bookworm.
 
 Install required packages:
 
@@ -21,24 +21,20 @@ $ source .venv/bin/activate
 Prefix `(.venv)` in shell prompt means that this command must be executed in activated
 environment. 
 
-Install required python packages:
-
-~~~~
-(.venv) $ pip install Flask Flask-SQLAlchemy Flask-Migrate Flask-Babel Flask-Login pytz markdown Pygments humanize lxml
-~~~~
-
-Install postgres driver, for linux:
-
-~~~~
-(.venv) $ pip install psycopg2
-~~~~
-
-For macos you need to specify path to directory with `pg_config` executable,
-so if you have Postgres.app do this:
+Special step for Macos: you need to specify path to directory with `pg_config` executable,
+so if you are using Postgres.app do this:
 
 ~~~~
 (.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/15/bin/:$PATH pip install psycopg2
 ~~~~
+
+Install application in development mode:
+
+~~~~
+(.venv) $ pip install -e .
+~~~~
+
+This command will install all required dependencies from the network.
 
 ## Database setup
 
@@ -80,32 +76,38 @@ Using macos Posgtres.app:
 $ /Applications/Postgres.app/Contents/Versions/15/bin/psql -h 127.0.0.1 pyrengine pyrengine_user
 ~~~~
 
+# Development runtime
 
 ## Initialize application database
 
 Use this commands to initialize database and populate with sample data:
 
 ~~~~
+(.venv) $ export FLASK_APP=pyrengine
+(.venv) $ export FLASK_ENV=development
 (.venv) $ flask db upgrade
 (.venv) $ flask init-db
 ~~~~
 
-
-# Development runtime
-
 ## Start application in development mode
+
+First copy sample configuration file into the project directory:
+
+~~~~
+(.venv) $ cp pyrengine/examples/development.cfg ./
+~~~~
 
 Start project:
 
 ~~~~
-(.venv) $ export FLASK_APP=app
+(.venv) $ export FLASK_APP=pyrengine
 (.venv) $ export FLASK_ENV=development
-(.venv) $ export PYRENGINE_SETTINGS=`pwd`/examples/development.cfg
+(.venv) $ export PYRENGINE_SETTINGS=`pwd`/development.cfg
 (.venv) $ export FLASK_DEBUG=1
 (.venv) $ flask run
 ~~~~
 
-Or via Makefile (no need to initialize environment variables):
+Or via Makefile (environment is initialized inside Makefile):
 
 ~~~~
 (.venv) $ make run
@@ -114,17 +116,16 @@ Or via Makefile (no need to initialize environment variables):
 Start Flask shell:
 
 ~~~~
-(.venv) $ export FLASK_APP=app
+(.venv) $ export FLASK_APP=pyrengine
 (.venv) $ export FLASK_ENV=development
 (.venv) $ flask shell
 ~~~~
 
-Or via Makefile (no need to initialize environment variables):
+Or via Makefile (environment is initialized inside Makefile):
 
 ~~~~
 (.venv) $ make flask-shell
 ~~~~
-
 
 ## Translation and internationalization
 
@@ -141,7 +142,6 @@ Compile translations:
 ~~~~
 (.venv) $ make babel-compile
 ~~~~
-
 
 ## Reset and database cleanup
 
@@ -196,9 +196,26 @@ To drop all created tables use this commands:
 Python 3.11.3 (main, Apr  7 2023, 20:13:31) [Clang 14.0.0 (clang-1400.0.29.202)] on darwin
 App: app
 Instance: /Users/serge/projects/pyrengine/instance
->>> from app.extensions import db
+>>> from pyrengine.extensions import db
 >>> db.drop_all()
 ~~~~
+
+# Deployment
+
+We deploy application using wheel. First install package `build` required for package creation:
+
+~~~~
+(.venv) $ pip install build
+~~~~
+
+Create distribution package:
+
+~~~~
+(.venv) $ python -m build --wheel
+~~~~
+
+Resulting wheel package will be placed to directory `dist/`, it looks like `pyrengine-1.0.0-py3-none-any.whl`.
+
 
 
 # Links

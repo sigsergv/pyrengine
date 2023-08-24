@@ -6,7 +6,7 @@ import re
 import logging
 import hashlib
 
-from app.utils.md_subscript import SubscriptExtension
+from pyrengine.utils.md_subscript import SubscriptExtension
 
 log = logging.getLogger(__name__)
 

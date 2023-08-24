@@ -8,9 +8,9 @@ from flask_babel import Babel
 from flask.cli import with_appcontext
 from flask_login import LoginManager
 
-from app.extensions import db
-from app.utils import hash_password
-from app import (models, jinja_helpers, notifications, backups, files)
+from pyrengine.extensions import db
+from pyrengine.utils import hash_password
+from pyrengine import (models, jinja_helpers, notifications, backups, files)
 
 STORAGE_PATH = None
 
@@ -37,8 +37,8 @@ def create_app():
     notifications.init_app(app)
 
     # Register blueprints here
-    from app.blog import bp as main_bp
-    from app.admin import bp as admin_bp
+    from pyrengine.blog import bp as main_bp
+    from pyrengine.admin import bp as admin_bp
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
 

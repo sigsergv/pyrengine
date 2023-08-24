@@ -1,6 +1,8 @@
 __pycache__
+/dist
+development.cfg
 .venv
 *.sublime-workspace
-app/translations/messages.pot
+pyrengine/translations/messages.pot
 *.mo
 /storage
