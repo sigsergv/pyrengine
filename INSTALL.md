@@ -52,8 +52,7 @@ Initialize database:
 $ export PYRENGINE_SETTINGS=/home/blog/pyrengine-blog/production.cfg
 $ export FLASK_APP=pyrengine
 $ source pyrengine-blog/venv/bin/activate
-(venv) $ cd pyrengine-blog/venv/lib/python3.11/site-packages/pyrengine/
-(venv) $ flask db upgrade
+(venv) $ flask db upgrade -d $(python3 -m pyrengine.utils -s alembic_migrations)
 (venv) $ flask init-db
 ~~~~
 Now switch back to system user.
@@ -64,13 +63,13 @@ Now switch back to system user.
 Copy nginx configuration file and edit it accordingly:
 
 ~~~~
-$ sudo cp /home/blog/pyrengine-blog/venv/lib/python3.11/site-packages/pyrengine/examples/pyrengine-nginx-uwsgi.conf /etc/nginx/sites-enabled/pyrengine-blog.conf
+$ sudo cp $(python3 -m pyrengine.utils -s examples_dir)/pyrengine-nginx-uwsgi.conf /etc/nginx/sites-enabled/pyrengine-blog.conf
 ~~~~
 
 Copy uWSGI configuration file:
 
 ~~~~
-$ sudo cp /home/blog/pyrengine-blog/venv/lib/python3.11/site-packages/pyrengine/examples/pyrengine-uwsgi.ini /etc/uwsgi/apps-enabled/pyrengine-blog.ini
+$ sudo cp $(python3 -m pyrengine.utils -s examples_dir)/pyrengine-uwsgi.ini /etc/uwsgi/apps-enabled/pyrengine-blog.ini
 ~~~~
 
 uWSGI log file is `/var/log/uwsgi/app/pyrengine-blog.log`.
@@ -78,7 +77,7 @@ uWSGI log file is `/var/log/uwsgi/app/pyrengine-blog.log`.
 Copy production config sample:
 
 ~~~~
-$ cp /home/blog/pyrengine-blog/venv/lib/python3.11/site-packages/pyrengine/examples/production.cfg /home/blog/pyrengine-blog/production.cfg
+$ cp $(python3 -m pyrengine.utils -s examples_dir)/production.cfg /home/blog/pyrengine-blog/production.cfg
 ~~~~
 
 Open it in text editor and set new SECRET_KEY, mail server and database connection parameters (only password if you follow this instruction). You can generate SECRET_KEY using this oneliner: 

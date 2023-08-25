@@ -205,7 +205,7 @@ Instance: /Users/serge/projects/pyrengine/instance
 We deploy application using wheel. First install package `build` required for package creation:
 
 ~~~~
-(.venv) $ pip install build
+(.venv) $ pip install build setuptools
 ~~~~
 
 Create distribution package:

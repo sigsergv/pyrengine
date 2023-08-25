@@ -8,6 +8,7 @@ authors = [
     { name="Sergey Stolyarov", email="sergei@regolit.com" },
 ]
 classifiers = [
+    "Framework :: Flask",
     "Programming Language :: Python :: 3",
     "License :: OSI Approved :: BSD License",
     "Operating System :: POSIX :: Linux",
@@ -37,9 +38,25 @@ dependencies = [
     "greenlet==2.0.2"
 ]
 
+#[tool.setuptools]
+#package-dir = {"" = "pyrengine"}
+
+#[tool.setuptools.packages]
+#find = {}  # Scanning implicit namespaces is active by default
+
+[tool.setuptools.packages.find]
+exclude = ["migrations*"]
+
+[tool.setuptools.package-data]
+# add templates recursiveley
+"pyrengine.templates" = ["**/*.jinja2"]
+# add everything in "pyrengine/static" directory
+"pyrengine.static" = ["**/*"]
+"pyrengine.models.migrations" = ["**/*"]
+
 [build-system]
-requires = [ "flit_core<4" ]
-build-backend = "flit_core.buildapi"
+requires = ["setuptools >= 62.3.0", "wheel"]
+build-backend = "setuptools.build_meta"
 
 [project.urls]
 "Homepage" = "https://github.com/sigsergv/pyrengine"

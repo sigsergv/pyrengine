@@ -21,10 +21,14 @@ babel-compile:
 	pybabel compile -d $(FLASK_APP)/translations
 
 clean-init-db:
-	rm -rf migrations
-	flask db init
-	flask db migrate -m "Initial migration."
-	flask db upgrade
+	rm -rf pyrengine/models/migrations
+	flask db init -d pyrengine/models/migrations
+	flask db migrate -d pyrengine/models/migrations -m "Initial migration."
+	flask db upgrade -d pyrengine/models/migrations
 	flask init-db
 
-.PHONY: run babel-collect babel-compile flask-shell
+build:
+	rm -rf dist build
+	python -m build --wheel
+
+.PHONY: run babel-collect babel-compile flask-shell build
