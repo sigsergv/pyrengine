@@ -7,8 +7,7 @@
 <h2><a href="{{ url_for('admin.files_list') }}">{{ _('Files management') }}</a> &lt; {{ _('Edit file properties') }}</h2>
 
 <form action="{{ url_for('admin.edit_file_props', file_id=file.id) }}" id="upload-form"\
-  method="post" onsubmit="return pyrengine.checkFileUploadForm('${url('admin_edit_file_props_check_ajax', file_id=file.id)}','upload-form');"\
-  enctype="multipart/form-data">
+  method="post" onsubmit="return pyrengine.checkFileUploadForm('{{ url_for('admin.edit_file_props_check_ajax', file_id=file.id) }}','upload-form');" enctype="multipart/form-data">
   <dl class="form">
     {{ forms.textfield('filename', file.name, _('Name of the file (required, case-sensitive, if file with that name exists it will be replaced)'), _('File will be accessed using specified name'), errors['filename']) }}
 

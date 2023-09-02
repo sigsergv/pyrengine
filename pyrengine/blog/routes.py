@@ -427,7 +427,20 @@ def edit_article_ajax(article_id):
 @bp.route('/article/<int:article_id>/delete', methods=['POST'])
 @login_required
 def delete_article_ajax(article_id):
-    return 'DELETE'
+    dbsession = db.session
+    article = dbsession.query(Article).get(article_id)
+    if article is None:
+        abort(404)
+    jctx = {
+        'success': True
+    }
+    # delete article and all article comments, invalidate tags too
+    dbsession.query(Comment).filter(Comment.article_id == article_id).delete()
+    dbsession.delete(article)
+    get_public_tags_cloud(force_reload=True)
+    dbsession.commit()
+
+    return jctx
 
 
 @bp.route('/article/preview', methods=['POST'])
@@ -790,6 +803,7 @@ def delete_comment_ajax(comment_id):
     return data
 
 @bp.route('/comments/moderation', methods=['POST', 'GET'])
+@login_required
 def comments_moderation():
     if request.method == 'GET':
         ctx = {

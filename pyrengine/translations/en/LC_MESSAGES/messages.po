@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-08-23 18:03+0700\n"
+"POT-Creation-Date: 2023-09-02 12:25+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: en\n"
@@ -18,423 +18,429 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: app/backups.py:68
+#: pyrengine/__init__.py:48 pyrengine/__init__.py:56
+msgid "Page not found"
+msgstr ""
+
+#: pyrengine/backups.py:68
 msgid "Backup ID cannot be processed."
 msgstr ""
 
-#: app/backups.py:72
+#: pyrengine/backups.py:72
 msgid "Backup not found."
 msgstr ""
 
-#: app/backups.py:79
+#: pyrengine/backups.py:79
 msgid "Backup file is broken!"
 msgstr ""
 
-#: app/backups.py:85
+#: pyrengine/backups.py:85
 msgid "Backup file is broken, no catalog file inside!"
 msgstr ""
 
-#: app/backups.py:90
+#: pyrengine/backups.py:90
 msgid "Backup file is broken, XML catalog is broken!"
 msgstr ""
 
-#: app/backups.py:109
+#: pyrengine/backups.py:109
 msgid "Unknown XML format of catalog file."
 msgstr ""
 
-#: app/backups.py:114
+#: pyrengine/backups.py:114
 msgid "Unsupported backup version: “{0}”!"
 msgstr ""
 
-#: app/backups.py:136
+#: pyrengine/backups.py:136
 msgid "Backup file is broken: settings block not found"
 msgstr ""
 
-#: app/backups.py:154
+#: pyrengine/backups.py:154
 msgid "Backup file is broken: users block not found"
 msgstr ""
 
-#: app/backups.py:203 app/backups.py:316
+#: pyrengine/backups.py:203 pyrengine/backups.py:316
 msgid "Backup file is broken: articles block not found"
 msgstr ""
 
-#: app/backups.py:367 app/backups.py:370
+#: pyrengine/backups.py:367 pyrengine/backups.py:370
 msgid ""
 "Unable to restore backup: database error, maybe your backup file is "
 "corrupted"
 msgstr ""
 
-#: app/admin/routes.py:107
+#: pyrengine/admin/routes.py:113
 msgid "Invalid input data"
 msgstr ""
 
-#: app/blog/routes.py:63
+#: pyrengine/blog/routes.py:63
 msgid "Latest articles"
 msgstr ""
 
-#: app/blog/routes.py:91 app/templates/base.jinja2:15
+#: pyrengine/blog/routes.py:91 pyrengine/templates/base.jinja2:15
 msgid "Latest articles feed"
 msgstr ""
 
-#: app/blog/routes.py:228
+#: pyrengine/blog/routes.py:228
 msgid "User not found"
 msgstr ""
 
-#: app/blog/routes.py:254
+#: pyrengine/blog/routes.py:254
 msgid "New article title"
 msgstr ""
 
-#: app/blog/routes.py:286 app/blog/routes.py:338
+#: pyrengine/blog/routes.py:286 pyrengine/blog/routes.py:338
 msgid "Article with the same shortcut already exists."
 msgstr ""
 
-#: app/blog/routes.py:447
+#: pyrengine/blog/routes.py:460
 msgid "Field is required."
 msgstr ""
 
-#: app/blog/routes.py:452
+#: pyrengine/blog/routes.py:465
 msgid "Invalid date format."
 msgstr ""
 
-#: app/blog/routes.py:503
+#: pyrengine/blog/routes.py:516
 msgid "Empty comment body is not allowed."
 msgstr ""
 
-#: app/blog/routes.py:537
+#: pyrengine/blog/routes.py:550
 msgid "Answering to not approved comment"
 msgstr ""
 
-#: app/templates/base.jinja2:26
+#: pyrengine/templates/base.jinja2:26
 msgid "Powered by pyrengine"
 msgstr ""
 
-#: app/templates/account/login.jinja2:3
+#: pyrengine/templates/account/login.jinja2:3
 msgid "Sign in"
 msgstr ""
 
-#: app/templates/account/login.jinja2:14
+#: pyrengine/templates/account/login.jinja2:14
 msgid "Login name"
 msgstr ""
 
-#: app/templates/account/login.jinja2:16
+#: pyrengine/templates/account/login.jinja2:16
 msgid "Password"
 msgstr ""
 
-#: app/templates/account/login.jinja2:18
+#: pyrengine/templates/account/login.jinja2:18
 msgid "sign in"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:3
-#: app/templates/admin/backups_list.jinja2:7
+#: pyrengine/templates/admin/backups_list.jinja2:3
+#: pyrengine/templates/admin/backups_list.jinja2:7
 msgid "Backups management"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:9
+#: pyrengine/templates/admin/backups_list.jinja2:9
 msgid "Backup blog now"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:12
+#: pyrengine/templates/admin/backups_list.jinja2:12
 msgid "Restoring backup, please wait"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:13
+#: pyrengine/templates/admin/backups_list.jinja2:13
 msgid "Creating backup, please wait"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:15
+#: pyrengine/templates/admin/backups_list.jinja2:15
 msgid "Backup archives"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:17
+#: pyrengine/templates/admin/backups_list.jinja2:17
 msgid "Click backup file name to download."
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:20
-#: app/templates/admin/files_list.jinja2:38
+#: pyrengine/templates/admin/backups_list.jinja2:20
+#: pyrengine/templates/admin/files_list.jinja2:38
 msgid "Select/deselect all files"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:22
+#: pyrengine/templates/admin/backups_list.jinja2:22
 msgid "Backup filename"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:23
-#: app/templates/admin/files_list.jinja2:42
+#: pyrengine/templates/admin/backups_list.jinja2:23
+#: pyrengine/templates/admin/files_list.jinja2:43
 msgid "File size"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:29
+#: pyrengine/templates/admin/backups_list.jinja2:29
 msgid "restore"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:30
+#: pyrengine/templates/admin/backups_list.jinja2:30
 msgid "Download backup"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:31
-#: app/templates/admin/files_list.jinja2:52
+#: pyrengine/templates/admin/backups_list.jinja2:31
+#: pyrengine/templates/admin/files_list.jinja2:54
 msgid "{0} bytes"
 msgstr ""
 
-#: app/templates/admin/backups_list.jinja2:38
-#: app/templates/admin/files_list.jinja2:58
+#: pyrengine/templates/admin/backups_list.jinja2:38
+#: pyrengine/templates/admin/files_list.jinja2:60
 msgid "delete selected"
 msgstr ""
 
-#: app/templates/admin/base.jinja2:3
+#: pyrengine/templates/admin/base.jinja2:3
 msgid "admin area"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:4
-#: app/templates/admin/edit_file_props.jinja2:7
+#: pyrengine/templates/admin/edit_file_props.jinja2:4
+#: pyrengine/templates/admin/edit_file_props.jinja2:7
 msgid "Edit file properties"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:7
-#: app/templates/admin/files_list.jinja2:4
-#: app/templates/admin/files_list.jinja2:8
-#: app/templates/widgets/actions.jinja2:7
+#: pyrengine/templates/admin/edit_file_props.jinja2:7
+#: pyrengine/templates/admin/files_list.jinja2:4
+#: pyrengine/templates/admin/files_list.jinja2:8
+#: pyrengine/templates/widgets/actions.jinja2:7
 msgid "Files management"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:13
-#: app/templates/admin/files_list.jinja2:19
+#: pyrengine/templates/admin/edit_file_props.jinja2:12
+#: pyrengine/templates/admin/files_list.jinja2:19
 msgid ""
 "Name of the file (required, case-sensitive, if file with that name exists"
 " it will be replaced)"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:13
-#: app/templates/admin/files_list.jinja2:19
+#: pyrengine/templates/admin/edit_file_props.jinja2:12
+#: pyrengine/templates/admin/files_list.jinja2:19
 msgid "File will be accessed using specified name"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:15
-#: app/templates/admin/files_list.jinja2:21
+#: pyrengine/templates/admin/edit_file_props.jinja2:14
+#: pyrengine/templates/admin/files_list.jinja2:21
 msgid "File access type"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:15
-#: app/templates/admin/files_list.jinja2:21
+#: pyrengine/templates/admin/edit_file_props.jinja2:14
+#: pyrengine/templates/admin/files_list.jinja2:21
 msgid "What should happen when user open URL to the file in web browser"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:15
-#: app/templates/admin/files_list.jinja2:21
+#: pyrengine/templates/admin/edit_file_props.jinja2:14
+#: pyrengine/templates/admin/files_list.jinja2:21
 msgid "display file download dialog (suitable for documents, archives)"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:15
-#: app/templates/admin/files_list.jinja2:21
+#: pyrengine/templates/admin/edit_file_props.jinja2:14
+#: pyrengine/templates/admin/files_list.jinja2:21
 msgid "leave processing to web browser (suitable for pictures)"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:17
+#: pyrengine/templates/admin/edit_file_props.jinja2:16
 msgid "File content type"
 msgstr ""
 
-#: app/templates/admin/edit_file_props.jinja2:20
+#: pyrengine/templates/admin/edit_file_props.jinja2:19
 msgid "submit"
 msgstr ""
 
-#: app/templates/admin/files_list.jinja2:15
+#: pyrengine/templates/admin/files_list.jinja2:15
 msgid "Choose file to upload"
 msgstr ""
 
-#: app/templates/admin/files_list.jinja2:17
+#: pyrengine/templates/admin/files_list.jinja2:17
 msgid "<- First choose file (other fields will be filled automatically)"
 msgstr ""
 
-#: app/templates/admin/files_list.jinja2:24
-#: app/templates/admin/files_list.jinja2:33
+#: pyrengine/templates/admin/files_list.jinja2:24
+#: pyrengine/templates/admin/files_list.jinja2:33
 msgid "upload file"
 msgstr ""
 
-#: app/templates/admin/files_list.jinja2:26
+#: pyrengine/templates/admin/files_list.jinja2:26
 msgid "cancel"
 msgstr ""
 
-#: app/templates/admin/files_list.jinja2:40
+#: pyrengine/templates/admin/files_list.jinja2:41
 msgid "Filename"
 msgstr ""
 
-#: app/templates/admin/files_list.jinja2:41
+#: pyrengine/templates/admin/files_list.jinja2:42
 msgid "Content type"
 msgstr ""
 
-#: app/templates/admin/files_list.jinja2:48
-#: app/templates/blog/article_snippet.jinja2:27
-#: app/templates/blog/index.jinja2:11 app/templates/blog/view_article.jinja2:35
-#: app/templates/widgets/pages.jinja2:3
+#: pyrengine/templates/admin/files_list.jinja2:49
+#: pyrengine/templates/blog/article_snippet.jinja2:27
+#: pyrengine/templates/blog/index.jinja2:11
+#: pyrengine/templates/blog/view_article.jinja2:35
+#: pyrengine/templates/widgets/pages.jinja2:3
 msgid "edit"
 msgstr ""
 
-#: app/templates/admin/files_list.jinja2:50
-msgid "file URL"
+#: pyrengine/templates/admin/files_list.jinja2:50
+msgid "Download file"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:4 app/templates/admin/settings.jinja2:8
+#: pyrengine/templates/admin/settings.jinja2:4
+#: pyrengine/templates/admin/settings.jinja2:8
 msgid "Site settings"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:36
-#: app/templates/admin/settings_pages_widget.jinja2:22
-#: app/templates/blog/edit_article.jinja2:35
-#: app/templates/blog/view_article.jinja2:79
+#: pyrengine/templates/admin/settings.jinja2:36
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:22
+#: pyrengine/templates/blog/edit_article.jinja2:35
+#: pyrengine/templates/blog/view_article.jinja2:79
 msgid "save"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:44
+#: pyrengine/templates/admin/settings.jinja2:44
 msgid "General"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:45
+#: pyrengine/templates/admin/settings.jinja2:45
 msgid "Blog title"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:46
+#: pyrengine/templates/admin/settings.jinja2:46
 msgid "Base blog address"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:46
+#: pyrengine/templates/admin/settings.jinja2:46
 msgid ""
 "URL that will be used in all external communications (notification "
 "messages for example)"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:47
+#: pyrengine/templates/admin/settings.jinja2:47
 msgid "Copyright string"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:47
+#: pyrengine/templates/admin/settings.jinja2:47
 msgid ""
 "A string displayed at the bottom of each blog page, just before \"Powered"
 " by pyrengine\""
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:48
+#: pyrengine/templates/admin/settings.jinja2:48
 msgid "Number of elements on a page"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:48
+#: pyrengine/templates/admin/settings.jinja2:48
 msgid "How much elements (articles etc) display on single page"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:49
+#: pyrengine/templates/admin/settings.jinja2:49
 msgid "Picture preview width"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:49
+#: pyrengine/templates/admin/settings.jinja2:49
 msgid ""
 "Width of automatically generated preview to be used as smaller copy of "
 "original picture."
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:50
+#: pyrengine/templates/admin/settings.jinja2:50
 msgid "[N/A] Google Analytics(tm) ID"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:50
+#: pyrengine/templates/admin/settings.jinja2:50
 msgid ""
 "Your google analytics ID, value like \"UA-12345678-9\", to disable Google"
 " Analytics just clear the field"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:51
+#: pyrengine/templates/admin/settings.jinja2:51
 msgid "Blog timezone"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:51
+#: pyrengine/templates/admin/settings.jinja2:51
 msgid ""
 "Timezone to be used for time and date values on the site, "
 "<strong>must</strong> be tzdb-compatible string value like "
 "\"Asia/Novosibirsk\" or \"UTC\"."
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:52
+#: pyrengine/templates/admin/settings.jinja2:52
 msgid "Site language"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:53
+#: pyrengine/templates/admin/settings.jinja2:53
 msgid "Site theme"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:53
+#: pyrengine/templates/admin/settings.jinja2:53
 msgid "Default theme"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:55
+#: pyrengine/templates/admin/settings.jinja2:55
 msgid "Site search widget"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:57
+#: pyrengine/templates/admin/settings.jinja2:57
 msgid "HTML/JavaScript code for the site search widget"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:57
+#: pyrengine/templates/admin/settings.jinja2:57
 msgid ""
 "You should enter HTML code in this text box you received from the "
 "external search provider. To delete site search from the pages just clear"
 " the field."
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:59
+#: pyrengine/templates/admin/settings.jinja2:59
 msgid "Notifications"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:61
+#: pyrengine/templates/admin/settings.jinja2:61
 msgid "Email address for system notifications"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:61
+#: pyrengine/templates/admin/settings.jinja2:61
 msgid ""
 "Email address for the system notification: user added, comment added for "
 "moderation etc"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:62
+#: pyrengine/templates/admin/settings.jinja2:62
 msgid "Email address to be used as sender address"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:62
+#: pyrengine/templates/admin/settings.jinja2:62
 msgid "This email will be used as FROM address for notification messages"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:65
+#: pyrengine/templates/admin/settings.jinja2:65
 msgid "Select notifications you want to receive"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:67
+#: pyrengine/templates/admin/settings.jinja2:67
 msgid "new comment added (including comment moderation requests)"
 msgstr ""
 
-#: app/templates/admin/settings.jinja2:68
+#: pyrengine/templates/admin/settings.jinja2:68
 msgid "[N/A] new user registered"
 msgstr ""
 
-#: app/templates/admin/settings_pages_widget.jinja2:4
-#: app/templates/admin/settings_pages_widget.jinja2:7
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:4
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:7
 msgid "Widget \"Pinned posts\" parameters"
 msgstr ""
 
-#: app/templates/admin/settings_pages_widget.jinja2:14
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:14
 msgid "Pages list"
 msgstr ""
 
-#: app/templates/admin/settings_pages_widget.jinja2:14
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:14
 msgid ""
 "One site definition per line, empty lines are ignored. Incorrect lines "
 "are ignored."
 msgstr ""
 
-#: app/templates/admin/settings_pages_widget.jinja2:16
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:16
 msgid ""
 "Every line defines one page, here is the sample: "
 "<code><pre>!http://google.com ! Google web search\n"
 "!http://yandex.ru ! Search in Yandex</pre></code>"
 msgstr ""
 
-#: app/templates/admin/settings_pages_widget.jinja2:18
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:18
 msgid ""
 "You can use any other character as delimiter instead of "
 "<strong>!</strong>, e.g. pipe \"|\":<code><pre>|http://google.com | "
@@ -442,352 +448,352 @@ msgid ""
 "|http://yandex.ru | Search in Yandex</pre></code>"
 msgstr ""
 
-#: app/templates/admin/settings_pages_widget.jinja2:19
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:19
 msgid "The main idea is simple: first character in the line is delimiter."
 msgstr ""
 
-#: app/templates/blog/article_snippet.jinja2:8
+#: pyrengine/templates/blog/article_snippet.jinja2:8
 msgid "Guest:"
 msgstr ""
 
-#: app/templates/blog/article_snippet.jinja2:10
-#: app/templates/blog/index.jinja2:17
+#: pyrengine/templates/blog/article_snippet.jinja2:10
+#: pyrengine/templates/blog/index.jinja2:17
 msgid "DATE_TIME_SHORT"
 msgstr "%%Y-%%m-%%d in %%H:%%M"
 
-#: app/templates/blog/article_snippet.jinja2:12
-#: app/templates/blog/comments_moderation.jinja2:18
+#: pyrengine/templates/blog/article_snippet.jinja2:12
+#: pyrengine/templates/blog/comments_moderation.jinja2:20
 msgid "IP address:"
 msgstr ""
 
-#: app/templates/blog/article_snippet.jinja2:14
-#: app/templates/blog/comments_moderation.jinja2:20
+#: pyrengine/templates/blog/article_snippet.jinja2:14
+#: pyrengine/templates/blog/comments_moderation.jinja2:22
 msgid "X-Forwarded-For"
 msgstr ""
 
-#: app/templates/blog/article_snippet.jinja2:16
+#: pyrengine/templates/blog/article_snippet.jinja2:16
 msgid "Email:"
 msgstr ""
 
-#: app/templates/blog/article_snippet.jinja2:22
+#: pyrengine/templates/blog/article_snippet.jinja2:22
 msgid "reply to this comment"
 msgstr ""
 
-#: app/templates/blog/article_snippet.jinja2:25
-#: app/templates/blog/comments_moderation.jinja2:26
+#: pyrengine/templates/blog/article_snippet.jinja2:25
+#: pyrengine/templates/blog/comments_moderation.jinja2:28
 msgid "approve"
 msgstr ""
 
-#: app/templates/blog/article_snippet.jinja2:28
-#: app/templates/blog/comments_moderation.jinja2:27
-#: app/templates/blog/index.jinja2:12 app/templates/blog/view_article.jinja2:36
+#: pyrengine/templates/blog/article_snippet.jinja2:28
+#: pyrengine/templates/blog/comments_moderation.jinja2:29
+#: pyrengine/templates/blog/index.jinja2:12
+#: pyrengine/templates/blog/view_article.jinja2:36
 msgid "delete"
 msgstr ""
 
-#: app/templates/blog/comments_moderation.jinja2:3
+#: pyrengine/templates/blog/comments_moderation.jinja2:3
+#: pyrengine/templates/blog/comments_moderation.jinja2:6
 msgid "Comments moderation"
 msgstr ""
 
-#: app/templates/blog/comments_moderation.jinja2:16
+#: pyrengine/templates/blog/comments_moderation.jinja2:18
 msgid "E-mail"
 msgstr ""
 
-#: app/templates/blog/comments_moderation.jinja2:17
-#: app/templates/blog/view_article.jinja2:75
+#: pyrengine/templates/blog/comments_moderation.jinja2:19
+#: pyrengine/templates/blog/view_article.jinja2:75
 msgid "Visitor website"
 msgstr ""
 
-#: app/templates/blog/comments_moderation.jinja2:22
+#: pyrengine/templates/blog/comments_moderation.jinja2:24
 msgid "link"
 msgstr ""
 
-#: app/templates/blog/comments_moderation.jinja2:31
+#: pyrengine/templates/blog/comments_moderation.jinja2:33
 msgid "expand..."
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:4
-#: app/templates/widgets/actions.jinja2:5
+#: pyrengine/templates/blog/edit_article.jinja2:4
+#: pyrengine/templates/widgets/actions.jinja2:5
 msgid "Write a new article"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:4
+#: pyrengine/templates/blog/edit_article.jinja2:4
 msgid "Edit article"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:9
+#: pyrengine/templates/blog/edit_article.jinja2:9
 msgid "Subject (required)"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:10
+#: pyrengine/templates/blog/edit_article.jinja2:10
 msgid "Shortcut (required)"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:10
+#: pyrengine/templates/blog/edit_article.jinja2:10
 msgid ""
 "Short string (part of the URL), alphanumeric characters and “-” are "
 "recommended."
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:11
+#: pyrengine/templates/blog/edit_article.jinja2:11
 msgid "Publishing date and time"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:11
+#: pyrengine/templates/blog/edit_article.jinja2:11
 msgid "Format: YYYY-MM-DD HH:MM"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:12
+#: pyrengine/templates/blog/edit_article.jinja2:12
 msgid "Tags (comma separated)"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:14
+#: pyrengine/templates/blog/edit_article.jinja2:14
 msgid ""
 "Article body (required, markup: *<em>italic</em>*, "
 "**<strong>bold</strong>**, [hyperlink](http://example.com) <a "
 "href=\"{0}\" target=\"_blank\" class=\"new-window\">more</a>)"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:18
+#: pyrengine/templates/blog/edit_article.jinja2:18
 msgid "Inline code (monospace text)"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:19
+#: pyrengine/templates/blog/edit_article.jinja2:19
 msgid "Emphasis (italic)"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:20
+#: pyrengine/templates/blog/edit_article.jinja2:20
 msgid "Strong text (bold)"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:21
+#: pyrengine/templates/blog/edit_article.jinja2:21
 msgid "Quotation"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:22
-#: app/templates/blog/edit_article.jinja2:23
-#: app/templates/blog/edit_article.jinja2:24
+#: pyrengine/templates/blog/edit_article.jinja2:22
+#: pyrengine/templates/blog/edit_article.jinja2:23
+#: pyrengine/templates/blog/edit_article.jinja2:24
 msgid "Insert dinkus"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:25
+#: pyrengine/templates/blog/edit_article.jinja2:25
 msgid "Insert shell code"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:26
+#: pyrengine/templates/blog/edit_article.jinja2:26
 msgid "Insert paragraph color text"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:27
+#: pyrengine/templates/blog/edit_article.jinja2:27
 msgid "Insert hyperlink template"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:31
+#: pyrengine/templates/blog/edit_article.jinja2:31
 msgid "draft article"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:31
+#: pyrengine/templates/blog/edit_article.jinja2:31
 msgid "if checked article will not be available to everyone"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:32
+#: pyrengine/templates/blog/edit_article.jinja2:32
 msgid "allow visitors comments"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:34
+#: pyrengine/templates/blog/edit_article.jinja2:34
 msgid "save and continue editing"
 msgstr ""
 
-#: app/templates/blog/edit_article.jinja2:36
+#: pyrengine/templates/blog/edit_article.jinja2:36
 msgid "preview"
 msgstr ""
 
-#: app/templates/blog/index.jinja2:3
+#: pyrengine/templates/blog/index.jinja2:3
 msgid "Recent articles"
 msgstr ""
 
-#: app/templates/blog/index.jinja2:15 app/templates/blog/view_article.jinja2:39
+#: pyrengine/templates/blog/index.jinja2:15
+#: pyrengine/templates/blog/view_article.jinja2:39
 msgid "draft"
 msgstr ""
 
-#: app/templates/blog/index.jinja2:20
+#: pyrengine/templates/blog/index.jinja2:20
 msgid "continue reading"
 msgstr ""
 
-#: app/templates/blog/index.jinja2:21
-msgid "Tags:"
-msgstr ""
-
-#: app/templates/blog/index.jinja2:24 app/templates/blog/index.jinja2:26
+#: pyrengine/templates/blog/index.jinja2:24
+#: pyrengine/templates/blog/index.jinja2:26
 msgid "Comments:"
 msgstr ""
 
-#: app/templates/blog/index.jinja2:29
+#: pyrengine/templates/blog/index.jinja2:29
 msgid "not approved comments:"
 msgstr ""
 
-#: app/templates/blog/index.jinja2:37
+#: pyrengine/templates/blog/index.jinja2:37
 msgid "No articles here."
 msgstr ""
 
-#: app/templates/blog/index.jinja2:41
+#: pyrengine/templates/blog/index.jinja2:41
 msgid "<-newer"
 msgstr ""
 
-#: app/templates/blog/index.jinja2:42
+#: pyrengine/templates/blog/index.jinja2:42
 msgid "older->"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:53
+#: pyrengine/templates/blog/view_article.jinja2:53
 msgid "Comments"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:68
+#: pyrengine/templates/blog/view_article.jinja2:68
 msgid "Display name of the visitor"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:69
+#: pyrengine/templates/blog/view_article.jinja2:69
 msgid "Comment date and time"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:70
+#: pyrengine/templates/blog/view_article.jinja2:70
 msgid "subscribed"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:72
+#: pyrengine/templates/blog/view_article.jinja2:72
 msgid "Email address of the visitor"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:73
+#: pyrengine/templates/blog/view_article.jinja2:73
 msgid "Visitor ip address"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:74
+#: pyrengine/templates/blog/view_article.jinja2:74
 msgid "Visitor X-Forwarded-For address"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:80
+#: pyrengine/templates/blog/view_article.jinja2:80
 msgid "close"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:92
+#: pyrengine/templates/blog/view_article.jinja2:92
 msgid "leave comment"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:99
+#: pyrengine/templates/blog/view_article.jinja2:99
 msgid ""
 "Comment text (allowed markup: *<em>italic</em>*, "
 "**<strong>bold</strong>**, [hyperlink](http://example.com) or "
 "&lt;http://example.com>)"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:101
+#: pyrengine/templates/blog/view_article.jinja2:101
 msgid ""
 "<strong>Please pay attention that comments with more than one hyperlink "
 "(including field \"website\") will be put on moderation.</strong>"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:106
-#: app/templates/blog/view_article.jinja2:114
+#: pyrengine/templates/blog/view_article.jinja2:106
+#: pyrengine/templates/blog/view_article.jinja2:114
 msgid "Subscribe to answers"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:112
+#: pyrengine/templates/blog/view_article.jinja2:112
 msgid "Your name (required, 50 characters or less)"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:113
+#: pyrengine/templates/blog/view_article.jinja2:113
 msgid ""
 "Your email (optional, won't be published, required if you want to receive"
 " answers)"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:115
+#: pyrengine/templates/blog/view_article.jinja2:115
 msgid "Your website"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:117
+#: pyrengine/templates/blog/view_article.jinja2:117
 msgid "post comment"
 msgstr ""
 
-#: app/templates/blog/view_article.jinja2:122
+#: pyrengine/templates/blog/view_article.jinja2:122
 msgid "commenting is disabled"
 msgstr ""
 
-#: app/templates/email/admin_new_comment.jinja2:1
+#: pyrengine/templates/email/admin_new_comment.jinja2:1
 msgid "EMAIL# ADMIN SUBJECT NEW COMMENT TO THE ARTICLE"
 msgstr ""
 "New comment to article «%%(article_title)s» from %%(comment_author_name)s"
 " on the site «%%(site_title)s»"
 
-#: app/templates/email/admin_new_comment.jinja2:5
+#: pyrengine/templates/email/admin_new_comment.jinja2:5
 msgid "EMAIL# ADMIN NEW COMMENT TO THE ARTICLE"
 msgstr ""
 "New comment to the article <a "
 "href=\"%%(article_url)s\">%%(article_title)s</a>."
 
-#: app/templates/email/admin_new_comment.jinja2:7
+#: pyrengine/templates/email/admin_new_comment.jinja2:7
 msgid "EMAIL# ADMIN VISITOR ON DATE WROTE THE FOLLOWING"
 msgstr ""
 "<strong>%%(comment_author_name)s (%%(comment_author_email)s)</strong> on "
 "<em>{comment_date}</em> wrote:"
 
-#: app/templates/email/admin_new_comment.jinja2:11
-#: app/templates/email/comment_response.jinja2:11
+#: pyrengine/templates/email/admin_new_comment.jinja2:11
+#: pyrengine/templates/email/comment_response.jinja2:11
 msgid "EMAIL# DIRECT LINK TO COMMENT"
 msgstr "<a href=\"%%(comment_url)s\">Direct link to the comment.</a>"
 
-#: app/templates/email/comment_response.jinja2:1
+#: pyrengine/templates/email/comment_response.jinja2:1
 #, fuzzy
 msgid "EMAIL# SUBJECT SOMEONE ANSWERED TO YOUR COMMENT"
 msgstr "<a href=\"%%(comment_url)s\">Direct link to the comment.</a>"
 
-#: app/templates/email/comment_response.jinja2:5
+#: pyrengine/templates/email/comment_response.jinja2:5
 #, fuzzy
 msgid "EMAIL# USER ANSWERED TO YOUR COMMENT FOR THE ARTICLE"
 msgstr ""
 "New comment to the article <a "
 "href=\"%%(article_url)s\">%%(article_title)s</a>."
 
-#: app/templates/email/comment_response.jinja2:7
+#: pyrengine/templates/email/comment_response.jinja2:7
 #, fuzzy
 msgid "EMAIL# VISITOR ON DATE WROTE THE FOLLOWING"
 msgstr ""
 "<strong>%%(comment_author_name)s (%%(comment_author_email)s)</strong> on "
 "<em>{comment_date}</em> wrote:"
 
-#: app/templates/email/email_verification.jinja2:1
+#: pyrengine/templates/email/email_verification.jinja2:1
 msgid "EMAIL# SUBJECT PLEASE VERIFY YOUR EMAIL ADDRESS FOR THE SITE"
 msgstr ""
 
-#: app/templates/email/email_verification.jinja2:5
+#: pyrengine/templates/email/email_verification.jinja2:5
 msgid "EMAIL# TO RECEIVE NOTIFICATIONS FROM SITE YOU MUST CONFIRM THIS ADDRESS"
 msgstr ""
 
-#: app/templates/email/email_verification.jinja2:7
+#: pyrengine/templates/email/email_verification.jinja2:7
 msgid "EMAIL# PLEASE CLICK HERE TO VERIFY ADDRESS"
 msgstr ""
 
-#: app/templates/widgets/actions.jinja2:4
+#: pyrengine/templates/widgets/actions.jinja2:4
 msgid "Actions"
 msgstr ""
 
-#: app/templates/widgets/actions.jinja2:6
+#: pyrengine/templates/widgets/actions.jinja2:6
 msgid "Comments moderation ({})"
 msgstr ""
 
-#: app/templates/widgets/actions.jinja2:8
+#: pyrengine/templates/widgets/actions.jinja2:8
 msgid "Backups"
 msgstr ""
 
-#: app/templates/widgets/actions.jinja2:9
+#: pyrengine/templates/widgets/actions.jinja2:9
 msgid "Settings"
 msgstr ""
 
-#: app/templates/widgets/actions.jinja2:10
+#: pyrengine/templates/widgets/actions.jinja2:10
 msgid "Sign out"
 msgstr ""
 
-#: app/templates/widgets/pages.jinja2:2
+#: pyrengine/templates/widgets/pages.jinja2:2
 msgid "Pinned posts"
 msgstr ""
 
@@ -813,4 +819,10 @@ msgstr ""
 
 #~ msgid "EMAIL# DIRECT LINK TO COMMENT"
 #~ msgstr "<a href=\"{comment_url}\">Direct link to the comment.</a>"
+
+#~ msgid "file URL"
+#~ msgstr ""
+
+#~ msgid "Tags:"
+#~ msgstr ""
 

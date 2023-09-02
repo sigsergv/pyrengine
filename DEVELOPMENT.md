@@ -2,13 +2,15 @@
 
 ## Environment setup
 
-Base OS: Linux, Debian 12 Bookworm.
+Base OS: Linux/Debian 12 Bookworm or macos/brew
 
-Install required packages:
+Install required packages for linux:
 
 ~~~~
 $ sudo apt install python3 python3-dev postgresql-15 libpq-dev
 ~~~~
+
+For macos you need standard development tools (compilers etc).
 
 Install venv:
 
@@ -34,7 +36,7 @@ Install application in development mode:
 (.venv) $ pip install -e .
 ~~~~
 
-This command will install all required dependencies from the network.
+This command will install all required python packages automatically.
 
 ## Database setup
 
@@ -88,6 +90,13 @@ Use this commands to initialize database and populate with sample data:
 (.venv) $ flask db upgrade
 (.venv) $ flask init-db
 ~~~~
+
+## Create storage directories
+
+~~~~
+(.venv) $ mkdir -p storage
+~~~~
+
 
 ## Start application in development mode
 

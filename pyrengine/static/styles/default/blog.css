@@ -372,15 +372,26 @@ dl.form textarea.small {
 
 table.items-list {
 	margin: 10px 0 10px 0;
-	border: 1px solid #a52a2a;
-	x-width: 100%;
+	border: 1px solid #6E6F9B;
+/*	width: 100%;*/
+/*	table-layout:fixed;*/
 }
 table.items-list th {
-	background-color: #d2d2d2;
-	padding: 2px 10px 2px 10px;
+	background-color: #C0DEFF;
+	text-align: left;
+	padding: 4px 10px 4px 5px;
 }
+table.items-list tr:nth-child(odd) {
+	background-color: #F0F0F0;
+}
+table.items-list tr:nth-child(even) {
+	background-color: #FFFFFF;
+}
+
 table.items-list td {
 	padding: 2px 5px 2px 5px;
+/*	width: 1px;*/
+/*	white-space: nowrap;*/
 }
 span.hint, div.hint {
 	color: #4d4d4d;
@@ -435,10 +446,13 @@ span.info {
 div#sidebar div.widget div {
     font-family: "PT Serif", Verdana, Tahoma, sans-serif;
 }
+div#sidebar div.widget-actions a {
+	text-decoration: none;
+}
 div#sidebar div.widget-actions {
 }
 div#sidebar div.widget-actions div.action-item {
-    margin-bottom: 1px;
+    margin-bottom: 3px;
     background-color: #f6f6f6;
     padding-left: 3px;
     border: 3px white;
@@ -509,13 +523,8 @@ input.gsc-input[type="text"] {
 	border: 1px solid #a9a9a9;
 }
 
-td.files-content-type {
-	max-width: 140px;
-	overflow: hidden;
-}
-
-acronym[title] {
-	border-style: none none dashed none;
+acronym {
+	text-decoration: gray underline dashed;
 	border-color: gray;
 	border-width: 1px;
 }

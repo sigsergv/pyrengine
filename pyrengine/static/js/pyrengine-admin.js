@@ -404,6 +404,21 @@ window.pyrengine.deleteSelectedFiles = function(table_id, url) {
 	pyrengine.create_confirm_link('delete-selected-btn', function() { deleteSelectedFiles(table_id, url); });
 };
 
+var deleteArticle = function(url, article_id) {
+	$.ajax({
+		url: url,
+		type: 'POST',
+		dataType: 'json'
+	}).done(function(data) {
+		window.location.reload(true);
+	}).fail(function() {
+		alert(tr('AJAX_REQUEST_ERROR'));
+		save_button.removeAttr('disabled');
+	});
+};
+window.pyrengine.deleteArticle = function(url, article_id) {
+	pyrengine.create_confirm_link('a-d-'+article_id, function() { deleteArticle(url, article_id);});
+}
 
 window.pyrengine.saveSettingsAjax = function(url) {
 	var field_names = ['site_title', 'site_base_url', 'site_copyright', 'elements_on_page',

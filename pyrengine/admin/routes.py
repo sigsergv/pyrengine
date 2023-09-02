@@ -63,9 +63,15 @@ def upload_file():
     return redirect(url_for('admin.files_list'))
 
 
-@bp.route('/files/upload/check')
+@bp.route('/files/upload/check', methods=['POST'])
 @login_required
 def upload_file_check_ajax():
+    return {}
+
+
+@bp.route('/files/<int:file_id>/edit/check', methods=['POST'])
+@login_required
+def edit_file_props_check_ajax():
     return {}
 
 
@@ -217,6 +223,7 @@ def settings_save_ajax():
             c.value = ('true' if v == 'true' else 'false')
             dbsession.add(c)
     dbsession.commit()
+    cache.clear_cache()
     return {}
 
 

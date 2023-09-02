@@ -2,9 +2,9 @@ import click
 import logging
 import os
 
-from flask import Flask, g
+from flask import (Flask, g, render_template)
 from flask_migrate import Migrate
-from flask_babel import Babel
+from flask_babel import Babel, gettext as _
 from flask.cli import with_appcontext
 from flask_login import LoginManager
 
@@ -42,9 +42,21 @@ def create_app():
     app.register_blueprint(main_bp)
     app.register_blueprint(admin_bp, url_prefix='/admin')
 
-    @app.route('/test/')
-    def test_page():
-        return '<h1>Testing the Flask Application Factory Pattern</h1>'
+    @app.errorhandler(404)
+    def error_404(e):
+        ctx = {
+            'title': _('Page not found')
+        }
+        html = render_template('/generic_error.jinja2', **ctx)
+        return html, 404
+
+    @app.errorhandler(401)
+    def error_401(e):
+        ctx = {
+            'title': _('Page not found')
+        }
+        html = render_template('/generic_error.jinja2', **ctx)
+        return html, 401
 
     return app
 

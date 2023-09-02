@@ -49,7 +49,7 @@
   {{ forms.textfield('image_preview_width', settings['image_preview_width'], _('Picture preview width'), _('Width of automatically generated preview to be used as smaller copy of original picture.'), errors['image_preview_width']) }}
   {{ forms.textfield('google_analytics_id', settings['google_analytics_id'], _('[N/A] Google Analytics(tm) ID'), _('Your google analytics ID, value like "UA-12345678-9", to disable Google Analytics just clear the field'), errors['google_analytics_id']) }}
   {{ forms.textfield('timezone', settings['timezone'], _('Blog timezone'), _('Timezone to be used for time and date values on the site, <strong>must</strong> be tzdb-compatible string value like "Asia/Novosibirsk" or "UTC".'), errors['timezone']) }}
-  {{ settings[''] }} {{ forms.selector('ui_lang', settings['ui_lang'], _('Site language'), '', [('en', 'English'), ('ru', 'Русский')]) }}
+  {{ forms.selector('ui_lang', settings['ui_lang'], _('Site language'), '', [('en', 'English'), ('ru', 'Русский')]) }}
   {{ forms.selector('ui_theme', settings['ui_theme'], _('Site theme'), '', [('default', _('Default theme'))]) }}
 
   <h3>{{ _('Site search widget') }}</h3>
