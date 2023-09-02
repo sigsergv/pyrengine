@@ -271,7 +271,7 @@ msgstr "Имя файла"
 
 #: pyrengine/templates/admin/files_list.jinja2:42
 msgid "Content type"
-msgstr "msgstr \"Тип файла"
+msgstr "Тип файла"
 
 #: pyrengine/templates/admin/files_list.jinja2:49
 #: pyrengine/templates/blog/article_snippet.jinja2:27

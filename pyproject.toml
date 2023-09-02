@@ -45,14 +45,20 @@ dependencies = [
 #find = {}  # Scanning implicit namespaces is active by default
 
 [tool.setuptools.packages.find]
-exclude = ["migrations*"]
+exclude = ["__pycache__"]
 
 [tool.setuptools.package-data]
 # add templates recursiveley
 "pyrengine.templates" = ["**/*.jinja2"]
 # add everything in "pyrengine/static" directory
 "pyrengine.static" = ["**/*"]
+"pyrengine.examples" = ["**/*"]
+"pyrengine.translations" = ["**/*"]
 "pyrengine.models.migrations" = ["**/*"]
+
+[tool.setuptools.exclude-package-data]
+"*" = ["*.pyc"]
+
 
 [build-system]
 requires = ["setuptools >= 62.3.0", "wheel"]

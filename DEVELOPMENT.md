@@ -220,7 +220,7 @@ We deploy application using wheel. First install package `build` required for pa
 Create distribution package:
 
 ~~~~
-(.venv) $ python -m build --wheel
+(.venv) $ make build
 ~~~~
 
 Resulting wheel package will be placed to directory `dist/`, it looks like `pyrengine-1.0.0-py3-none-any.whl`.

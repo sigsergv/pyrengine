@@ -3,7 +3,7 @@
 Install required system packages:
 
 ~~~~
-$ sudo apt install nginx uwsgi uwsgi-plugin-python3 python3 python3-dev postgresql-15 libpq-dev
+$ sudo apt install nginx uwsgi uwsgi-plugin-python3 python3 python3-dev python3-venv postgresql-15 gcc libpq-dev
 ~~~~
 
 Create separate system user for the server runtime, do not start it as root user.
@@ -46,35 +46,7 @@ Fetch latest version (.whl-file) from releases page <https://github.com/sigsergv
 (venv) $ pip install pyrengine-1.0.0-py3-none-any.whl
 ~~~~
 
-Initialize database:
-
-~~~~
-$ export PYRENGINE_SETTINGS=/home/blog/pyrengine-blog/production.cfg
-$ export FLASK_APP=pyrengine
-$ source pyrengine-blog/venv/bin/activate
-(venv) $ flask db upgrade -d $(python3 -m pyrengine.utils -s alembic_migrations)
-(venv) $ flask init-db
-~~~~
-Now switch back to system user.
-
-
-
-
-Copy nginx configuration file and edit it accordingly:
-
-~~~~
-$ sudo cp $(python3 -m pyrengine.utils -s examples_dir)/pyrengine-nginx-uwsgi.conf /etc/nginx/sites-enabled/pyrengine-blog.conf
-~~~~
-
-Copy uWSGI configuration file:
-
-~~~~
-$ sudo cp $(python3 -m pyrengine.utils -s examples_dir)/pyrengine-uwsgi.ini /etc/uwsgi/apps-enabled/pyrengine-blog.ini
-~~~~
-
-uWSGI log file is `/var/log/uwsgi/app/pyrengine-blog.log`.
-
-Copy production config sample:
+Initialize production config:
 
 ~~~~
 $ cp $(python3 -m pyrengine.utils -s examples_dir)/production.cfg /home/blog/pyrengine-blog/production.cfg
@@ -85,6 +57,41 @@ Open it in text editor and set new SECRET_KEY, mail server and database connecti
 ~~~~
 $ python3 -c 'import secrets; print(secrets.token_urlsafe(32))'
 ~~~~
+
+Initialize database:
+
+~~~~
+$ export PYRENGINE_SETTINGS=/home/blog/pyrengine-blog/production.cfg
+$ export FLASK_APP=pyrengine
+$ source pyrengine-blog/venv/bin/activate
+(venv) $ flask db upgrade -d $(python3 -m pyrengine.utils -s alembic_migrations)
+(venv) $ flask init-db
+~~~~
+
+
+Now switch back to system user.
+
+Copy nginx configuration file and edit it accordingly:
+
+~~~~
+$ sudo cp $(/home/blog/pyrengine-blog/venv/bin/python3 -m pyrengine.utils -s examples_dir)/pyrengine-nginx-uwsgi.conf /etc/nginx/sites-enabled/pyrengine-blog.conf
+~~~~
+
+Copy uWSGI configuration file:
+
+~~~~
+$ sudo cp $(/home/blog/pyrengine-blog/venv/bin/python3 -m pyrengine.utils -s examples_dir)/pyrengine-uwsgi.ini /etc/uwsgi/apps-enabled/pyrengine-blog.ini
+~~~~
+
+uWSGI log file is `/var/log/uwsgi/app/pyrengine-blog.log`.
+
+Restart nginx and uwsgi:
+
+~~~~
+$ sudo systemctl restart nginx
+$ sudo systemctl restart uwsgi
+~~~~
+
 
 
 

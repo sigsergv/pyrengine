@@ -27,7 +27,7 @@ clean-init-db:
 	flask db upgrade -d pyrengine/models/migrations
 	flask init-db
 
-build:
+build: babel-compile
 	rm -rf dist build
 	python -m build --wheel
 
