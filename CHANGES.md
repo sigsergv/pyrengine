@@ -7,6 +7,7 @@ This file contains releases history along with most important changes.
 Released: 2023-09-04
 
 * fixed errors in email templates
+* fixed tags view
 
 ## 1.0.1
 

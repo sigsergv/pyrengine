@@ -128,7 +128,47 @@ def latest_rss():
 
 @bp.route('/tag/<tag>')
 def articles_by_tag(tag):
-    return ''
+    ctx = {
+        'articles': [],
+        'prev_page': None,
+        'next_page': None
+    }
+    page_size = int(get_config('elements_on_page'))
+    start_page = 0
+    if 'start' in request.args:
+        try:
+            start_page = int(request.args['start'])
+            if start_page < 0:
+                start_page = 0
+        except ValueError:
+            start_page = 0
+
+    dbsession = db.session
+    user = current_user
+
+    q = dbsession.query(Article).join(Tag).options(db.joinedload(Article.tags)).options(db.joinedload(Article.user)).order_by(Article.published.desc())
+    # print(current_user)
+    if user.is_anonymous:
+        q = q.filter(Article.is_draft==False)
+
+    q = q.filter(Tag.tag == tag)
+
+    ctx['articles'] = q[(start_page * page_size):(start_page+1) * page_size + 1]
+
+    #for article in ctx['articles']:
+    #    log.debug(article.shortcut_date)
+
+    if len(ctx['articles']) > page_size:
+        ctx['prev_page'] = url_for('blog.articles_by_tag', tag=tag, start=start_page+1)
+        ctx['articles'].pop()
+
+    ctx['next_page'] = None
+    if start_page > 0:
+        ctx['next_page'] = url_for('blog.articles_by_tag', tag=tag, start=start_page-1)
+
+    ctx['page_title'] = _('Latest articles')
+
+    return render_template('blog/index.jinja2', **ctx)
 
 
 @bp.route('/help/article-markup')
