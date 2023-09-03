@@ -3,6 +3,7 @@ import zipfile
 import shutil
 
 from lxml import etree
+from datetime import datetime
 from base64 import b64encode, b64decode
 from flask_babel import gettext as _
 from sqlalchemy.exc import IntegrityError
@@ -26,6 +27,7 @@ def init(app):
 
 def list_backups():
     items = []
+    
     for ind, fn in enumerate(os.listdir(BACKUPS_PATH), 1):
         full_fn = os.path.join(BACKUPS_PATH, fn)
         if not os.path.isfile(full_fn):
@@ -39,7 +41,7 @@ def list_backups():
             'size': os.path.getsize(full_fn)
         }
         items.append(b)
-    return items
+    return sorted(items, key=lambda x: x['filename'])
 
 
 def backup_file_name(backup_id):
@@ -59,6 +61,18 @@ def backup_file_name(backup_id):
         return None
 
     return full_path
+
+
+def delete_backup(backup_id):
+    filename = backup_file_name(backup_id)
+    if filename is None:
+        return False
+    try:
+        os.unlink(filename)
+    except Exception as e:
+        logger.error('Failed to delete backup, error: {0}'.format(str(e)))
+        return False
+    return True
 
 
 def restore_backup(backup_id):
@@ -110,7 +124,7 @@ def restore_backup(backup_id):
 
     backup_version = root.get('version')
 
-    if backup_version not in ('1.1', ):
+    if backup_version not in ('1.1', '1.2'):
         return _('Unsupported backup version: “{0}”!'.format(root.get('version')))
 
     ## restore data
@@ -369,5 +383,136 @@ def restore_backup(backup_id):
         print(e)
         return _('Unable to restore backup: database error, maybe your backup file is corrupted')
 
-
     return True
+
+
+def create_backup():
+    now = datetime.now()
+    ts = now.strftime('%Y%m%d-%H%M%S')
+    backup_file_name = 'backup-{0}.zip'.format(ts)
+    backup_tmp_dir = os.path.join(BACKUPS_PATH, 'tmp-{0}'.format(ts))
+
+    def cleanup():
+        shutil.rmtree(backup_tmp_dir, ignore_errors=True)
+
+    os.mkdir(backup_tmp_dir)
+
+    nsmap = {None: 'http://regolit.com/ns/pyrone/backup/1.0'}
+
+    def e(parent, name, text=None):
+        node = etree.SubElement(parent, name, nsmap=nsmap)
+        if text is not None:
+            node.text = text
+        return node
+
+    root = etree.Element('backup', nsmap=nsmap)
+    root.set('version', '1.2')
+
+    articles_el = e(root, 'articles')
+    vf_el = e(root, 'verified-emails')
+    files_el = e(root, 'files')
+    settings_el = e(root, 'settings')
+    users_el = e(root, 'users')
+
+    dbsession = db.session
+
+    # dump tables, create xml-file with data, dump files, pack all in the zip-file
+    for article in dbsession.query(Article).all():
+        article_el = e(articles_el, 'article')
+        article_el.set('id', str(article.id))
+        article_el.set('user-id', str(article.user_id))
+        e(article_el, 'title', article.title)
+        e(article_el, 'shortcut-date', article.shortcut_date)
+        e(article_el, 'shortcut', article.shortcut)
+        e(article_el, 'body', article.body)
+        e(article_el, 'published', str(article.published))
+        e(article_el, 'updated', str(article.updated))
+        e(article_el, 'is-commentable', str(article.is_commentable))
+        e(article_el, 'is-draft', str(article.is_draft))
+        tags_el = e(article_el, 'tags')
+
+        for t in article.tags:
+            e(tags_el, 'tag', t.tag)
+
+        comments_el = e(article_el, 'comments')
+
+        for comment in article.comments:
+            comment_el = e(comments_el, 'comment')
+            comment_el.set('id', str(comment.id))
+            if comment.user_id is not None:
+                comment_el.set('user-id', str(comment.user_id))
+            if comment.parent_id is not None:
+                comment_el.set('parent-id', str(comment.parent_id))
+            e(comment_el, 'body', comment.body)
+            e(comment_el, 'email', comment.email)
+            e(comment_el, 'display-name', comment.display_name)
+            e(comment_el, 'published', str(comment.published))
+            e(comment_el, 'ip-address', comment.ip_address)
+            if comment.xff_ip_address is not None:
+                e(comment_el, 'xff-ip-address', comment.xff_ip_address)
+            e(comment_el, 'is-approved', str(comment.is_approved))
+
+    # dump verified emails
+    for vf in dbsession.query(VerifiedEmail).all():
+        s = e(vf_el, 'email', vf.email)
+        s.set('verified', 'true' if vf.is_verified else 'false')
+        s.set('last-verification-date', str(int(vf.last_verify_date)))
+        s.set('verification-code', vf.verification_code)
+
+    # dump settings
+    for setting in dbsession.query(Config).all():
+        s = e(settings_el, 'config', setting.value)
+        s.set('id', setting.id)
+
+    # dump users
+    for user in dbsession.query(User).all():
+        user_el = e(users_el, 'user')
+        user_el.set('id', str(user.id))
+        e(user_el, 'login', user.login)
+        e(user_el, 'password', user.password)
+        e(user_el, 'display-name', user.display_name)
+        e(user_el, 'email', user.email)
+        e(user_el, 'kind', user.kind)
+
+    # dump files
+    ind = 1
+    storage_dirs = get_storage_dirs()
+
+    for f in dbsession.query(File).all():
+        # check is file exists
+
+        full_path = os.path.join(storage_dirs['orig'], f.name)
+        if not os.path.exists(full_path) or not os.path.isfile(full_path):
+            continue
+
+        target_file = 'file{0:05}'.format(ind)
+        shutil.copy(full_path, os.path.join(backup_tmp_dir, target_file))
+
+        file_el = e(files_el, 'file')
+        file_el.set('src', target_file)
+        e(file_el, 'name', f.name)
+        e(file_el, 'dltype', f.dltype)
+        e(file_el, 'updated', str(f.updated))
+        e(file_el, 'content-type', f.content_type)
+        ind += 1
+
+    # write xml
+    index_xml = os.path.join(backup_tmp_dir, 'index.xml')
+    out = open(index_xml, 'wb')
+    etree.ElementTree(root).write(index_xml, pretty_print=True, encoding='UTF-8', xml_declaration=True)
+    out.close()
+
+    # compress directory
+    z = zipfile.ZipFile(os.path.join(BACKUPS_PATH, backup_file_name), 'w')
+    for fn in os.listdir(backup_tmp_dir):
+        fn_full = os.path.join(backup_tmp_dir, fn)
+        if not os.path.isfile(fn_full):
+            continue
+
+        z.write(fn_full, fn)
+    z.close()
+
+    # cleanup
+    cleanup()
+
+    return backup_file_name

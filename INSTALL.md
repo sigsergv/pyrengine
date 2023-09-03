@@ -68,7 +68,6 @@ $ source pyrengine-blog/venv/bin/activate
 (venv) $ flask init-db
 ~~~~
 
-
 Now switch back to system user.
 
 Copy nginx configuration file and edit it accordingly:
@@ -92,8 +91,11 @@ $ sudo systemctl restart nginx
 $ sudo systemctl restart uwsgi
 ~~~~
 
+# Additional configuration
 
+## favicons
 
+Pyrengine provides sample favicon if you need another please rewrite path to `/favicon.png` in your nginx configuration file.
 
 # Upgrade
 

@@ -23,7 +23,7 @@
   <dt>{% if title_help %}<acronym title="{{ title_help }}">{{ title }}</acronym>{% else %}{{ title }}{% endif %}</dt>
   <dd><select name="{{ name }}" id="fid-{{ name }}" >
   {% for opt_id,opt_label in items %}
-    <option value="{{ opt_id }}">{{ opt_label }}</option>
+    <option value="{{ opt_id }}"{% if value==opt_id %} selected="true"{% endif %}>{{ opt_label }}</option>
   {% endfor %}
   </select></dd>
 {%- endmacro %}

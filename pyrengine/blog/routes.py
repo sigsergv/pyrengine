@@ -2,10 +2,10 @@ import re
 import uuid
 import os
 
-from flask import (render_template, make_response, request, redirect, url_for, abort)
+from flask import (render_template, make_response, request, redirect, url_for, abort, send_file)
 from pyrengine.blog import bp
 from pyrengine import notifications
-from pyrengine.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, timestamp_to_dt, markup, user_has_permission, article_url, normalize_email)
+from pyrengine.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, timestamp_to_dt, markup, user_has_permission, article_url, normalize_email, package_file_path)
 from pyrengine.utils.PyRSS2Gen import RSS2, RSSItem
 from pyrengine.models import (User, Article, Comment, Tag, VerifiedEmail, File)
 from pyrengine.models.config import get as get_config
@@ -63,6 +63,11 @@ def index():
     ctx['page_title'] = _('Latest articles')
 
     return render_template('blog/index.jinja2', **ctx)
+
+
+@bp.route('/favicon.png')
+def favicon_png():
+    return send_file(package_file_path('examples/favicon.png'))
 
 
 @bp.route('/files/f/<filename>')

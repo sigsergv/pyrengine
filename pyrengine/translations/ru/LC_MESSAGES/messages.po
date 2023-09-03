@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-09-03 10:33+0700\n"
+"POT-Creation-Date: 2023-09-03 14:13+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: ru\n"
@@ -23,47 +23,47 @@ msgstr ""
 msgid "Page not found"
 msgstr "Страница не найдена"
 
-#: pyrengine/backups.py:68
+#: pyrengine/backups.py:82
 msgid "Backup ID cannot be processed."
 msgstr ""
 
-#: pyrengine/backups.py:72
+#: pyrengine/backups.py:86
 msgid "Backup not found."
 msgstr "Бэкап не найден."
 
-#: pyrengine/backups.py:79
+#: pyrengine/backups.py:93
 msgid "Backup file is broken!"
 msgstr "Файл бэкапа повреждён!"
 
-#: pyrengine/backups.py:85
+#: pyrengine/backups.py:99
 msgid "Backup file is broken, no catalog file inside!"
 msgstr "Файл бэкапа повреждён, не найден файл каталога внутри архива!"
 
-#: pyrengine/backups.py:90
+#: pyrengine/backups.py:104
 msgid "Backup file is broken, XML catalog is broken!"
 msgstr "Файл бэкапа повреждён, файл каталога повреждён!"
 
-#: pyrengine/backups.py:109
+#: pyrengine/backups.py:123
 msgid "Unknown XML format of catalog file."
 msgstr "Формат файла каталога не является корректным XML."
 
-#: pyrengine/backups.py:114
+#: pyrengine/backups.py:128
 msgid "Unsupported backup version: “{0}”!"
 msgstr "Версия бэкапа «{0}» не поддерживается!"
 
-#: pyrengine/backups.py:136
+#: pyrengine/backups.py:150
 msgid "Backup file is broken: settings block not found"
 msgstr "Файл бэкапа повреждён, блок «settings» не обнаружен"
 
-#: pyrengine/backups.py:154
+#: pyrengine/backups.py:168
 msgid "Backup file is broken: users block not found"
 msgstr "Файл бэкапа повреждён, блок «users» не обнаружен"
 
-#: pyrengine/backups.py:203 pyrengine/backups.py:316
+#: pyrengine/backups.py:217 pyrengine/backups.py:330
 msgid "Backup file is broken: articles block not found"
 msgstr "Файл бэкапа повреждён, блок «articles» не обнаружен"
 
-#: pyrengine/backups.py:367 pyrengine/backups.py:370
+#: pyrengine/backups.py:381 pyrengine/backups.py:384
 msgid ""
 "Unable to restore backup: database error, maybe your backup file is "
 "corrupted"
@@ -71,43 +71,47 @@ msgstr ""
 "Не удалось восстановить бэкап, ошибка базы данных, вероятно файл бэкапа "
 "повреждён"
 
-#: pyrengine/admin/routes.py:113
+#: pyrengine/admin/routes.py:117
 msgid "Invalid input data"
+msgstr ""
+
+#: pyrengine/admin/routes.py:209
+msgid "Failed to delete some backup filename."
 msgstr ""
 
 #: pyrengine/blog/routes.py:63
 msgid "Latest articles"
 msgstr "Недавние статьи"
 
-#: pyrengine/blog/routes.py:91 pyrengine/templates/base.jinja2:15
+#: pyrengine/blog/routes.py:96 pyrengine/templates/base.jinja2:15
 msgid "Latest articles feed"
 msgstr "Лента недавних статей"
 
-#: pyrengine/blog/routes.py:228
+#: pyrengine/blog/routes.py:233
 msgid "User not found"
 msgstr "Пользователь не найден"
 
-#: pyrengine/blog/routes.py:254
+#: pyrengine/blog/routes.py:259
 msgid "New article title"
 msgstr "Название новой статьи"
 
-#: pyrengine/blog/routes.py:286 pyrengine/blog/routes.py:338
+#: pyrengine/blog/routes.py:291 pyrengine/blog/routes.py:343
 msgid "Article with the same shortcut already exists."
 msgstr "Статья с таким шорткатом уже существует"
 
-#: pyrengine/blog/routes.py:460
+#: pyrengine/blog/routes.py:465
 msgid "Field is required."
 msgstr "Поле обязательно нужно заполнить."
 
-#: pyrengine/blog/routes.py:465
+#: pyrengine/blog/routes.py:470
 msgid "Invalid date format."
 msgstr "Некорректный формат даты."
 
-#: pyrengine/blog/routes.py:516
+#: pyrengine/blog/routes.py:521
 msgid "Empty comment body is not allowed."
 msgstr "Пустой комментарий не разрешён."
 
-#: pyrengine/blog/routes.py:550
+#: pyrengine/blog/routes.py:555
 msgid "Answering to not approved comment"
 msgstr "Нельзя ответить на неподтверждённый комментарий"
 
@@ -148,42 +152,51 @@ msgstr "Восстановление бэкапа, пожалуйста ждит
 msgid "Creating backup, please wait"
 msgstr "Создание бэкапа, пожалуйста\tждите"
 
-#: pyrengine/templates/admin/backups_list.jinja2:15
+#: pyrengine/templates/admin/backups_list.jinja2:14
+msgid "Backup complete, reload page to see it."
+msgstr ""
+
+#: pyrengine/templates/admin/backups_list.jinja2:14
+#, fuzzy
+msgid "New backup filename: {0}"
+msgstr "Имя файла бэкапа"
+
+#: pyrengine/templates/admin/backups_list.jinja2:16
 msgid "Backup archives"
 msgstr "Архивы бэкапов"
 
-#: pyrengine/templates/admin/backups_list.jinja2:17
+#: pyrengine/templates/admin/backups_list.jinja2:18
 msgid "Click backup file name to download."
 msgstr "Нажмите на имя файла бэкапа, чтобы его скачать."
 
-#: pyrengine/templates/admin/backups_list.jinja2:20
+#: pyrengine/templates/admin/backups_list.jinja2:21
 #: pyrengine/templates/admin/files_list.jinja2:38
 msgid "Select/deselect all files"
 msgstr "Выделить/снять выделение со всех файлов"
 
-#: pyrengine/templates/admin/backups_list.jinja2:22
+#: pyrengine/templates/admin/backups_list.jinja2:23
 msgid "Backup filename"
 msgstr "Имя файла бэкапа"
 
-#: pyrengine/templates/admin/backups_list.jinja2:23
+#: pyrengine/templates/admin/backups_list.jinja2:24
 #: pyrengine/templates/admin/files_list.jinja2:43
 msgid "File size"
 msgstr "Размер файла"
 
-#: pyrengine/templates/admin/backups_list.jinja2:29
+#: pyrengine/templates/admin/backups_list.jinja2:30
 msgid "restore"
 msgstr "восстановить"
 
-#: pyrengine/templates/admin/backups_list.jinja2:30
+#: pyrengine/templates/admin/backups_list.jinja2:31
 msgid "Download backup"
 msgstr "Скачать бэкап"
 
-#: pyrengine/templates/admin/backups_list.jinja2:31
+#: pyrengine/templates/admin/backups_list.jinja2:32
 #: pyrengine/templates/admin/files_list.jinja2:54
 msgid "{0} bytes"
 msgstr "{0} байтов"
 
-#: pyrengine/templates/admin/backups_list.jinja2:38
+#: pyrengine/templates/admin/backups_list.jinja2:39
 #: pyrengine/templates/admin/files_list.jinja2:60
 msgid "delete selected"
 msgstr "удалить выделенное"
@@ -590,8 +603,7 @@ msgid ""
 msgstr ""
 "Тело статьи (обязательно, разметка *<em>курсив</em>*, "
 "**<strong>полужирная</strong>**, [ссылка](http://example.com) <a "
-"href=\"/static/article-markup-tip-en.html\" target=\"_blank\" class"
-"=\"new-window\">ещё</a>)"
+"href=\"{0}\" target=\"_blank\" class=\"new-window\">ещё</a>)"
 
 #: pyrengine/templates/blog/edit_article.jinja2:18
 msgid "Inline code (monospace text)"
@@ -844,6 +856,10 @@ msgstr "Выйти"
 msgid "Pinned posts"
 msgstr "Избранные посты"
 
+#: pyrengine/templates/widgets/search.jinja2:4
+msgid "Site search"
+msgstr "Поиск по сайту"
+
 #~ msgid "AJAX_REQUEST_ERROR"
 #~ msgstr ""
 
@@ -871,5 +887,8 @@ msgstr "Избранные посты"
 #~ msgstr ""
 
 #~ msgid "Tags:"
+#~ msgstr ""
+
+#~ msgid "Search blog"
 #~ msgstr ""
 

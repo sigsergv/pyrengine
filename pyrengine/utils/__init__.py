@@ -6,6 +6,7 @@ import random
 import pytz
 import datetime
 import calendar
+import os
 
 from flask import url_for
 
@@ -93,3 +94,9 @@ def article_url(article):
 
 def normalize_email(email):
     return email
+
+
+def package_file_path(p):
+    path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', p))
+    return path
+

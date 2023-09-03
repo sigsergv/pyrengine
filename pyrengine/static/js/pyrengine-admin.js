@@ -247,13 +247,22 @@ window.pyrengine.startBackupRestore = function(url, restore_link_id) {
 
 
 window.pyrengine.backupNow = function(url) {
+	$('#eid-error').hide();
 	$('#eid-backup-progress').show();
 	$.ajax({
 		url: url,
 		type: 'POST'
-	}).done(function() {
+	}).done(function(json) {
 		$('#eid-backup-progress').hide();
-		location.reload(true);
+		if (!json.success) {
+			$('#eid-error').text(tr('BACKUP_FAILED_WITH_ERROR').replace('{0}', json.error));
+			$('#eid-error').show();
+		} else {
+			var html = $('#complete-backup-filename').text();
+			html = html.replace('{0}', json.backup_file_name);
+			$('#complete-backup-filename').text(html);
+			$('#eid-backup-done').show();
+		}
 	}).fail(function() {
 		$('#eid-backup-progress').hide();
 		alert(tr('AJAX_REQUEST_ERROR'));
@@ -261,6 +270,7 @@ window.pyrengine.backupNow = function(url) {
 };
 
 var pyrengine_file_list_delete_selected = function(table_id, url) {
+	$('#eid-error').hide();
 	// find all checkboxes in the table
 	var selected_uids = pyrengine.get_selected_rows(table_id);
 	if (selected_uids.length == 0) {
@@ -274,8 +284,12 @@ var pyrengine_file_list_delete_selected = function(table_id, url) {
 		data: {
 			uids: selected_uids.join(',')
 		}
-	}).done(function(data){
-		$.each(data.deleted, function(ind, id) {
+	}).done(function(json){
+		if (!json.success) {
+			$('#eid-error').text(json.error);
+			$('#eid-error').show();
+		}
+		$.each(json.deleted, function(ind, id) {
 			var el = $('tr[data-row-value="'+id+'"]');
 			el.remove();
 		});

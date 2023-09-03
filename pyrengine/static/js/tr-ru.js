@@ -9,5 +9,6 @@ window.translations = {
 	'POSTING_COMMENT': 'Отправка комментария.',
 	'COMMENT_IS_WAITING_FOR_APPROVAL': 'Комментарий сохранён и ждёт модерации.',
 	'BACKUP_RESTORE_COMPLETE': 'Бэкап успешно восстановлен, сайт будет перезагружен.',
-	'SETTINGS_SAVED': 'Настройки успешно сохранены.'
+	'SETTINGS_SAVED': 'Настройки успешно сохранены.',
+	'BACKUP_FAILED_WITH_ERROR': 'Бэкап завершился с ошибкой: {0}'
 };

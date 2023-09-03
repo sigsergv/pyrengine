@@ -1,0 +1,8 @@
+{% set search_code = h.get_config('site_search_widget_code') %}
+{% if search_code is not none %}
+<div class="widget widget-search">
+  <div class="section">{{ _('Site search') }}</div>
+  {{ search_code }}
+</div>
+
+{% endif %}

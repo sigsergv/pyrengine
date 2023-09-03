@@ -9,5 +9,6 @@ window.translations = {
 	'POSTING_COMMENT': 'Posting comment',
 	'COMMENT_IS_WAITING_FOR_APPROVAL': 'Comment is awaiting for approval.',
 	'BACKUP_RESTORE_COMPLETE': 'Backup restore successfully, site will be reloaded now.',
-	'SETTINGS_SAVED': 'Settings saved successfully.'
+	'SETTINGS_SAVED': 'Settings saved successfully.',
+	'BACKUP_FAILED_WITH_ERROR': 'Backup failed with error: {0}'
 };

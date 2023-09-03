@@ -248,7 +248,6 @@ window.pyrengine.postArticleComment = function() {
 	params[article_id.substring(0, 5)] = display_name;
 	params[article_id.substring(13, 25)] = email;
 	params[article_id.substring(15, 21)] = website;
-	console.log('is_subscribed', is_subscribed);
 	if (is_subscribed === true) {
 		params[article_id.substring(19, 27)] = 'true';
 	}

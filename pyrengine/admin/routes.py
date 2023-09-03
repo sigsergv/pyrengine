@@ -1,4 +1,6 @@
 import os
+import logging
+
 
 from mimetypes import guess_type
 from datetime import datetime
@@ -16,6 +18,8 @@ from pyrengine.files import FILES_PATH
 from pyrengine.extensions import db
 
 from flask_login import (login_user, logout_user, login_required, current_user)
+
+logger = logging.getLogger(__name__)
 
 @bp.route('/')
 @login_required
@@ -136,7 +140,21 @@ def backups_list():
 @bp.route('/backups/create', methods=['POST'])
 @login_required
 def backup_now():
-    return {}
+    """
+    Perform complete blog backup: articles, comments, files and settings.
+    """
+    try:
+        backup_file_name = backups.create_backup()
+    except Exception as e:
+        logger.error('Backup failed, error: {}'.format(str(e)))
+        return {
+            'success': False,
+            'error': 'backup failed'
+        }
+    return {
+        'success': True,
+        'backup_file_name': backup_file_name
+    }
 
 
 @bp.route('/backups/restore/<backup_id>', methods=['POST'])
@@ -180,7 +198,20 @@ def download_backup(backup_id):
 @bp.route('/backups/delete', methods=['POST'])
 @login_required
 def delete_backups_ajax():
-    return {}
+    v = request.form.get('uids', '')
+    uids = v.split(',')
+    deleted = []
+    error = ''
+    for backup_id in uids:
+        if backups.delete_backup(backup_id):
+            deleted.append(backup_id)
+        else:
+            error = _('Failed to delete some backup filename.')
+    return {
+        'success': error == '',
+        'deleted': deleted,
+        'error': error
+    }
 
 
 @bp.route('/settings')
