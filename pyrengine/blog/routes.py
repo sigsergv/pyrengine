@@ -58,7 +58,7 @@ def index():
 
     ctx['next_page'] = None
     if start_page > 0:
-        ctx['next_page'] = url_for('blog.indx', start=start_page+1)
+        ctx['next_page'] = url_for('blog.index', start=start_page+1)
 
     ctx['page_title'] = _('Latest articles')
 
