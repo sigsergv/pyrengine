@@ -2,6 +2,12 @@
 
 This file contains releases history along with most important changes.
 
+## 1.0.2
+
+Released: 2023-09-04
+
+* fixed errors in email templates
+
 ## 1.0.1
 
 Released: 2023-09-04

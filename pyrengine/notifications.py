@@ -10,7 +10,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from multiprocessing import Process
 
-from pyrengine.utils import (article_url, timestamp_to_str, normalize_email)
+from pyrengine.utils import (full_article_url, timestamp_to_str, normalize_email)
 from flask import render_template
 # from pyramid.renderers import render
 
@@ -49,6 +49,7 @@ def send_email_process(ctx, html, recipients, sender):
 
     # now cut out subject line from the message
     mo = SUBJECT_RE.match(html)
+    # print(html)
     if mo is None:
         subject = 'NO-SUBJECT'
     else:
@@ -100,7 +101,7 @@ class Notification:
         Process(target=send_email_process, args=(context, self.html, 
             [self.to], sender)).start()
 
-    def __init__(self, to, html):
+    def __init__(self, html, to):
         self.to = to
         self.html = html
 
@@ -116,9 +117,12 @@ def _extract_comment_sub(comment):
         author_name = comment.user.display_name
         author_email = comment.user.email
 
+    if author_email == '':
+        author_email = '<em>no-email</em>'
+
     # construct comment link
     article = comment.article
-    comment_url = article_url(article) + '#comment-' + str(comment.id)
+    comment_url = full_article_url(article) + '#comment-' + str(comment.id)
 
     comment_date = timestamp_to_str(comment.published)
     res = {
@@ -138,7 +142,7 @@ def _extract_article_sub(article):
 
     res = {
         'article_title': article.title,
-        'article_url': article_url(article)
+        'article_url': full_article_url(article)
         }
     return res
 

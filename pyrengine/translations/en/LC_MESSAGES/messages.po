@@ -755,8 +755,8 @@ msgstr ""
 #: pyrengine/templates/email/admin_new_comment.jinja2:7
 msgid "EMAIL# ADMIN VISITOR ON DATE WROTE THE FOLLOWING"
 msgstr ""
-"<strong>%%(comment_author_name)s (%%(comment_author_email)s)</strong> on "
-"<em>{comment_date}</em> wrote:"
+"<strong>%%(comment_author_name)s</strong> (E-mail: %%(comment_author_email)s) on "
+"<em>%%(comment_date)s</em>) wrote:"
 
 #: pyrengine/templates/email/admin_new_comment.jinja2:11
 #: pyrengine/templates/email/comment_response.jinja2:11
@@ -780,7 +780,7 @@ msgstr ""
 msgid "EMAIL# VISITOR ON DATE WROTE THE FOLLOWING"
 msgstr ""
 "<strong>%%(comment_author_name)s (%%(comment_author_email)s)</strong> on "
-"<em>{comment_date}</em> wrote:"
+"<em>%%(comment_date)s</em> wrote:"
 
 #: pyrengine/templates/email/email_verification.jinja2:1
 msgid "EMAIL# SUBJECT PLEASE VERIFY YOUR EMAIL ADDRESS FOR THE SITE"
@@ -822,35 +822,5 @@ msgstr ""
 msgid "Site search"
 msgstr ""
 
-#~ msgid "AJAX_REQUEST_ERROR"
-#~ msgstr ""
 
-#~ msgid "Write new article"
-#~ msgstr ""
-
-#~ msgid "if checked article will be visible to blog administrator only"
-#~ msgstr ""
-
-#~ msgid "EMAIL# ADMIN SUBJECT NEW COMMENT TO THE ARTICLE"
-#~ msgstr ""
-#~ "New comment to article «{article_title}» "
-#~ "from {comment_author_name} on the site "
-#~ "«{site_title}»"
-
-#~ msgid "EMAIL# ADMIN NEW COMMENT TO THE ARTICLE"
-#~ msgstr ""
-#~ "New comment to the article <a "
-#~ "href=\"{article_url}\">{article_title}</a>."
-
-#~ msgid "EMAIL# DIRECT LINK TO COMMENT"
-#~ msgstr "<a href=\"{comment_url}\">Direct link to the comment.</a>"
-
-#~ msgid "file URL"
-#~ msgstr ""
-
-#~ msgid "Tags:"
-#~ msgstr ""
-
-#~ msgid "Search blog"
-#~ msgstr ""
 

@@ -92,6 +92,10 @@ def article_url(article):
     return url_for('blog.view_article', shortcut_date=article.shortcut_date, shortcut=article.shortcut)
 
 
+def full_article_url(article):
+    return get_config('site_base_url') + url_for('blog.view_article', shortcut_date=article.shortcut_date, shortcut=article.shortcut)
+
+
 def normalize_email(email):
     return email
 

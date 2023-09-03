@@ -91,14 +91,27 @@ $ sudo systemctl restart nginx
 $ sudo systemctl restart uwsgi
 ~~~~
 
+# Upgrade
+
+Fetch latest version from releases page <https://github.com/sigsergv/pyrengine/releases>.
+
+Install package to virtual environment:
+
+~~~~
+$ pip install pyrengine-1.0.1-py3-none-any.whl
+~~~~
+
+
 # Additional configuration
 
 ## favicons
 
 Pyrengine provides sample favicon if you need another please rewrite path to `/favicon.png` in your nginx configuration file.
 
-# Upgrade
+## Reinstall package
 
-Fetch latest version from releases page <https://github.com/sigsergv/pyrengine/releases>.
+To reinstall already installed version use this command:
 
-Install package to virtual environment.
+~~~~
+$ pip install --upgrade --force-reinstall --no-deps --no-cache-dir ./pyrengine-1.0.2-py3-none-any.whl
+~~~~

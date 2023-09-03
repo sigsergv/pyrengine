@@ -796,8 +796,8 @@ msgstr ""
 #: pyrengine/templates/email/admin_new_comment.jinja2:7
 msgid "EMAIL# ADMIN VISITOR ON DATE WROTE THE FOLLOWING"
 msgstr ""
-"<strong>{comment_author_name} (%%(comment_author_email)s</strong> "
-"<em>%%(comment_date)s</em> написал:"
+"<strong>%%(comment_author_name)s</strong> (E-mail: %%(comment_author_email)s, "
+"<em>%%(comment_date)s</em>) написал:"
 
 #: pyrengine/templates/email/admin_new_comment.jinja2:11
 #: pyrengine/templates/email/comment_response.jinja2:11
@@ -820,18 +820,18 @@ msgstr ""
 #, fuzzy
 msgid "EMAIL# VISITOR ON DATE WROTE THE FOLLOWING"
 msgstr ""
-"<strong>{comment_author_name} (%%(comment_author_email)s</strong> "
+"<strong>%%(comment_author_name)s (%%(comment_author_email)s</strong> "
 "<em>%%(comment_date)s</em> написал:"
 
 #: pyrengine/templates/email/email_verification.jinja2:1
 msgid "EMAIL# SUBJECT PLEASE VERIFY YOUR EMAIL ADDRESS FOR THE SITE"
-msgstr "Подтвердите свой email на сайте «{site_title}»"
+msgstr "Подтвердите свой email на сайте «%%(site_title)s»"
 
 #: pyrengine/templates/email/email_verification.jinja2:5
 msgid "EMAIL# TO RECEIVE NOTIFICATIONS FROM SITE YOU MUST CONFIRM THIS ADDRESS"
 msgstr ""
-"Чтобы получать уведомления с сайта «{site_title}», вы должны подтвердить "
-"свой email <em>{email}</em>."
+"Чтобы получать уведомления с сайта «%%(site_title)s», вы должны подтвердить "
+"свой email <em>%%(email)</em>."
 
 #: pyrengine/templates/email/email_verification.jinja2:7
 msgid "EMAIL# PLEASE CLICK HERE TO VERIFY ADDRESS"
@@ -864,36 +864,4 @@ msgstr "Избранные посты"
 #: pyrengine/templates/widgets/search.jinja2:4
 msgid "Site search"
 msgstr "Поиск по сайту"
-
-#~ msgid "AJAX_REQUEST_ERROR"
-#~ msgstr ""
-
-#~ msgid "Write new article"
-#~ msgstr ""
-
-#~ msgid "if checked article will be visible to blog administrator only"
-#~ msgstr ""
-
-#~ msgid "EMAIL# ADMIN SUBJECT NEW COMMENT TO THE ARTICLE"
-#~ msgstr ""
-#~ "Новый комментарий к статье «{article_title}»"
-#~ " от посетителя {comment_author_name} на "
-#~ "сайте «{site_title}»"
-
-#~ msgid "EMAIL# ADMIN NEW COMMENT TO THE ARTICLE"
-#~ msgstr ""
-#~ "Новый комментарий к статье <a "
-#~ "href=\"{article_url}\">{article_title}</a>."
-
-#~ msgid "EMAIL# DIRECT LINK TO COMMENT"
-#~ msgstr "<a href=\"{comment_url}\">Прямая ссылка на комментарий.</a>"
-
-#~ msgid "file URL"
-#~ msgstr ""
-
-#~ msgid "Tags:"
-#~ msgstr ""
-
-#~ msgid "Search blog"
-#~ msgstr ""
 
