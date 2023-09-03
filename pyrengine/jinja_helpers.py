@@ -1,6 +1,7 @@
 """
 Various helper functions for jinja templates
 """
+import pyrengine
 
 from sqlalchemy import func
 
@@ -48,3 +49,7 @@ def get_pages_widget_links(force_reload=False):
         cache.set_value('pages_links', value)
     
     return value
+
+
+def get_version():
+    return pyrengine.__version__

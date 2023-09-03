@@ -1,6 +1,6 @@
 # 1.0.0
 
-Released 2023-09-??
+Released 2023-09-03
 
 Pyrengine is a new site engine for my personal blog. It's very simple but satisfies all my 
 requirements.

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-09-02 12:25+0700\n"
+"POT-Creation-Date: 2023-09-03 10:33+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: en\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: pyrengine/__init__.py:48 pyrengine/__init__.py:56
+#: pyrengine/__init__.py:49 pyrengine/__init__.py:57
 msgid "Page not found"
 msgstr ""
 
@@ -295,126 +295,130 @@ msgid "General"
 msgstr ""
 
 #: pyrengine/templates/admin/settings.jinja2:45
+msgid "Application version"
+msgstr ""
+
+#: pyrengine/templates/admin/settings.jinja2:47
 msgid "Blog title"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:46
+#: pyrengine/templates/admin/settings.jinja2:48
 msgid "Base blog address"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:46
+#: pyrengine/templates/admin/settings.jinja2:48
 msgid ""
 "URL that will be used in all external communications (notification "
 "messages for example)"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:47
+#: pyrengine/templates/admin/settings.jinja2:49
 msgid "Copyright string"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:47
+#: pyrengine/templates/admin/settings.jinja2:49
 msgid ""
 "A string displayed at the bottom of each blog page, just before \"Powered"
 " by pyrengine\""
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:48
+#: pyrengine/templates/admin/settings.jinja2:50
 msgid "Number of elements on a page"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:48
+#: pyrengine/templates/admin/settings.jinja2:50
 msgid "How much elements (articles etc) display on single page"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:49
+#: pyrengine/templates/admin/settings.jinja2:51
 msgid "Picture preview width"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:49
+#: pyrengine/templates/admin/settings.jinja2:51
 msgid ""
 "Width of automatically generated preview to be used as smaller copy of "
 "original picture."
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:50
+#: pyrengine/templates/admin/settings.jinja2:52
 msgid "[N/A] Google Analytics(tm) ID"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:50
+#: pyrengine/templates/admin/settings.jinja2:52
 msgid ""
 "Your google analytics ID, value like \"UA-12345678-9\", to disable Google"
 " Analytics just clear the field"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:51
+#: pyrengine/templates/admin/settings.jinja2:53
 msgid "Blog timezone"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:51
+#: pyrengine/templates/admin/settings.jinja2:53
 msgid ""
 "Timezone to be used for time and date values on the site, "
 "<strong>must</strong> be tzdb-compatible string value like "
 "\"Asia/Novosibirsk\" or \"UTC\"."
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:52
+#: pyrengine/templates/admin/settings.jinja2:54
 msgid "Site language"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:53
+#: pyrengine/templates/admin/settings.jinja2:55
 msgid "Site theme"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:53
+#: pyrengine/templates/admin/settings.jinja2:55
 msgid "Default theme"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:55
+#: pyrengine/templates/admin/settings.jinja2:57
 msgid "Site search widget"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:57
+#: pyrengine/templates/admin/settings.jinja2:59
 msgid "HTML/JavaScript code for the site search widget"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:57
+#: pyrengine/templates/admin/settings.jinja2:59
 msgid ""
 "You should enter HTML code in this text box you received from the "
 "external search provider. To delete site search from the pages just clear"
 " the field."
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:59
+#: pyrengine/templates/admin/settings.jinja2:61
 msgid "Notifications"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:61
+#: pyrengine/templates/admin/settings.jinja2:63
 msgid "Email address for system notifications"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:61
+#: pyrengine/templates/admin/settings.jinja2:63
 msgid ""
 "Email address for the system notification: user added, comment added for "
 "moderation etc"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:62
+#: pyrengine/templates/admin/settings.jinja2:64
 msgid "Email address to be used as sender address"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:62
+#: pyrengine/templates/admin/settings.jinja2:64
 msgid "This email will be used as FROM address for notification messages"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:65
+#: pyrengine/templates/admin/settings.jinja2:67
 msgid "Select notifications you want to receive"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:67
+#: pyrengine/templates/admin/settings.jinja2:69
 msgid "new comment added (including comment moderation requests)"
 msgstr ""
 
-#: pyrengine/templates/admin/settings.jinja2:68
+#: pyrengine/templates/admin/settings.jinja2:70
 msgid "[N/A] new user registered"
 msgstr ""
 

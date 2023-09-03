@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-09-02 12:25+0700\n"
+"POT-Creation-Date: 2023-09-03 10:33+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: ru\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.12.1\n"
 
-#: pyrengine/__init__.py:48 pyrengine/__init__.py:56
+#: pyrengine/__init__.py:49 pyrengine/__init__.py:57
 msgid "Page not found"
 msgstr "Страница не найдена"
 
@@ -302,14 +302,18 @@ msgid "General"
 msgstr "Общие"
 
 #: pyrengine/templates/admin/settings.jinja2:45
+msgid "Application version"
+msgstr "Версия приложения"
+
+#: pyrengine/templates/admin/settings.jinja2:47
 msgid "Blog title"
 msgstr "Заголовок блога"
 
-#: pyrengine/templates/admin/settings.jinja2:46
+#: pyrengine/templates/admin/settings.jinja2:48
 msgid "Base blog address"
 msgstr "Базовый URL блога"
 
-#: pyrengine/templates/admin/settings.jinja2:46
+#: pyrengine/templates/admin/settings.jinja2:48
 msgid ""
 "URL that will be used in all external communications (notification "
 "messages for example)"
@@ -317,11 +321,11 @@ msgstr ""
 "URL, который будет использоваться во внешних коммуникациях (уведомления "
 "по почте, например)"
 
-#: pyrengine/templates/admin/settings.jinja2:47
+#: pyrengine/templates/admin/settings.jinja2:49
 msgid "Copyright string"
 msgstr "Строка копирайта"
 
-#: pyrengine/templates/admin/settings.jinja2:47
+#: pyrengine/templates/admin/settings.jinja2:49
 msgid ""
 "A string displayed at the bottom of each blog page, just before \"Powered"
 " by pyrengine\""
@@ -329,19 +333,19 @@ msgstr ""
 "Строка, отображаемая в нижней части каждой страницы блога, прямо перед "
 "надписью «Работает на pyrengine"
 
-#: pyrengine/templates/admin/settings.jinja2:48
+#: pyrengine/templates/admin/settings.jinja2:50
 msgid "Number of elements on a page"
 msgstr "Сколько элементов на странице"
 
-#: pyrengine/templates/admin/settings.jinja2:48
+#: pyrengine/templates/admin/settings.jinja2:50
 msgid "How much elements (articles etc) display on single page"
 msgstr "Сколько элементов (например, статей) показывать на одной странице"
 
-#: pyrengine/templates/admin/settings.jinja2:49
+#: pyrengine/templates/admin/settings.jinja2:51
 msgid "Picture preview width"
 msgstr "Ширина превьюшки для картинки"
 
-#: pyrengine/templates/admin/settings.jinja2:49
+#: pyrengine/templates/admin/settings.jinja2:51
 msgid ""
 "Width of automatically generated preview to be used as smaller copy of "
 "original picture."
@@ -349,11 +353,11 @@ msgstr ""
 "Ширина автоматически сгенерённой превьюшки, которая будет использоваться "
 "в качестве уменьшенной копии картинки"
 
-#: pyrengine/templates/admin/settings.jinja2:50
+#: pyrengine/templates/admin/settings.jinja2:52
 msgid "[N/A] Google Analytics(tm) ID"
 msgstr "[N/A] Google Analytics™ ID"
 
-#: pyrengine/templates/admin/settings.jinja2:50
+#: pyrengine/templates/admin/settings.jinja2:52
 msgid ""
 "Your google analytics ID, value like \"UA-12345678-9\", to disable Google"
 " Analytics just clear the field"
@@ -361,11 +365,11 @@ msgstr ""
 "Идентификатор вашего аккаунта в системе Google Analytics™, значение типа "
 "«UA-12345678-9», чтобы отключить аналитику, очистите это поле"
 
-#: pyrengine/templates/admin/settings.jinja2:51
+#: pyrengine/templates/admin/settings.jinja2:53
 msgid "Blog timezone"
 msgstr "Часовой пояс блога"
 
-#: pyrengine/templates/admin/settings.jinja2:51
+#: pyrengine/templates/admin/settings.jinja2:53
 msgid ""
 "Timezone to be used for time and date values on the site, "
 "<strong>must</strong> be tzdb-compatible string value like "
@@ -374,27 +378,27 @@ msgstr ""
 "Название часового пояса (в формате tzdb!), например «Asia/Novosibirsk» "
 "или «UTC»."
 
-#: pyrengine/templates/admin/settings.jinja2:52
+#: pyrengine/templates/admin/settings.jinja2:54
 msgid "Site language"
 msgstr "Язык сайта"
 
-#: pyrengine/templates/admin/settings.jinja2:53
+#: pyrengine/templates/admin/settings.jinja2:55
 msgid "Site theme"
 msgstr "Тема оформления сайта"
 
-#: pyrengine/templates/admin/settings.jinja2:53
+#: pyrengine/templates/admin/settings.jinja2:55
 msgid "Default theme"
 msgstr "Тема по умолчанию"
 
-#: pyrengine/templates/admin/settings.jinja2:55
+#: pyrengine/templates/admin/settings.jinja2:57
 msgid "Site search widget"
 msgstr "Виджет поиска по сайту"
 
-#: pyrengine/templates/admin/settings.jinja2:57
+#: pyrengine/templates/admin/settings.jinja2:59
 msgid "HTML/JavaScript code for the site search widget"
 msgstr "HTML/JavaScript код для виджета поиска"
 
-#: pyrengine/templates/admin/settings.jinja2:57
+#: pyrengine/templates/admin/settings.jinja2:59
 msgid ""
 "You should enter HTML code in this text box you received from the "
 "external search provider. To delete site search from the pages just clear"
@@ -403,15 +407,15 @@ msgstr ""
 "Вы должны ввести в это поле HTML-код, полученный вами от поискового "
 "провайдера. Чтобы удалить виджет поиска, просто очистите это поле."
 
-#: pyrengine/templates/admin/settings.jinja2:59
+#: pyrengine/templates/admin/settings.jinja2:61
 msgid "Notifications"
 msgstr "Уведомления"
 
-#: pyrengine/templates/admin/settings.jinja2:61
+#: pyrengine/templates/admin/settings.jinja2:63
 msgid "Email address for system notifications"
 msgstr "Адрес электронной почты для системных уведомлений"
 
-#: pyrengine/templates/admin/settings.jinja2:61
+#: pyrengine/templates/admin/settings.jinja2:63
 msgid ""
 "Email address for the system notification: user added, comment added for "
 "moderation etc"
@@ -419,25 +423,25 @@ msgstr ""
 "Адрес электронной почты, на который будут рассылаться уведомления о "
 "добавлении нового пользователя, новом комментарии и т.п."
 
-#: pyrengine/templates/admin/settings.jinja2:62
+#: pyrengine/templates/admin/settings.jinja2:64
 msgid "Email address to be used as sender address"
 msgstr ""
 "Адрес электронной почты, который будет использоваться в качестве адреса "
 "отправителя"
 
-#: pyrengine/templates/admin/settings.jinja2:62
+#: pyrengine/templates/admin/settings.jinja2:64
 msgid "This email will be used as FROM address for notification messages"
 msgstr "Этот адрес будет использован в качестве адреса отправителя для уведомлений"
 
-#: pyrengine/templates/admin/settings.jinja2:65
+#: pyrengine/templates/admin/settings.jinja2:67
 msgid "Select notifications you want to receive"
 msgstr "Выберите, какие уведомления вы хотите получать"
 
-#: pyrengine/templates/admin/settings.jinja2:67
+#: pyrengine/templates/admin/settings.jinja2:69
 msgid "new comment added (including comment moderation requests)"
 msgstr "добавлен новый комментарий (включая требующий модерации)"
 
-#: pyrengine/templates/admin/settings.jinja2:68
+#: pyrengine/templates/admin/settings.jinja2:70
 msgid "[N/A] new user registered"
 msgstr "N/A] зарегистрировался новый пользователь"
 

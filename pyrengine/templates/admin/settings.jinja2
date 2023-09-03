@@ -42,6 +42,8 @@
 <form id="form" action="/" onsubmit="pyrengine.saveSettingsAjax('{{ url_for('admin.settings_save_ajax') }}'); return false;">
 <dl class="form">
   <h3>{{ _('General') }}</h3>
+  <dt>{{ _('Application version') }}</dt>
+  <dd>{{ h.get_version() }}</dd>
   {{ forms.textfield('site_title', settings['site_title'], _('Blog title'), '', errors['site_title']) }}
   {{ forms.textfield('site_base_url', settings['site_base_url'], _('Base blog address'), _('URL that will be used in all external communications (notification messages for example)'), errors['site_base_url']) }}
   {{ forms.textfield('site_copyright', settings['site_copyright'], _('Copyright string'), _('A string displayed at the bottom of each blog page, just before "Powered by pyrengine"'), errors['site_copyright']) }}

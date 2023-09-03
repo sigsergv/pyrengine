@@ -1,6 +1,7 @@
 [project]
+dynamic = ["version"]
 name = "pyrengine"
-version = "1.0.0"
+#version = "1.0.0"
 description = "Personal blog engine written in Python using Flask and SqlAlchemy"
 readme = "README.md"
 requires-python = ">=3.10"
@@ -43,6 +44,9 @@ dependencies = [
 
 #[tool.setuptools.packages]
 #find = {}  # Scanning implicit namespaces is active by default
+
+[tool.setuptools.dynamic]
+version = {attr = "pyrengine.__version__"}
 
 [tool.setuptools.packages.find]
 exclude = ["__pycache__"]
