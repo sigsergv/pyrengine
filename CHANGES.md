@@ -4,13 +4,14 @@ This file contains releases history along with most important changes.
 
 ## 1.0.1
 
-Released: 2023-09-xx
+Released: 2023-09-04
 
 * backups features added: create backup, delete backup
 * fixed SELECT html element render, added missing "selected" attribute
 * fixed broken translations
 * added site search widget
 * added favicon instructions
+* fixed navigation link crash
 
 ## 1.0.0
 
