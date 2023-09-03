@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-09-03 14:13+0700\n"
+"POT-Creation-Date: 2023-09-03 14:24+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: ru\n"
@@ -503,6 +503,7 @@ msgstr "Гость:"
 
 #: pyrengine/templates/blog/article_snippet.jinja2:10
 #: pyrengine/templates/blog/index.jinja2:17
+#: pyrengine/templates/blog/view_article.jinja2:43
 msgid "DATE_TIME_SHORT"
 msgstr "%%Y-%%m-%%d в %%H:%%M"
 
@@ -692,6 +693,10 @@ msgstr "←новые"
 #: pyrengine/templates/blog/index.jinja2:42
 msgid "older->"
 msgstr "старые→"
+
+#: pyrengine/templates/blog/view_article.jinja2:43
+msgid "Published {0}"
+msgstr "Опубликовано {0}"
 
 #: pyrengine/templates/blog/view_article.jinja2:53
 msgid "Comments"

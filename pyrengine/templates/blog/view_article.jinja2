@@ -40,7 +40,7 @@ $(document).ready(function() {
   </div>
   
   <div class="subtitle">
-    <div class="date">{{ h.timestamp_to_str(article.published) }}</div>
+    <div class="date">{{ _('Published {0}').format(h.timestamp_to_str(article.published, _('DATE_TIME_SHORT'))) }}</div>
     <div class="clear-both"></div>
     {% if article.tags|length > 0 %}
     <div class="tags">{% for tag in article.tags %}<a href="{{ url_for('blog.articles_by_tag', tag=tag.tag) }}">#{{ tag.tag }}</a> {% endfor %}</div>
