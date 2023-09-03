@@ -166,7 +166,7 @@ def articles_by_tag(tag):
     if start_page > 0:
         ctx['next_page'] = url_for('blog.articles_by_tag', tag=tag, start=start_page-1)
 
-    ctx['page_title'] = _('Latest articles')
+    ctx['page_title'] = _('Articles with tag “{0}”').format(tag)
 
     return render_template('blog/index.jinja2', **ctx)
 

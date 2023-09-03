@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-09-03 14:24+0700\n"
+"POT-Creation-Date: 2023-09-03 21:54+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: ru\n"
@@ -87,31 +87,35 @@ msgstr "Недавние статьи"
 msgid "Latest articles feed"
 msgstr "Лента недавних статей"
 
-#: pyrengine/blog/routes.py:233
+#: pyrengine/blog/routes.py:169
+msgid "Articles with tag “{0}”"
+msgstr "Статьи с тегом «{0}»"
+
+#: pyrengine/blog/routes.py:273
 msgid "User not found"
 msgstr "Пользователь не найден"
 
-#: pyrengine/blog/routes.py:259
+#: pyrengine/blog/routes.py:299
 msgid "New article title"
 msgstr "Название новой статьи"
 
-#: pyrengine/blog/routes.py:291 pyrengine/blog/routes.py:343
+#: pyrengine/blog/routes.py:331 pyrengine/blog/routes.py:383
 msgid "Article with the same shortcut already exists."
 msgstr "Статья с таким шорткатом уже существует"
 
-#: pyrengine/blog/routes.py:465
+#: pyrengine/blog/routes.py:505
 msgid "Field is required."
 msgstr "Поле обязательно нужно заполнить."
 
-#: pyrengine/blog/routes.py:470
+#: pyrengine/blog/routes.py:510
 msgid "Invalid date format."
 msgstr "Некорректный формат даты."
 
-#: pyrengine/blog/routes.py:521
+#: pyrengine/blog/routes.py:561
 msgid "Empty comment body is not allowed."
 msgstr "Пустой комментарий не разрешён."
 
-#: pyrengine/blog/routes.py:555
+#: pyrengine/blog/routes.py:595
 msgid "Answering to not approved comment"
 msgstr "Нельзя ответить на неподтверждённый комментарий"
 
@@ -660,10 +664,6 @@ msgstr "сохранить в фоновом режиме"
 msgid "preview"
 msgstr "предварительный просмотр"
 
-#: pyrengine/templates/blog/index.jinja2:3
-msgid "Recent articles"
-msgstr "Недавние статьи"
-
 #: pyrengine/templates/blog/index.jinja2:15
 #: pyrengine/templates/blog/view_article.jinja2:39
 msgid "draft"
@@ -796,8 +796,8 @@ msgstr ""
 #: pyrengine/templates/email/admin_new_comment.jinja2:7
 msgid "EMAIL# ADMIN VISITOR ON DATE WROTE THE FOLLOWING"
 msgstr ""
-"<strong>%%(comment_author_name)s</strong> (E-mail: %%(comment_author_email)s, "
-"<em>%%(comment_date)s</em>) написал:"
+"<strong>%%(comment_author_name)s</strong> (E-mail: "
+"%%(comment_author_email)s, <em>%%(comment_date)s</em>) написал:"
 
 #: pyrengine/templates/email/admin_new_comment.jinja2:11
 #: pyrengine/templates/email/comment_response.jinja2:11
@@ -830,8 +830,8 @@ msgstr "Подтвердите свой email на сайте «%%(site_title)s�
 #: pyrengine/templates/email/email_verification.jinja2:5
 msgid "EMAIL# TO RECEIVE NOTIFICATIONS FROM SITE YOU MUST CONFIRM THIS ADDRESS"
 msgstr ""
-"Чтобы получать уведомления с сайта «%%(site_title)s», вы должны подтвердить "
-"свой email <em>%%(email)</em>."
+"Чтобы получать уведомления с сайта «%%(site_title)s», вы должны "
+"подтвердить свой email <em>%%(email)</em>."
 
 #: pyrengine/templates/email/email_verification.jinja2:7
 msgid "EMAIL# PLEASE CLICK HERE TO VERIFY ADDRESS"
@@ -864,4 +864,7 @@ msgstr "Избранные посты"
 #: pyrengine/templates/widgets/search.jinja2:4
 msgid "Site search"
 msgstr "Поиск по сайту"
+
+#~ msgid "Recent articles"
+#~ msgstr "Недавние статьи"
 
