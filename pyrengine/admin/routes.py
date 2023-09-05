@@ -5,7 +5,7 @@ import logging
 from mimetypes import guess_type
 from datetime import datetime
 
-from flask import (render_template, abort, request, redirect, url_for)
+from flask import (render_template, abort, request, redirect, url_for, send_file)
 from werkzeug.utils import secure_filename
 from pyrengine import (backups, files, jinja_helpers)
 from pyrengine.admin import bp
@@ -177,23 +177,13 @@ def restore_backup(backup_id):
 @login_required
 def download_backup(backup_id):
     full_path = backups.backup_file_name(backup_id)
+    filename = os.path.basename(full_path)
     if full_path is None:
         abort(404)
 
-    headers = []
-    content_length = os.path.getsize(full_path)
-    headers.append(('Content-Length', str(content_length)))
-    headers.append(('Content-Disposition', str('attachment; filename={0}'.format(filename))))
+    return send_file(full_path, mimetype='application/octet-stream', as_attachment=True,
+        download_name=filename)
 
-    response = Response(content_type='application/octet-stream')
-    try:
-        response.app_iter = open(full_path, 'rb')
-    except IOError:
-        abort(404)
-
-    response.headerlist += headers
-
-    return response
 
 @bp.route('/backups/delete', methods=['POST'])
 @login_required

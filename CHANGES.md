@@ -8,6 +8,7 @@ Released: 2023-09-04
 
 * fixed errors in email templates
 * fixed tags view
+* fixed crash on backup file download
 
 ## 1.0.1
 

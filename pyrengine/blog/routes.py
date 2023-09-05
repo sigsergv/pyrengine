@@ -121,7 +121,6 @@ def latest_rss():
         generator='pyrengine'
         )
 
-    # response = Response(body=feed.to_xml(encoding='utf-8'), content_type='application/rss+xml')
     resp = make_response(feed.to_xml(encoding='utf-8'), )
     return resp
 
