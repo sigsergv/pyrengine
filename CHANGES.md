@@ -2,6 +2,13 @@
 
 This file contains releases history along with most important changes.
 
+## 1.0.3
+
+Released: 2023-09-10
+
+* added new embedded monospace font: Liberation mono
+* added some custom styles for tables in articles
+
 ## 1.0.2
 
 Released: 2023-09-04

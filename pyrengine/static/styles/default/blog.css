@@ -41,9 +41,50 @@
 	font-style: normal;
 }
 
+@font-face {
+	font-family: 'Regolit Mono';
+	src: 
+		url('LiberationMono.woff2') format('woff2'),
+		url('LiberationMono.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Regolit Mono';
+	src: 
+		url('LiberationMono-Bold.woff2') format('woff2'),
+		url('LiberationMono-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Regolit Mono';
+	src: 
+		url('LiberationMono-BoldItalic.woff2') format('woff2'),
+		url('LiberationMono-BoldItalic.woff') format('woff');
+	font-weight: bold;
+	font-style: italic;
+}
+
+@font-face {
+	font-family: 'Regolit Mono';
+	src: 
+		url('LiberationMono-Italic.woff2') format('woff2'),
+		url('LiberationMono-Italic.woff') format('woff');
+	font-weight: normal;
+	font-style: italic;
+}
+
+
 body {
 	margin: 0;
 	padding: 0;
+}
+pre, code {
+	font-family: "Regolit Mono";
+	font-size: 90%;
 }
 body, div, table {
 	font-family: "PT Serif", "Times New Roman", serif;
@@ -545,7 +586,7 @@ textarea, input[type="text"] {
 }
 textarea {
 	font-size: 14px;
-	font-family: monospace;
+	font-family: "Regolit Mono";
 }
 button.button {
 	font-size: 14px;
@@ -561,6 +602,20 @@ a.headerlink {
 	text-decoration: none;
 	color: gray;
 }
+
+/* advanced markup styles */
+table.article, table.article td, table.article th {
+	border: 1px solid;
+	border-collapse: collapse;
+}
+table.article th {
+	border: 2px solid;
+}
+table.article td {
+	text-align: center;
+}
+/* end of advanced markup styles */
+
 /* pygments styles */
 pre { line-height: 125%; }
 td.linenos .normal { color: inherit; background-color: transparent; padding-left: 5px; padding-right: 5px; }
