@@ -27,7 +27,7 @@ Special step for Macos: you need to specify path to directory with `pg_config` e
 so if you are using Postgres.app do this:
 
 ~~~~
-(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/15/bin/:$PATH pip install psycopg2
+(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/15/bin/:$PATH pip install psycopg2==2.9.9
 ~~~~
 
 Install application in development mode:

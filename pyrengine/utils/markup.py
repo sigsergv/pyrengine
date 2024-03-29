@@ -74,14 +74,14 @@ def pre_render_text_markup(text):
     global storage_img_re, storage_img_preview_re
 
     if storage_img_preview_re is False:
-        storage_img_preview_re = re.compile("!(!\[[^\]]+\])\(([^)]+)/m\)")
+        storage_img_preview_re = re.compile(r"!(!\[[^\]]+\])\(([^)]+)/m\)")
 
     if storage_img_re is False:
-        storage_img_re = re.compile("!(!\[[^\]]+\])\(([^)]+)\)")
+        storage_img_re = re.compile(r"!(!\[[^\]]+\])\(([^)]+)\)")
 
     # replace preview images
-    text = storage_img_preview_re.sub("[\\1(/files/p/\\2)](/files/f/\\2)", text)
+    text = storage_img_preview_re.sub(r"[\\1(/files/p/\\2)](/files/f/\\2)", text)
 
     # replace constructions "!![Alt text](IMGID)" with "![Alt text](/storage/f/IMGID)"
-    text = storage_img_re.sub("\\1(/files/f/\\2)", text)
+    text = storage_img_re.sub(r"\\1(/files/f/\\2)", text)
     return text

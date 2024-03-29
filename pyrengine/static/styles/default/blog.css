@@ -51,6 +51,22 @@
 }
 
 @font-face {
+	font-family: 'Regolit Serif';
+	src: 
+		url('LiberationSerif-Regular.woff') format('woff');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Regolit Serif';
+	src: 
+		url('LiberationSerif-Bold.woff') format('woff');
+	font-weight: bold;
+	font-style: normal;
+}
+
+@font-face {
 	font-family: 'Regolit Mono';
 	src: 
 		url('LiberationMono-Bold.woff2') format('woff2'),
@@ -113,7 +129,7 @@ div#topbar div.title, div#topbar div.title a,
 div#topbar-admin div.title, div#topbar-admin div.title a {
 	color: #a11113;
 	font-family: "PT Serif", "Times New Roman", serif;
-	font-size: 30px;
+	font-size: 40px;
 	font-weight: bolder;
 	margin: 10px;
 	text-decoration: none;
@@ -197,17 +213,18 @@ div#content div.article code, div#eid-article-render-preview p code {
 div#content div.article pre,
 div#content div.preview pre,
 div#eid-article-render-preview pre {
-    padding: 4px;
+    padding: 6px 0px 6px 10px;
     background-color: #F7F4E7;
     border: 1px solid #AAA189;
+    border-radius: .75rem;
 }
 div#content div.article blockquote,
 div#content div.preview blockquote,
 div#eid-article-render-preview blockquote {
 	border: solid #000080;
 	background-color: #E9EAF7;
-	border-width: 0 0 0 3px;
-	padding-left: 4pt;
+	border-width: 0 0 0 4px;
+	padding: 3pt 3pt 1pt 14pt;
 }
 div#bottombar {
 	padding: 0 0 4px 0;
@@ -241,9 +258,10 @@ div.article-preview div.title a {
 }
 div.article-preview div.title {
 	padding: 5px 5px 5px 0;
-	font-size: 17pt;
-	font-weight: bolder;
+	font-size: 30pt;
+	font-weight: bold;
 	position: relative;
+	font-family: "Regolit Serif", serif;
 }
 div.article-preview div.tags {
     font-size: 10pt;
@@ -300,8 +318,9 @@ a.tag-100 { font-size: 38px; color: #00f;}
 
 /* article styles */
 div.article div.title {
+	font-family: "Regolit Serif", serif;
 	padding: 5px 5px 5px 0;
-	font-size: 17pt;
+	font-size: 30pt;
 	font-weight: bolder;
 	position: relative;
 }
@@ -459,11 +478,12 @@ div.warning {
 	color: #000;
 }
 span.warning {
+	font-size: 14pt;
 	color: white;
-	border: 1px solid #a52a2a;
-	border-radius: 3px;
+	border: 4px solid #a52a2a;
+	border-radius: .75rem;
 	background-color: #a52a2a;
-	padding: 0 2px 0 2px;
+	padding: 0 3pt 0 3pt;
 }
 span.info {
 	color: #005400;
@@ -623,7 +643,7 @@ span.linenos { color: inherit; background-color: transparent; padding-left: 5px;
 td.linenos .special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 span.linenos.special { color: #000000; background-color: #ffffc0; padding-left: 5px; padding-right: 5px; }
 .codehilite .hll { background-color: #ffffcc }
-.codehilite { background: #f8f8f8; }
+/*.codehilite { background: #f8f8f8; }*/
 .codehilite .c { color: #3D7B7B; font-style: italic } /* Comment */
 .codehilite .err { border: 1px solid #FF0000 } /* Error */
 .codehilite .k { color: #008000; font-weight: bold } /* Keyword */
