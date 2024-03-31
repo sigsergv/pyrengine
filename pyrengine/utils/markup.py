@@ -70,6 +70,8 @@ storage_img_preview_re = False
 def pre_render_text_markup(text):
     """
     Render links to files from the storage including inline pictures from the files storage
+
+    !![Alt text](IMGID) → \1 => r'![Alt text], \2 => r'IMGID'
     """
     global storage_img_re, storage_img_preview_re
 
@@ -80,8 +82,8 @@ def pre_render_text_markup(text):
         storage_img_re = re.compile(r"!(!\[[^\]]+\])\(([^)]+)\)")
 
     # replace preview images
-    text = storage_img_preview_re.sub(r"[\\1(/files/p/\\2)](/files/f/\\2)", text)
+    text = storage_img_preview_re.sub(r"[\1(/files/p/\2)](/files/f/\2)", text)
 
-    # replace constructions "!![Alt text](IMGID)" with "![Alt text](/storage/f/IMGID)"
-    text = storage_img_re.sub(r"\\1(/files/f/\\2)", text)
+    # replace constructions "!![Alt text](IMGID)" with "![Alt text](/files/f/IMGID)"
+    text = storage_img_re.sub(r"\1(/files/f/\2)", text)
     return text

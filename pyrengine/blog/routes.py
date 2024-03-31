@@ -12,7 +12,8 @@ from pyrengine.models.config import get as get_config
 from pyrengine.models.article import get_public_tags_cloud
 from pyrengine.extensions import db
 from sqlalchemy import func
-from pyrengine.files import FILES_PATH
+from pyrengine.files import FILES_PATH, PREVIEWS_PATH
+from PIL import Image
 
 from flask_babel import gettext as _
 from flask_login import (login_user, logout_user, login_required, current_user)
@@ -80,6 +81,41 @@ def download_file(filename):
 
     full_filename = os.path.join(FILES_PATH, filename)
     data = open(full_filename, 'rb').read()
+    resp = make_response(data)
+    resp.mimetype = dbfile.content_type
+    return resp
+
+
+@bp.route('/files/p/<filename>')
+def download_file_preview(filename):
+    dbsession = db.session
+
+    dbfile = dbsession.query(File).filter(File.name==filename).first()
+    if dbfile is None:
+        abort(404)
+    if dbfile.content_type not in ('image/jpeg', 'image/png', 'image/jpg'):
+        abort(404)
+
+    full_path = os.path.join(FILES_PATH, filename)
+    preview_path = os.path.join(PREVIEWS_PATH, filename)
+    # create preview file if required
+    if not os.path.exists(preview_path):
+        try:
+            preview_max_width = int(get_config('image_preview_width', 300))
+        except ValueError:
+            preview_max_width = 300
+        except TypeError:
+            preview_max_width = 300
+        im = Image.open(full_path)
+        if im.size[0] <= preview_max_width:
+            # don't need a resize
+            preview_path = full_path
+        else:
+            h = (im.size[1] * preview_max_width) / im.size[0]
+            resized = im.resize((preview_max_width, int(h)), Image.BILINEAR)
+            resized.save(preview_path)
+
+    data = open(preview_path, 'rb').read()
     resp = make_response(data)
     resp.mimetype = dbfile.content_type
     return resp

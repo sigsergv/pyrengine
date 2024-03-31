@@ -43,7 +43,7 @@ $ source ~blog/pyrengine-blog/venv/bin/activate
 Fetch latest version (.whl-file) from releases page <https://github.com/sigsergv/pyrengine/releases> and install it:
 
 ~~~~
-(venv) $ pip install pyrengine-1.0.0-py3-none-any.whl
+(venv) $ pip install pyrengine-1.0.5-py3-none-any.whl
 ~~~~
 
 Initialize production config:

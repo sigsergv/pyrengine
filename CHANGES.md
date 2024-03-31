@@ -2,6 +2,12 @@
 
 This file contains releases history along with most important changes.
 
+## 1.0.5
+
+Release: 2024-03-31
+
+* added images preview support
+
 ## 1.0.4
 
 Release: 2024-03-29
