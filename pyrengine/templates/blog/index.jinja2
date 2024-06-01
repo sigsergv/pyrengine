@@ -18,7 +18,7 @@
   <div class="before-preview"></div>
   <div class="preview">{{ article.get_html_preview() | safe }}</div>
   {% if article.is_splitted %}<div class="splitter"><a href="{{ h.article_url(article) }}">{{ _('continue reading') }}</a></div>{% endif %}
-  <div class="tags">{% for tag in article.tags %}<a href="{{ url_for('blog.articles_by_tag', tag=tag.tag) }}">#{{ tag.tag }}</a> {% endfor %}</div>
+  <div class="tags">{% for tag in article.tags %}<a href="{{ url_for('blog.articles_by_tag', tag=tag.tag) }}">{{ tag.tag }}</a> {% endfor %}</div>
   <div class="footer">
     {% if article.comments_approved > 0 %}
       <a href="{{ h.article_url(article) }}#comments">{{ _('Comments:') }} {{ article.comments_approved }}</a>
