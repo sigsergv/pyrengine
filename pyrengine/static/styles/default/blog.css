@@ -3,6 +3,11 @@
 /* pyrengine-theme-data:title-ru: Стиль по умолчанию */
 /*
  * Author: Sergey Stolyarov <sergei@regolit.com>
+ *
+ * text color: #000
+ * link color: #000080 (hover #0040ff)
+ * accent color: #a11113
+ * tag bg color: #040 (hover #070)
  */
 
 @font-face {
@@ -258,16 +263,29 @@ div.article-preview div.title a {
 }
 div.article-preview div.title {
 	padding: 5px 5px 5px 0;
-	font-size: 30pt;
+	margin-bottom: 5px;
+	font-size: 25pt;
 	font-weight: bold;
 	position: relative;
 	font-family: "Regolit Serif", serif;
+	border: 4px solid #000080;
+	border-style: none none solid none;
 }
-div.article-preview div.tags {
+div.article-preview div.tags, div.article div.tags {
     font-size: 10pt;
     font-weight: bold;
 	color: #040;
 	margin: 10px 0 0 0;
+}
+div.article-preview div.tags a, div.article div.tags a {
+	background-color: #040;
+	color: #fff;
+	border-radius: 8px;
+	padding: 1px 3px 1px 3px;
+	text-decoration: none;
+}
+div.article-preview div.tags a:hover, div.article div.tags a:hover {
+	background-color: #070;
 }
 div.article-preview div.splitter {
 	margin: 10px 0 10px 0;
@@ -275,9 +293,6 @@ div.article-preview div.splitter {
 div.article-preview div.before-preview {
 }
 div.article-preview div.after-preview {
-}
-div.article-preview div.tags a {
-	color: #040;
 }
 div.article-preview div.footer {
 	color: #989898;
@@ -294,35 +309,47 @@ div.pager {
 div.tags-cloud {
 }
 
-a.tag-0 { font-size: 9px; color: #aaf;}
-a.tag-5 { font-size: 10px; color: #aaf;}
-a.tag-10 { font-size: 11px; color: #99f;}
-a.tag-15 { font-size: 13px; color: #99f;}
-a.tag-20 { font-size: 14px; color: #88f;}
-a.tag-25 { font-size: 16px; color: #88f;}
-a.tag-30 { font-size: 17px; color: #77f;}
-a.tag-35 { font-size: 19px; color: #77f;}
-a.tag-40 { font-size: 20px; color: #66f;}
-a.tag-45 { font-size: 22px; color: #66f;}
-a.tag-50 { font-size: 23px; color: #55f;}
-a.tag-55 { font-size: 25px; color: #55f;}
-a.tag-60 { font-size: 26px; color: #44f;}
-a.tag-65 { font-size: 28px; color: #44f;}
-a.tag-70 { font-size: 29px; color: #33f;}
-a.tag-75 { font-size: 31px; color: #33f;}
-a.tag-80 { font-size: 32px; color: #22f;}
-a.tag-85 { font-size: 34px; color: #22f;}
-a.tag-90 { font-size: 35px; color: #11f;}
-a.tag-95 { font-size: 37px; color: #11f;}
-a.tag-100 { font-size: 38px; color: #00f;}
+div.tags-cloud a {
+	background-color: #bbb;
+	border-radius: 8px;
+	padding: 1px 3px 1px 3px;
+	text-decoration: none;
+}
+div.tags-cloud a:hover {
+	background-color: #040;
+}
+
+a.tag-0 { font-size: 9px; color: #fff;}
+a.tag-5 { font-size: 10px; color: #fff;}
+a.tag-10 { font-size: 11px; color: #fff;}
+a.tag-15 { font-size: 13px; color: #fff;}
+a.tag-20 { font-size: 14px; color: #fff;}
+a.tag-25 { font-size: 16px; color: #fff;}
+a.tag-30 { font-size: 17px; color: #fff;}
+a.tag-35 { font-size: 19px; color: #fff;}
+a.tag-40 { font-size: 20px; color: #fff;}
+a.tag-45 { font-size: 22px; color: #fff;}
+a.tag-50 { font-size: 23px; color: #fff;}
+a.tag-55 { font-size: 25px; color: #fff;}
+a.tag-60 { font-size: 26px; color: #fff;}
+a.tag-65 { font-size: 28px; color: #fff;}
+a.tag-70 { font-size: 29px; color: #fff;}
+a.tag-75 { font-size: 31px; color: #fff;}
+a.tag-80 { font-size: 32px; color: #fff;}
+a.tag-85 { font-size: 34px; color: #fff;}
+a.tag-90 { font-size: 35px; color: #fff;}
+a.tag-95 { font-size: 37px; color: #fff;}
+a.tag-100 { font-size: 38px; color: #fff;}
 
 /* article styles */
 div.article div.title {
 	font-family: "Regolit Serif", serif;
 	padding: 5px 5px 5px 0;
-	font-size: 30pt;
+	font-size: 25pt;
 	font-weight: bolder;
 	position: relative;
+	border: 4px solid #000;
+	border-style: none none solid none;
 }
 div.article div.subtitle {
 }
@@ -621,6 +648,10 @@ span.user-link {
 a.headerlink {
 	text-decoration: none;
 	color: gray;
+	margin-left: 3px;
+}
+a.headerlink:hover {
+	color: #0040ff;
 }
 
 /* advanced markup styles */

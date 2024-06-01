@@ -1,4 +1,4 @@
-<div class="widget">
+<div class="widget tags-cloud">
 <div class="section"></div>
 {% for t in h.get_public_tags_cloud() %}
   <a href="{{ url_for('blog.articles_by_tag', tag=t[0]) }}" class='tag-{{ t[1] }}'>{{ t[0] }}</a>

@@ -671,7 +671,7 @@ msgstr "черновик"
 
 #: pyrengine/templates/blog/index.jinja2:20
 msgid "continue reading"
-msgstr "читать дальше"
+msgstr "читать дальше »»"
 
 #: pyrengine/templates/blog/index.jinja2:24
 #: pyrengine/templates/blog/index.jinja2:26

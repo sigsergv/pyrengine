@@ -637,7 +637,7 @@ msgstr ""
 
 #: pyrengine/templates/blog/index.jinja2:20
 msgid "continue reading"
-msgstr ""
+msgstr "continue reading »»"
 
 #: pyrengine/templates/blog/index.jinja2:24
 #: pyrengine/templates/blog/index.jinja2:26

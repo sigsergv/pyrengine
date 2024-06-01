@@ -2,7 +2,7 @@
 
 ## Environment setup
 
-Base OS: Linux/Debian 12 Bookworm or macos/brew
+Base OS: Linux/Debian 12 Bookworm or macos with Homebrew
 
 Install required packages for linux:
 
@@ -10,7 +10,13 @@ Install required packages for linux:
 $ sudo apt install python3 python3-dev postgresql-15 libpq-dev
 ~~~~
 
-For macos you need standard development tools (compilers etc).
+For macos you need standard development tools (compilers etc, install using command `xcode-select --install`). You also
+
+Embedded python3 is too old and you need 3.10 or later, so install python3 package from homebrew:
+
+~~~~
+brew install python@3.11
+~~~~
 
 Install venv:
 

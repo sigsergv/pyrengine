@@ -1,16 +1,22 @@
 # Release notes
 
-This file contains releases history along with most important changes.
+This file contains releases history along with the most important changes.
+
+## 1.0.6
+
+Released: 2024-06-01
+
+* default blog style improvements
 
 ## 1.0.5
 
-Release: 2024-03-31
+Released: 2024-03-31
 
 * added images preview support
 
 ## 1.0.4
 
-Release: 2024-03-29
+Released: 2024-03-29
 
 * new blog style
 * updated dependencies and libraries

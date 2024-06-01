@@ -13,7 +13,7 @@ from pyrengine.utils import hash_password
 from pyrengine import (models, jinja_helpers, notifications, backups, files)
 
 STORAGE_PATH = None
-__version__ = '1.0.5'
+__version__ = '1.0.6'
 
 login_manager = LoginManager()
 
