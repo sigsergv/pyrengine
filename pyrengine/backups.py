@@ -239,6 +239,8 @@ def restore_backup(backup_id):
         props = {'published': 'published', 'updated': 'updated'}
         for k, v in props.items():
             if k in m:
+                if m[k] == 'None':
+                    m[k] = 0
                 setattr(article, v, int(m[k]))
 
         props = {'is-commentable': 'is_commentable', 'is-draft': 'is_draft'}

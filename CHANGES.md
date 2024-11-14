@@ -2,6 +2,13 @@
 
 This file contains releases history along with the most important changes.
 
+## 1.0.8
+
+Released: 2024-11-xx
+
+* updated dependencies
+* default blog style improvements
+
 ## 1.0.6
 
 Released: 2024-06-01

@@ -21,7 +21,7 @@ brew install python@3.11
 Install venv:
 
 ~~~~
-$ python3 -m venv .venv
+$ python3.11 -m venv .venv
 $ source .venv/bin/activate
 (.venv) $
 ~~~~
@@ -33,7 +33,7 @@ Special step for Macos: you need to specify path to directory with `pg_config` e
 so if you are using Postgres.app do this:
 
 ~~~~
-(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/15/bin/:$PATH pip install psycopg2==2.9.9
+(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/15/bin/:$PATH pip install psycopg2==2.9.10
 ~~~~
 
 Install application in development mode:
@@ -58,7 +58,7 @@ Type "help" for help.
 pyrengine=# GRANT USAGE, CREATE ON SCHEMA public TO pyrengine_user;
 ~~~~
 
-In macos Posgtres.app:
+In macos Postgres.app:
 
 ~~~~
 $ /Applications/Postgres.app/Contents/Versions/15/bin/createdb pyrengine
