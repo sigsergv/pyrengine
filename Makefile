@@ -20,6 +20,7 @@ babel-collect:
 babel-compile:
 	pybabel compile -d $(FLASK_APP)/translations
 
+# do not use this recipe as it deletes all saved migrations!
 clean-init-db:
 	rm -rf pyrengine/models/migrations
 	flask db init -d pyrengine/models/migrations
