@@ -1,5 +1,5 @@
 window.translations = {
-    'AJAX_REQUEST_ERROR': 'Ошибка выполнения AJAX-запроса.',
+	'AJAX_REQUEST_ERROR': 'Ошибка выполнения AJAX-запроса.',
 	'ARTICLE_SAVED': 'Статья успешно сохранена.',
 	'ARTICLE_SAVE_FAILED': 'Сохранение статьи завершилось с ошибкой.',
 	'ARTICLE_SAVED': 'Статья сохранена.',
@@ -10,5 +10,6 @@ window.translations = {
 	'COMMENT_IS_WAITING_FOR_APPROVAL': 'Комментарий сохранён и ждёт модерации.',
 	'BACKUP_RESTORE_COMPLETE': 'Бэкап успешно восстановлен, сайт будет перезагружен.',
 	'SETTINGS_SAVED': 'Настройки успешно сохранены.',
-	'BACKUP_FAILED_WITH_ERROR': 'Бэкап завершился с ошибкой: {0}'
+	'BACKUP_FAILED_WITH_ERROR': 'Бэкап завершился с ошибкой: {0}',
+	'SELECT_ITEMS_FIRST': 'Выберите элементы сначала'
 };

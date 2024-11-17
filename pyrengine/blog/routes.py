@@ -706,7 +706,7 @@ def add_article_comment_ajax(article_id):
     parent = comment.parent
     admin_email = get_config('admin_notifications_email')
     vf_q = dbsession.query(VerifiedEmail)
-    notifications_emails = []
+    notifications_emails = set()
 
     while parent is not None and loop_limit > 0:
         loop_limit -= 1
@@ -729,11 +729,14 @@ def add_article_comment_ajax(article_id):
 
         if email in notifications_emails:
             continue
+            
+        notifications_emails.add(email)
 
+        print(email)
         vf = vf_q.filter(VerifiedEmail.email == email).first()
         if vf is not None and vf.is_verified:
             # send notification to "email"
-            ns.append(notifications.gen_comment_response_notification(request, article, comment, c, email))
+            ns.append(notifications.gen_comment_response_notification(article, c, comment, email))
 
     admin_notifications_email = normalize_email(get_config('admin_notifications_email'))
 
@@ -913,6 +916,36 @@ def comments_moderation():
         return render_template('blog/comments_moderation.jinja2', **ctx)
     else:
         return ''
+
+@bp.route('/verify-email', methods=['GET'])
+def verify_email_form():
+    ctx = {
+        'email': request.args.get('email'),
+        'token': request.args.get('token')
+    }
+    return render_template('account/verify_email.jinja2', **ctx)
+
+
+@bp.route('/verify-email', methods=['POST'])
+def verify_email():
+    # form = request.form
+    email = request.form.get('email')
+    token = request.form.get('token')
+    ctx = {
+        'success': False
+    }
+    dbsession = db.session
+    vf = dbsession.query(VerifiedEmail).filter(VerifiedEmail.email == email)\
+        .filter(VerifiedEmail.verification_code == token)\
+        .filter(VerifiedEmail.is_verified == False)\
+        .first()
+    if vf is not None:
+        vf.is_verified = True
+        dbsession.add(vf)
+        dbsession.commit()
+        ctx['success'] = True
+    return render_template('account/verify_email_complete.jinja2', **ctx)
+
 
 def _update_comments_counters(article):
     """

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2023-09-03 21:54+0700\n"
+"POT-Creation-Date: 2024-11-19 21:40+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: ru\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.12.1\n"
+"Generated-By: Babel 2.16.0\n"
 
 #: pyrengine/__init__.py:49 pyrengine/__init__.py:57
 msgid "Page not found"
@@ -59,11 +59,11 @@ msgstr "Файл бэкапа повреждён, блок «settings» не о�
 msgid "Backup file is broken: users block not found"
 msgstr "Файл бэкапа повреждён, блок «users» не обнаружен"
 
-#: pyrengine/backups.py:217 pyrengine/backups.py:330
+#: pyrengine/backups.py:217 pyrengine/backups.py:332
 msgid "Backup file is broken: articles block not found"
 msgstr "Файл бэкапа повреждён, блок «articles» не обнаружен"
 
-#: pyrengine/backups.py:381 pyrengine/backups.py:384
+#: pyrengine/backups.py:383 pyrengine/backups.py:386
 msgid ""
 "Unable to restore backup: database error, maybe your backup file is "
 "corrupted"
@@ -75,47 +75,47 @@ msgstr ""
 msgid "Invalid input data"
 msgstr ""
 
-#: pyrengine/admin/routes.py:209
+#: pyrengine/admin/routes.py:208
 msgid "Failed to delete some backup filename."
 msgstr ""
 
-#: pyrengine/blog/routes.py:63
+#: pyrengine/blog/routes.py:64
 msgid "Latest articles"
 msgstr "Недавние статьи"
 
-#: pyrengine/blog/routes.py:96 pyrengine/templates/base.jinja2:15
+#: pyrengine/blog/routes.py:132 pyrengine/templates/base.jinja2:15
 msgid "Latest articles feed"
 msgstr "Лента недавних статей"
 
-#: pyrengine/blog/routes.py:169
+#: pyrengine/blog/routes.py:204
 msgid "Articles with tag “{0}”"
 msgstr "Статьи с тегом «{0}»"
 
-#: pyrengine/blog/routes.py:273
+#: pyrengine/blog/routes.py:308
 msgid "User not found"
 msgstr "Пользователь не найден"
 
-#: pyrengine/blog/routes.py:299
+#: pyrengine/blog/routes.py:334
 msgid "New article title"
 msgstr "Название новой статьи"
 
-#: pyrengine/blog/routes.py:331 pyrengine/blog/routes.py:383
+#: pyrengine/blog/routes.py:366 pyrengine/blog/routes.py:418
 msgid "Article with the same shortcut already exists."
 msgstr "Статья с таким шорткатом уже существует"
 
-#: pyrengine/blog/routes.py:505
+#: pyrengine/blog/routes.py:540
 msgid "Field is required."
 msgstr "Поле обязательно нужно заполнить."
 
-#: pyrengine/blog/routes.py:510
+#: pyrengine/blog/routes.py:545
 msgid "Invalid date format."
 msgstr "Некорректный формат даты."
 
-#: pyrengine/blog/routes.py:561
+#: pyrengine/blog/routes.py:596
 msgid "Empty comment body is not allowed."
 msgstr "Пустой комментарий не разрешён."
 
-#: pyrengine/blog/routes.py:595
+#: pyrengine/blog/routes.py:630
 msgid "Answering to not approved comment"
 msgstr "Нельзя ответить на неподтверждённый комментарий"
 
@@ -139,6 +139,29 @@ msgstr "Пароль"
 msgid "sign in"
 msgstr "войти"
 
+#: pyrengine/templates/account/verify_email.jinja2:3
+#: pyrengine/templates/account/verify_email.jinja2:7
+#: pyrengine/templates/account/verify_email_complete.jinja2:3
+#: pyrengine/templates/account/verify_email_complete.jinja2:7
+msgid "Verify e-mail address"
+msgstr "Подтвердить E-mail"
+
+#: pyrengine/templates/account/verify_email.jinja2:9
+msgid "Click button below to verify e-mail address <strong>{0}</strong>."
+msgstr "Нажмите кнопку ниже, чтобы подтвердить адрес <strong>{0}</strong>."
+
+#: pyrengine/templates/account/verify_email.jinja2:14
+msgid "Verify e-mail"
+msgstr "Подтвердить адрес"
+
+#: pyrengine/templates/account/verify_email_complete.jinja2:10
+msgid "E-mail verified."
+msgstr "E-mail адрес подтверждён."
+
+#: pyrengine/templates/account/verify_email_complete.jinja2:12
+msgid "E-mail not found."
+msgstr "E-mail не найден"
+
 #: pyrengine/templates/admin/backups_list.jinja2:3
 #: pyrengine/templates/admin/backups_list.jinja2:7
 msgid "Backups management"
@@ -158,12 +181,11 @@ msgstr "Создание бэкапа, пожалуйста\tждите"
 
 #: pyrengine/templates/admin/backups_list.jinja2:14
 msgid "Backup complete, reload page to see it."
-msgstr ""
+msgstr "Бэкап завершён, перегрузить страницу, чтобы увидеть новый файл."
 
 #: pyrengine/templates/admin/backups_list.jinja2:14
-#, fuzzy
 msgid "New backup filename: {0}"
-msgstr "Имя файла бэкапа"
+msgstr "Файл нового бэкапа: {0}"
 
 #: pyrengine/templates/admin/backups_list.jinja2:16
 msgid "Backup archives"
@@ -264,6 +286,23 @@ msgstr "Тип файла (content type)"
 #: pyrengine/templates/admin/edit_file_props.jinja2:19
 msgid "submit"
 msgstr "отправить"
+
+#: pyrengine/templates/admin/emails_list.jinja2:3
+#: pyrengine/templates/admin/emails_list.jinja2:7
+#: pyrengine/templates/widgets/actions.jinja2:8
+msgid "E-mail addresses"
+msgstr "E-mail адреса"
+
+#: pyrengine/templates/admin/emails_list.jinja2:12
+msgid "Verified"
+msgstr "Подтверждён"
+
+#: pyrengine/templates/admin/emails_list.jinja2:19
+#: pyrengine/templates/blog/article_snippet.jinja2:10
+#: pyrengine/templates/blog/index.jinja2:17
+#: pyrengine/templates/blog/view_article.jinja2:43
+msgid "DATE_TIME_SHORT"
+msgstr "%%Y-%%m-%%d в %%H:%%M"
 
 #: pyrengine/templates/admin/files_list.jinja2:15
 msgid "Choose file to upload"
@@ -464,8 +503,8 @@ msgstr "N/A] зарегистрировался новый пользовате�
 
 #: pyrengine/templates/admin/settings_pages_widget.jinja2:4
 #: pyrengine/templates/admin/settings_pages_widget.jinja2:7
-msgid "Widget \"Pinned posts\" parameters"
-msgstr "Параметры виджета «Избранные посты»"
+msgid "Widget \"Pinned links\" parameters"
+msgstr "Параметры виджета «Избранные ссылки»"
 
 #: pyrengine/templates/admin/settings_pages_widget.jinja2:14
 msgid "Pages list"
@@ -504,12 +543,6 @@ msgstr "Главная идея проста: первый символ в ст�
 #: pyrengine/templates/blog/article_snippet.jinja2:8
 msgid "Guest:"
 msgstr "Гость:"
-
-#: pyrengine/templates/blog/article_snippet.jinja2:10
-#: pyrengine/templates/blog/index.jinja2:17
-#: pyrengine/templates/blog/view_article.jinja2:43
-msgid "DATE_TIME_SHORT"
-msgstr "%%Y-%%m-%%d в %%H:%%M"
 
 #: pyrengine/templates/blog/article_snippet.jinja2:12
 #: pyrengine/templates/blog/comments_moderation.jinja2:20
@@ -670,8 +703,8 @@ msgid "draft"
 msgstr "черновик"
 
 #: pyrengine/templates/blog/index.jinja2:20
-msgid "continue reading"
-msgstr "читать дальше »»"
+msgid "read more"
+msgstr "читать дальше"
 
 #: pyrengine/templates/blog/index.jinja2:24
 #: pyrengine/templates/blog/index.jinja2:26
@@ -805,23 +838,18 @@ msgid "EMAIL# DIRECT LINK TO COMMENT"
 msgstr "<a href=\"%%(comment_url)s\">Прямая ссылка на комментарий.</a>"
 
 #: pyrengine/templates/email/comment_response.jinja2:1
-#, fuzzy
 msgid "EMAIL# SUBJECT SOMEONE ANSWERED TO YOUR COMMENT"
-msgstr "<a href=\"%%(comment_url)s\">Прямая ссылка на комментарий.</a>"
+msgstr "Ответ на комментарий на сайте «%%(site_title)s»"
 
 #: pyrengine/templates/email/comment_response.jinja2:5
-#, fuzzy
 msgid "EMAIL# USER ANSWERED TO YOUR COMMENT FOR THE ARTICLE"
-msgstr ""
-"Новый комментарий к статье <a "
-"href=\"%%(article_url)s\">%%(article_title)s</a>."
+msgstr "Ответ на ваш комментарий к статье <em>%%(article_title)s</em>"
 
 #: pyrengine/templates/email/comment_response.jinja2:7
-#, fuzzy
 msgid "EMAIL# VISITOR ON DATE WROTE THE FOLLOWING"
 msgstr ""
-"<strong>%%(comment_author_name)s (%%(comment_author_email)s</strong> "
-"<em>%%(comment_date)s</em> написал:"
+"<strong>%%(comment_author_name)s</strong> <em>%%(comment_date)s</em> "
+"написал:"
 
 #: pyrengine/templates/email/email_verification.jinja2:1
 msgid "EMAIL# SUBJECT PLEASE VERIFY YOUR EMAIL ADDRESS FOR THE SITE"
@@ -831,7 +859,7 @@ msgstr "Подтвердите свой email на сайте «%%(site_title)s�
 msgid "EMAIL# TO RECEIVE NOTIFICATIONS FROM SITE YOU MUST CONFIRM THIS ADDRESS"
 msgstr ""
 "Чтобы получать уведомления с сайта «%%(site_title)s», вы должны "
-"подтвердить свой email <em>%%(email)</em>."
+"подтвердить свой email <em>%%(email)s</em>."
 
 #: pyrengine/templates/email/email_verification.jinja2:7
 msgid "EMAIL# PLEASE CLICK HERE TO VERIFY ADDRESS"
@@ -845,21 +873,21 @@ msgstr "Действия"
 msgid "Comments moderation ({})"
 msgstr "Модерация комментариев"
 
-#: pyrengine/templates/widgets/actions.jinja2:8
+#: pyrengine/templates/widgets/actions.jinja2:9
 msgid "Backups"
 msgstr "Бэкапы"
 
-#: pyrengine/templates/widgets/actions.jinja2:9
+#: pyrengine/templates/widgets/actions.jinja2:10
 msgid "Settings"
 msgstr "Настройки"
 
-#: pyrengine/templates/widgets/actions.jinja2:10
+#: pyrengine/templates/widgets/actions.jinja2:11
 msgid "Sign out"
 msgstr "Выйти"
 
 #: pyrengine/templates/widgets/pages.jinja2:2
-msgid "Pinned posts"
-msgstr "Избранные посты"
+msgid "Pinned links"
+msgstr "Избранные ссылки"
 
 #: pyrengine/templates/widgets/search.jinja2:4
 msgid "Site search"

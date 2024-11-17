@@ -2,6 +2,16 @@
 
 This file contains releases history along with the most important changes.
 
+## 1.0.7
+
+Release: 2024-11-xx
+
+* updated dependencies
+* default blog style improvements
+* files list is sorted now
+* fixed notifications
+* added missing email confirmation code
+
 ## 1.0.6
 
 Released: 2024-06-01

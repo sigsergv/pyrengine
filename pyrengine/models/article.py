@@ -141,7 +141,6 @@ def get_public_tags_cloud(force_reload=False):
 
                 weights = [(x[0], (lg(x[1])-lg(min_count)) / lmm) for x in items]
                 weights = [(x[0], 5 * round(x[1]*100 / 5)) for x in weights]
-                print(weights)
 
             value = weights
         else:

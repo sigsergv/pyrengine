@@ -21,7 +21,7 @@ brew install python@3.11
 Install venv:
 
 ~~~~
-$ python3 -m venv .venv
+$ python3.11 -m venv .venv
 $ source .venv/bin/activate
 (.venv) $
 ~~~~
@@ -33,7 +33,7 @@ Special step for Macos: you need to specify path to directory with `pg_config` e
 so if you are using Postgres.app do this:
 
 ~~~~
-(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/15/bin/:$PATH pip install psycopg2==2.9.9
+(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/15/bin/:$PATH pip install psycopg2==2.9.10
 ~~~~
 
 Install application in development mode:
@@ -58,7 +58,7 @@ Type "help" for help.
 pyrengine=# GRANT USAGE, CREATE ON SCHEMA public TO pyrengine_user;
 ~~~~
 
-In macos Posgtres.app:
+In macos Postgres.app:
 
 ~~~~
 $ /Applications/Postgres.app/Contents/Versions/15/bin/createdb pyrengine
@@ -86,15 +86,20 @@ $ /Applications/Postgres.app/Contents/Versions/15/bin/psql -h 127.0.0.1 pyrengin
 
 # Development runtime
 
+## Configuration file
+
+First copy sample configuration file into the project directory:
+
+~~~~
+(.venv) $ cp pyrengine/examples/development.cfg ./
+~~~~
+
 ## Initialize application database
 
 Use this commands to initialize database and populate with sample data:
 
 ~~~~
-(.venv) $ export FLASK_APP=pyrengine
-(.venv) $ export FLASK_ENV=development
-(.venv) $ flask db upgrade
-(.venv) $ flask init-db
+(.venv) $ make init-db
 ~~~~
 
 ## Create storage directories
@@ -106,37 +111,13 @@ Use this commands to initialize database and populate with sample data:
 
 ## Start application in development mode
 
-First copy sample configuration file into the project directory:
-
-~~~~
-(.venv) $ cp pyrengine/examples/development.cfg ./
-~~~~
-
 Start project:
-
-~~~~
-(.venv) $ export FLASK_APP=pyrengine
-(.venv) $ export FLASK_ENV=development
-(.venv) $ export PYRENGINE_SETTINGS=`pwd`/development.cfg
-(.venv) $ export FLASK_DEBUG=1
-(.venv) $ flask run
-~~~~
-
-Or via Makefile (environment is initialized inside Makefile):
 
 ~~~~
 (.venv) $ make run
 ~~~~
 
 Start Flask shell:
-
-~~~~
-(.venv) $ export FLASK_APP=pyrengine
-(.venv) $ export FLASK_ENV=development
-(.venv) $ flask shell
-~~~~
-
-Or via Makefile (environment is initialized inside Makefile):
 
 ~~~~
 (.venv) $ make flask-shell

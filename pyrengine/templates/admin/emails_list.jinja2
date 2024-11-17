@@ -1,0 +1,26 @@
+{% extends 'admin/base.jinja2' %}
+
+{% block title %}{{ _('E-mail addresses') }}{% endblock %}
+
+{% block content %}
+
+<h2>{{ _('E-mail addresses') }}</h2>
+
+<table border="0" class="items-list" cellpadding="0" cellspacing="0" id="files-table">
+<tr>
+	<th>E-mail</th>
+	<th>{{ _('Verified') }}</th>
+	<th>DATE</th>
+</tr>
+{% for e in emails %}
+	<tr>
+		<td>{{ e.email }}</td>
+		<td>{% if e.is_verified %}<span class="fa fa-check color-green">{% endif %}</td>
+		<td>{{ h.timestamp_to_str(e.last_verify_date, _('DATE_TIME_SHORT')) }}</td>
+	</tr>
+	
+{% endfor %}
+
+</table>
+
+{% endblock %}

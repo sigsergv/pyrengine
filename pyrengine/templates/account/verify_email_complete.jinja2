@@ -1,0 +1,15 @@
+{% extends 'base.jinja2' %}
+
+{% block title %}{{ _('Verify e-mail address') }}{% endblock %}
+
+{% block content %}
+
+<h2>{{ _('Verify e-mail address') }}</h2>
+
+{% if success %}
+<div>{{ _('E-mail verified.') }}</div>
+{% else %}
+<div>{{ _('E-mail not found.') }}</div>
+{% endif %}
+
+{% endblock %}

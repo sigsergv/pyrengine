@@ -9,7 +9,7 @@ from flask import (render_template, abort, request, redirect, url_for, send_file
 from werkzeug.utils import secure_filename
 from pyrengine import (backups, files, jinja_helpers)
 from pyrengine.admin import bp
-from pyrengine.models import (File, Config)
+from pyrengine.models import (File, Config, VerifiedEmail)
 from pyrengine.models.config import set as set_config
 from pyrengine.models.config import get as get_config
 from pyrengine.utils import cache, dt_to_timestamp
@@ -32,7 +32,7 @@ def files_list():
     ctx = {
     }
     dbsession = db.session
-    ctx['files'] = dbsession.query(File).all()
+    ctx['files'] = dbsession.query(File).order_by(File.name).all()
 
     return render_template('admin/files_list.jinja2', **ctx)
 
@@ -127,6 +127,15 @@ def delete_files_ajax():
         os.unlink(os.path.join(FILES_PATH, fn))
     return jctx
 
+
+@bp.route('/emails')
+@login_required
+def emails_list():
+    ctx = {}
+    dbsession = db.session
+    ctx['emails'] = dbsession.query(VerifiedEmail).order_by(VerifiedEmail.email).all()
+
+    return render_template('admin/emails_list.jinja2', **ctx)
 
 @bp.route('/backups')
 @login_required
