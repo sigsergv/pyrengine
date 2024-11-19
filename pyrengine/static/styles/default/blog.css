@@ -217,6 +217,11 @@ a.new-window {
 	color: #060;
 }
 div#content div.article code, div#eid-article-render-preview p code {
+	background-color: #EFEFEF;
+	border-radius: 2px;
+}
+div#content div.article pre code, div#eid-article-render-preview pre code {
+	background-color: transparent;
 }
 div#content div.article pre,
 div#content div.preview pre,
@@ -701,7 +706,7 @@ span.user-link {
 }
 a.headerlink {
 	text-decoration: none;
-	color: gray;
+	color: #E1E1E1;
 	margin-left: 3px;
 }
 a.headerlink:hover {
