@@ -73,8 +73,10 @@ window.pyrengine.create_link_notify_box = function(target_id, message) {
 /**
  * @param {String} target_id id of node where append confirm box
  * @param {Function} callback required callback to be called when user clicks confirm box
+ * @param {String} position confirmation block display position (relative to target): 'right' (default), 'bottom'
  */
- window.pyrengine.create_confirm_link = function(target_id, callback) {
+ window.pyrengine.create_confirm_link = function(target_id, callback, position) {
+ 	var mouse_inside = false;
 	var confirm_id = 'confirmlink-' + target_id;
 	if ($('#'+confirm_id).get(0)) {
 		return;
@@ -86,19 +88,32 @@ window.pyrengine.create_link_notify_box = function(target_id, message) {
 	}
 	target = $(target);
 
-	var confirmation_el = $('<a> <span class="fa fa-check-circle"> OK</a>').attr({
+	var confirmation_el = $('<div class="confirmation-block"><a class="confirm-icon"><span class="fa fa-check-circle"> OK</a></div>').attr({
 		href: '#',
 		id: confirm_id
-	}).addClass('confirm-icon')
-	  .click(function(e) {
+	  }).click(function(e) {
 	  	  callback.call();
 	  	  confirmation_el.remove();
 	  	  return false;
 	  });
-	target.after(confirmation_el);
+
+	switch (position) {
+	case 'bottom':
+		confirmation_el.css({ 'top': target.offset().top + target.outerHeight() + 3, 'left': target.offset().left });
+		break;
+	default:
+		// 'right' is default position
+		confirmation_el.css({ 'top': target.offset().top, 'left': target.offset().left + target.outerWidth() + 3 });
+	} 
+	confirmation_el.on('mouseenter', function() { mouse_inside = true; });
+	confirmation_el.on('mouseleave', function() { mouse_inside = false; confirmation_el.remove(); });
+
+	$(document.body).append(confirmation_el);
 
 	setTimeout(function(){
-		confirmation_el.remove();
+		if (!mouse_inside) {
+			confirmation_el.remove();
+		}
 	}, 1000);
 }
 

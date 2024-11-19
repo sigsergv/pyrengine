@@ -181,6 +181,13 @@ div#sidebar div.section {
 	padding-top: 5px;
 }
 
+.confirmation-block {
+	position: absolute;
+	font-size: 13pt;
+	cursor: default;
+	display: block;
+	padding: 0;
+}
 a.confirm-icon {
 	border: 2px solid black;
 	border-width: 2px 6px 2px 2px;
@@ -188,8 +195,7 @@ a.confirm-icon {
 	background-color: #f1d200;
 	color: black;
 	text-decoration: none;
-	padding: 0 2px 0 0;
-	margin: 0 3px 0 2px;
+	padding: 0 3px 0 3px;
 }
 a.confirm-icon:hover {
 	border-color: green;

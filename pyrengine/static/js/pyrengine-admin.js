@@ -431,7 +431,7 @@ var deleteArticle = function(url, article_id) {
 	});
 };
 window.pyrengine.deleteArticle = function(url, article_id) {
-	pyrengine.create_confirm_link('a-d-'+article_id, function() { deleteArticle(url, article_id);});
+	pyrengine.create_confirm_link('a-d-'+article_id, function() { deleteArticle(url, article_id);}, 'bottom');
 }
 
 window.pyrengine.saveSettingsAjax = function(url) {
