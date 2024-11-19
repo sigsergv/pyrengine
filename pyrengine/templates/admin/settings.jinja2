@@ -66,8 +66,8 @@
     
   <dt>{{ _('Select notifications you want to receive') }}</dt>
 
-  {{ forms.checkbox('admin_notify_new_comments', settings['admin_notify_new_comments'] == 'true', '', _('new comment added (including comment moderation requests)')) }}
-  {{ forms.checkbox('admin_notify_new_user', settings['admin_notify_new_user'] == 'true', '', _('[N/A] new user registered')) }}
+  {{ forms.checkbox('admin_notify_new_comments', settings['admin_notify_new_comments'] == 'true', '', _('new comment added (including comment moderation requests)'), '') }}
+  {{ forms.checkbox('admin_notify_new_user', settings['admin_notify_new_user'] == 'true', '', _('[N/A] new user registered'), '') }}
 
 </dl>
 </form>

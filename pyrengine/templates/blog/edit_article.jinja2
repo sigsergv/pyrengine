@@ -29,7 +29,7 @@
 
     {{ forms.textarea('body', form['body'], '', '', errors['body']) }}
     {{ forms.checkbox('is_draft', form['is_draft'], none, _('draft article'), _('if checked article will not be available to everyone')) }}
-    {{ forms.checkbox('is_commentable', form['is_commentable'], none, _('allow visitors comments')) }}
+    {{ forms.checkbox('is_commentable', form['is_commentable'], none, _('allow visitors comments'), '') }}
 
     <dd>{% if mode == 'edit' %}{{ forms.button(_('save and continue editing'), '', "pyrengine.saveArticle('" + url_for('blog.edit_article_ajax', article_id=article_id) + "'); return false;") }} {% endif %}
     {{ forms.button(_('save'), 'fa fa-save', "$('#form').submit(); return false;") }}
