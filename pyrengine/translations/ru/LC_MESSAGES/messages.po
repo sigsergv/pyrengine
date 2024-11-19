@@ -499,7 +499,7 @@ msgstr "добавлен новый комментарий (включая тр�
 
 #: pyrengine/templates/admin/settings.jinja2:70
 msgid "[N/A] new user registered"
-msgstr "N/A] зарегистрировался новый пользователь"
+msgstr "[N/A] зарегистрировался новый пользователь"
 
 #: pyrengine/templates/admin/settings_pages_widget.jinja2:4
 #: pyrengine/templates/admin/settings_pages_widget.jinja2:7
