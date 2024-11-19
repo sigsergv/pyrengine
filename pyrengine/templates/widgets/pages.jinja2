@@ -1,6 +1,6 @@
 <div class="widget">
 <div class="section">{{ _('Pinned links') }}
-{% if admin_permission %}<a href="{{ url_for('admin.settings_widget_pages') }}" title="{{ _('edit') }}"><span class="fa fa-pencil"></span></a>{% endif %}
+{% if admin_permission %}<a href="{{ url_for('admin.settings_widget_pages') }}" title="{{ _('edit') }}"><span class="fa fa-edit"></span></a>{% endif %}
 
 <ul>
 {% for link in h.get_pages_widget_links() %}

@@ -24,7 +24,7 @@
           {% if not comment.is_approved %}
           <a href="#" onclick="pyrengine.approveComment('{{ url_for('blog.approve_comment_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" id="ca-{{ comment.id }}" class="border-icon">{{ _('approve') }}</a>  
           {% endif %}
-          <a href="#" onclick="pyrengine.showCommentEditForm('{{ url_for('blog.edit_comment_ajax', comment_id=comment.id) }}', '{{ url_for('blog.comment_fetch_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" title="{{ _('edit') }}"><span class="fa fa-pencil"></span></a>
+          <a href="#" onclick="pyrengine.showCommentEditForm('{{ url_for('blog.edit_comment_ajax', comment_id=comment.id) }}', '{{ url_for('blog.comment_fetch_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" title="{{ _('edit') }}"><span class="fa fa-edit"></span></a>
           <a href="#" onclick="pyrengine.deleteComment('{{ url_for('blog.delete_comment_ajax', comment_id=comment.id) }}', '{{ comment.id }}'); return false;" id="cd-{{ comment.id }}" title="{{ _('delete') }}"><span class="fa fa-trash-o"></span></a>
         {% endif %}
       </div>

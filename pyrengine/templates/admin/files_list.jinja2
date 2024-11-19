@@ -46,7 +46,7 @@
 {% for f in files %}
 <tr id="list-tr-{{ f.id }}" data-row-value="{{ f.id }}">
   <td><input type="checkbox" value="{{ f.id }}" class="list-cb"/></td>
-  <td><a href="{{ url_for('admin.edit_file_props', file_id=f.id) }}" class="border-icon" title="{{ _('edit') }}"><span class="fa fa-pencil"></span></a>
+  <td><a href="{{ url_for('admin.edit_file_props', file_id=f.id) }}" class="border-icon" title="{{ _('edit') }}"><span class="fa fa-edit"></span></a>
   <td><a href="{{ url_for('blog.download_file', filename=f.name) }}" title="{{ _('Download file') }}"><span class="fa fa-download"></span></a></td>
   </td>
   <td>{{ f.name }}</td>
