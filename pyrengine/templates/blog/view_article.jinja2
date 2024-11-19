@@ -33,7 +33,7 @@ $(document).ready(function() {
     {% if editor_permission %}
     <div class="article-actions">
      <a href="{{ url_for('blog.edit_article', article_id=article.id) }}" class="border-icon" title="{{ _('edit') }}"><span class="fa fa-edit"></span></a>
-     <a href="#" onclick="pyrengine.deleteArticle('{{ url_for('blog.delete_article_ajax', article_id=article.id) }}', '{{ article.id }}'); return false;" class="border-icon" title="{{ _('delete') }}"><span class="fa fa-trash-o"></span></a>
+     <a href="#" onclick="pyrengine.deleteArticle('{{ url_for('blog.delete_article_ajax', article_id=article.id) }}', '{{ article.id }}'); return false;" class="border-icon" title="{{ _('delete') }}" id="a-d-{{ article.id }}"><span class="fa fa-trash-o"></span></a>
     </div>
     {% endif %}
     {{ article.title }} {% if article.is_draft %}<span class="panel warning">{{ _('draft') }}</span>{% endif %}
