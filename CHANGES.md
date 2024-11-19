@@ -11,6 +11,7 @@ Release: 2024-11-xx
 * files list is sorted now
 * fixed notifications
 * added missing email confirmation code
+* confirmation element improvements
 
 ## 1.0.6
 
