@@ -88,7 +88,7 @@ window.pyrengine.create_link_notify_box = function(target_id, message) {
 	}
 	target = $(target);
 
-	var confirmation_el = $('<div class="confirmation-block"><a class="confirm-icon"><span class="fa fa-check-circle"> OK</a></div>').attr({
+	var confirmation_el = $('<div class="confirmation-block"><a class="confirm-icon"><span class="confirmation-icon fa fa-check-circle-o"> OK</a></div>').attr({
 		href: '#',
 		id: confirm_id
 	  }).click(function(e) {
@@ -105,7 +105,11 @@ window.pyrengine.create_link_notify_box = function(target_id, message) {
 		// 'right' is default position
 		confirmation_el.css({ 'top': target.offset().top, 'left': target.offset().left + target.outerWidth() + 3 });
 	} 
-	confirmation_el.on('mouseenter', function() { mouse_inside = true; });
+	confirmation_el.on('mouseenter', function(e) {
+		var icon = $(e.currentTarget).find('span.confirmation-icon');
+		icon.removeClass('fa-check-circle-o').addClass('fa-check-circle');
+		mouse_inside = true;
+	});
 	confirmation_el.on('mouseleave', function() { mouse_inside = false; confirmation_el.remove(); });
 
 	$(document.body).append(confirmation_el);
