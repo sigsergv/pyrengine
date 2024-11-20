@@ -359,36 +359,41 @@ div.tags-cloud {
 }
 
 div.tags-cloud a {
-	background-color: #bbb;
-	border-radius: 8px;
+/*	background-color: #bbb;*/
+	color: #003B70;
+/*	border: 1px dotted #7398AB;*/
+	border-radius: 3px;
 	padding: 1px 3px 1px 3px;
 	text-decoration: none;
 }
 div.tags-cloud a:hover {
+	color: white;
+/*	border: 1px solid #004891;*/
 	background-color: #004891;
 }
 
-a.tag-0 { font-size: 9px; color: #fff;}
-a.tag-5 { font-size: 10px; color: #fff;}
-a.tag-10 { font-size: 11px; color: #fff;}
-a.tag-15 { font-size: 13px; color: #fff;}
-a.tag-20 { font-size: 14px; color: #fff;}
-a.tag-25 { font-size: 16px; color: #fff;}
-a.tag-30 { font-size: 17px; color: #fff;}
-a.tag-35 { font-size: 19px; color: #fff;}
-a.tag-40 { font-size: 20px; color: #fff;}
-a.tag-45 { font-size: 22px; color: #fff;}
-a.tag-50 { font-size: 23px; color: #fff;}
-a.tag-55 { font-size: 25px; color: #fff;}
-a.tag-60 { font-size: 26px; color: #fff;}
-a.tag-65 { font-size: 28px; color: #fff;}
-a.tag-70 { font-size: 29px; color: #fff;}
-a.tag-75 { font-size: 31px; color: #fff;}
-a.tag-80 { font-size: 32px; color: #fff;}
-a.tag-85 { font-size: 34px; color: #fff;}
-a.tag-90 { font-size: 35px; color: #fff;}
-a.tag-95 { font-size: 37px; color: #fff;}
-a.tag-100 { font-size: 38px; color: #fff;}
+a.tag-0  { font-size:  9px;}
+a.tag-5  { font-size: 10px;}
+a.tag-10 { font-size: 11px;}
+a.tag-15 { font-size: 13px;}
+a.tag-20 { font-size: 14px;}
+a.tag-25 { font-size: 16px;}
+a.tag-30 { font-size: 17px;}
+a.tag-35 { font-size: 19px;}
+a.tag-40 { font-size: 20px;}
+a.tag-45 { font-size: 22px;}
+a.tag-50 { font-size: 23px;}
+a.tag-55 { font-size: 25px;}
+a.tag-60 { font-size: 26px;}
+a.tag-65 { font-size: 28px;}
+a.tag-70 { font-size: 29px;}
+a.tag-75 { font-size: 31px;}
+a.tag-80 { font-size: 32px;}
+a.tag-85 { font-size: 34px;}
+a.tag-90 { font-size: 35px;}
+a.tag-95 { font-size: 37px;}
+a.tag-100{ font-size: 38px;}
+
 
 /* article styles */
 div.article div.title {
