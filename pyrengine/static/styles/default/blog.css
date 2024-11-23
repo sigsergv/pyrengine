@@ -678,9 +678,12 @@ acronym {
 }
 
 .article-actions {
+	font-size: 0;
 	position: absolute;
-/*	top: 10px;*/
+	padding: 0 0 3px 0;
+	margin: 0;
 	right: 0;
+	bottom: 0;
 }
 .article-actions .border-icon {
 	font-size: 22px;
@@ -689,6 +692,7 @@ acronym {
 	background-color: #003B70;
 	border-radius: 6px;
 	padding: 0 5px 0 5px;
+	margin: 0 0 0 3px;
 }
 
 .article-actions .border-icon:hover {
