@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2024-11-19 21:40+0700\n"
+"POT-Creation-Date: 2024-11-23 15:04+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: ru\n"
@@ -25,7 +25,7 @@ msgstr "Страница не найдена"
 
 #: pyrengine/backups.py:82
 msgid "Backup ID cannot be processed."
-msgstr ""
+msgstr "Не получилось обработать ID бэкапа."
 
 #: pyrengine/backups.py:86
 msgid "Backup not found."
@@ -73,11 +73,11 @@ msgstr ""
 
 #: pyrengine/admin/routes.py:117
 msgid "Invalid input data"
-msgstr ""
+msgstr "Некорректные входные данные"
 
 #: pyrengine/admin/routes.py:208
 msgid "Failed to delete some backup filename."
-msgstr ""
+msgstr "Не удалось удалить файлы бэкапов."
 
 #: pyrengine/blog/routes.py:64
 msgid "Latest articles"
@@ -119,9 +119,58 @@ msgstr "Пустой комментарий не разрешён."
 msgid "Answering to not approved comment"
 msgstr "Нельзя ответить на неподтверждённый комментарий"
 
+#: pyrengine/blog/routes.py:987 pyrengine/blog/routes.py:988
+msgid "Passwords don't match."
+msgstr "Пароли не совпадают."
+
+#: pyrengine/blog/routes.py:991
+msgid "Password cannot be empty."
+msgstr "Пароль не может быть пустым."
+
+#: pyrengine/blog/routes.py:999
+msgid "User account not found."
+msgstr "Пользователь не найден."
+
+#: pyrengine/blog/routes.py:1003
+msgid "Incorrect password."
+msgstr "Неправильный пароль."
+
 #: pyrengine/templates/base.jinja2:26
 msgid "Powered by pyrengine"
 msgstr "Работает на pyrengine"
+
+#: pyrengine/templates/account/change_password.jinja2:4
+#: pyrengine/templates/account/change_password.jinja2:8
+msgid "Change account password"
+msgstr "Сменить пароль аккаунта"
+
+#: pyrengine/templates/account/change_password.jinja2:12
+msgid "Account login name"
+msgstr "Логин"
+
+#: pyrengine/templates/account/change_password.jinja2:15
+msgid "Current password"
+msgstr "Текущий пароль"
+
+#: pyrengine/templates/account/change_password.jinja2:16
+msgid "New password"
+msgstr "Новый пароль"
+
+#: pyrengine/templates/account/change_password.jinja2:17
+msgid "Repeat new password"
+msgstr "Повторите новый пароль"
+
+#: pyrengine/templates/account/change_password.jinja2:19
+#: pyrengine/templates/admin/settings.jinja2:36
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:22
+#: pyrengine/templates/blog/edit_article.jinja2:35
+#: pyrengine/templates/blog/view_article.jinja2:79
+msgid "save"
+msgstr "сохранить"
+
+#: pyrengine/templates/account/change_password_complete.jinja2:5
+msgid "Password was changed successfully."
+msgstr "Пароль был успешно изменнён."
 
 #: pyrengine/templates/account/login.jinja2:3
 msgid "Sign in"
@@ -346,13 +395,6 @@ msgstr "Скачать файл"
 msgid "Site settings"
 msgstr "Настройки сайта"
 
-#: pyrengine/templates/admin/settings.jinja2:36
-#: pyrengine/templates/admin/settings_pages_widget.jinja2:22
-#: pyrengine/templates/blog/edit_article.jinja2:35
-#: pyrengine/templates/blog/view_article.jinja2:79
-msgid "save"
-msgstr "сохранить"
-
 #: pyrengine/templates/admin/settings.jinja2:44
 msgid "General"
 msgstr "Общие"
@@ -524,6 +566,9 @@ msgid ""
 "<code><pre>!http://google.com ! Google web search\n"
 "!http://yandex.ru ! Search in Yandex</pre></code>"
 msgstr ""
+"Каждая строка задаёт одну страницу, например: "
+"<code><pre>!http://google.com ! Google web search\n"
+"!http://yandex.ru ! Search in Yandex</pre></code>"
 
 #: pyrengine/templates/admin/settings_pages_widget.jinja2:18
 msgid ""
@@ -532,9 +577,10 @@ msgid ""
 "Google web search\n"
 "|http://yandex.ru | Search in Yandex</pre></code>"
 msgstr ""
-"Каждая строка задаёт один сайт, например: <code><pre>!http://google.com !"
-" Google web search\n"
-"!http://yandex.ru ! Search in Yandex</pre></code>"
+"Вы можете использовать любой другой символ в качестве разделителя вместо "
+"<strong>!</strong>, например, <strong>|</strong>: "
+"<code><pre>|http://google.com | Google web search\n"
+"|http://yandex.ru | Search in Yandex</pre></code>"
 
 #: pyrengine/templates/admin/settings_pages_widget.jinja2:19
 msgid "The main idea is simple: first character in the line is delimiter."
@@ -882,6 +928,10 @@ msgid "Settings"
 msgstr "Настройки"
 
 #: pyrengine/templates/widgets/actions.jinja2:11
+msgid "Change password"
+msgstr "Сменить пароль"
+
+#: pyrengine/templates/widgets/actions.jinja2:12
 msgid "Sign out"
 msgstr "Выйти"
 

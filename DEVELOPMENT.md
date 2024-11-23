@@ -117,6 +117,12 @@ Start project:
 (.venv) $ make run
 ~~~~
 
+Or with custom host:
+
+~~~~
+(.venv) $ make FLASK_HOST=192.168.88.29 run
+~~~~
+
 Start Flask shell:
 
 ~~~~

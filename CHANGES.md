@@ -2,9 +2,17 @@
 
 This file contains releases history along with the most important changes.
 
+## 1.0.8
+
+Release: 2024-??-??
+
+* fixed broken style for different resolutions
+* added change administrator password page
+* added missing translation strings
+
 ## 1.0.7
 
-Release: 2024-11-xx
+Release: 2024-11-20
 
 * updated dependencies
 * default blog style improvements

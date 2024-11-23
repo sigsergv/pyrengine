@@ -5,7 +5,7 @@ import os
 from flask import (render_template, make_response, request, redirect, url_for, abort, send_file)
 from pyrengine.blog import bp
 from pyrengine import notifications
-from pyrengine.utils import (check_hashed_password, timestamp_to_str, str_to_timestamp, timestamp_to_dt, markup, user_has_permission, article_url, normalize_email, package_file_path)
+from pyrengine.utils import (hash_password, check_hashed_password, timestamp_to_str, str_to_timestamp, timestamp_to_dt, markup, user_has_permission, article_url, normalize_email, package_file_path)
 from pyrengine.utils.PyRSS2Gen import RSS2, RSSItem
 from pyrengine.models import (User, Article, Comment, Tag, VerifiedEmail, File)
 from pyrengine.models.config import get as get_config
@@ -945,6 +945,75 @@ def verify_email():
         dbsession.commit()
         ctx['success'] = True
     return render_template('account/verify_email_complete.jinja2', **ctx)
+
+
+@bp.route('/account/change-password', methods=['GET'])
+@login_required
+def change_password_form():
+    user = current_user
+
+    ctx = {
+        'form': {},
+        'errors': {},
+        'login_name': user.login
+    }
+    return render_template('account/change_password.jinja2', **ctx)
+
+
+@bp.route('/account/change-password/complete', methods=['GET'])
+@login_required
+def change_password_complete():
+    ctx = {
+    }
+    return render_template('account/change_password_complete.jinja2', **ctx)
+
+
+@bp.route('/account/change-password', methods=['POST'])
+@login_required
+def change_password():
+    user = current_user
+
+    ctx = {
+        'form': {},
+        'errors': {},
+        'login_name': user.login
+    }
+    is_error = False
+    current_password = request.form['current_password']
+    new_password_1 = request.form['new_password_1']
+    new_password_2 = request.form['new_password_2']
+
+    if new_password_1 != new_password_2:
+        ctx['errors']['new_password_1'] = _('Passwords don\'t match.')
+        ctx['errors']['new_password_2'] = _('Passwords don\'t match.')
+        is_error = True
+    elif new_password_1 == '':
+        ctx['errors']['new_password_1'] = _('Password cannot be empty.')
+        is_error = True
+
+
+    if not is_error:
+        dbsession = db.session
+        u = dbsession.query(User).filter(User.login == user.login).first()
+        if u is None:
+            ctx['errors']['current_password'] = _('User account not found.')
+            is_error = True
+        else:
+            if not check_hashed_password(current_password, u.password):
+                ctx['errors']['current_password'] = _('Incorrect password.')
+                is_error = True
+            else:
+                # finally can change password
+                u.password = hash_password(new_password_1)
+                dbsession.add(user)
+                dbsession.flush()
+                dbsession.commit()
+                return redirect(url_for('blog.change_password_complete'))
+
+    if is_error:
+        return render_template('account/change_password.jinja2', **ctx)
+    else:
+        return render_template('account/change_password_complete.jinja2', **ctx)
 
 
 def _update_comments_counters(article):

@@ -1,5 +1,6 @@
 export FLASK_APP := pyrengine
 export FLASK_ENV := development
+export FLASK_HOST ?= 127.0.0.1
 export PYRENGINE_SETTINGS := $(realpath ./development.cfg)
 export FLASK_DEBUG := 1
 export FLASK_RUN_EXTRA_FILES := $(FLASK_APP)/translations/en/LC_MESSAGES/messages.mo:$(FLASK_APP)/translations/ru/LC_MESSAGES/messages.mo
@@ -8,7 +9,7 @@ default:
 	@echo "All commands: run, babel-collect, babel-compile"
 
 run:
-	flask run 
+	flask run --host=$(FLASK_HOST)
 
 flask-shell:
 	flask shell

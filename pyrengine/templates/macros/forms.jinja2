@@ -8,6 +8,12 @@
   <div id="error-{{ name }}" class="error" style="{% if not error %}display: none;{% endif %}">{{ error }}</div>
   <dd><input type="text" name="{{ name }}" id="fid-{{ name }}" value="{{ value }}"></dd>
 {%- endmacro %}
+  
+{% macro passwordfield(name, title, title_help, error) -%}
+  <dt>{% if title_help %}<acronym title="{{ title_help }}">{{ title }}</acronym>{% else %}{{ title }}{% endif %}</dt>
+  <div id="error-{{ name }}" class="error" style="{% if not error %}display: none;{% endif %}">{{ error }}</div>
+  <dd><input type="password" name="{{ name }}" id="fid-{{ name }}"></dd>
+{%- endmacro %}
 
 {% macro textarea(name, value, title, title_help, error, style) -%}
   {% if title is not none %}<dt>{% if title_help %}<acronym title="{{ title_help }}">{{ title }}</acronym>{% else %}{{ title }}{% endif %}</dt>{% endif %}

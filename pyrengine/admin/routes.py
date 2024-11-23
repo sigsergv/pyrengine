@@ -17,7 +17,7 @@ from pyrengine.files import FILES_PATH
 
 from pyrengine.extensions import db
 
-from flask_login import (login_user, logout_user, login_required, current_user)
+from flask_login import (logout_user, login_required)
 
 logger = logging.getLogger(__name__)
 

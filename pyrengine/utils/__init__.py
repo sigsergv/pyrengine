@@ -25,7 +25,6 @@ def hash_password(password: str) -> str:
 
 
 def check_hashed_password(password: str, hashed_password: str) -> bool:
-    print(len(hashed_password))
     if len(hashed_password) == 48:
         # assuming it's sha1 with salt from restored version
         salt = hashed_password[:8]

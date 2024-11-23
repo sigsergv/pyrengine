@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2024-11-19 21:40+0700\n"
+"POT-Creation-Date: 2024-11-23 15:04+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: en\n"
@@ -116,8 +116,57 @@ msgstr ""
 msgid "Answering to not approved comment"
 msgstr ""
 
+#: pyrengine/blog/routes.py:987 pyrengine/blog/routes.py:988
+msgid "Passwords don't match."
+msgstr ""
+
+#: pyrengine/blog/routes.py:991
+msgid "Password cannot be empty."
+msgstr ""
+
+#: pyrengine/blog/routes.py:999
+msgid "User account not found."
+msgstr ""
+
+#: pyrengine/blog/routes.py:1003
+msgid "Incorrect password."
+msgstr ""
+
 #: pyrengine/templates/base.jinja2:26
 msgid "Powered by pyrengine"
+msgstr ""
+
+#: pyrengine/templates/account/change_password.jinja2:4
+#: pyrengine/templates/account/change_password.jinja2:8
+msgid "Change account password"
+msgstr ""
+
+#: pyrengine/templates/account/change_password.jinja2:12
+msgid "Account login name"
+msgstr ""
+
+#: pyrengine/templates/account/change_password.jinja2:15
+msgid "Current password"
+msgstr ""
+
+#: pyrengine/templates/account/change_password.jinja2:16
+msgid "New password"
+msgstr ""
+
+#: pyrengine/templates/account/change_password.jinja2:17
+msgid "Repeat new password"
+msgstr ""
+
+#: pyrengine/templates/account/change_password.jinja2:19
+#: pyrengine/templates/admin/settings.jinja2:36
+#: pyrengine/templates/admin/settings_pages_widget.jinja2:22
+#: pyrengine/templates/blog/edit_article.jinja2:35
+#: pyrengine/templates/blog/view_article.jinja2:79
+msgid "save"
+msgstr ""
+
+#: pyrengine/templates/account/change_password_complete.jinja2:5
+msgid "Password was changed successfully."
 msgstr ""
 
 #: pyrengine/templates/account/login.jinja2:3
@@ -337,13 +386,6 @@ msgstr ""
 #: pyrengine/templates/admin/settings.jinja2:4
 #: pyrengine/templates/admin/settings.jinja2:8
 msgid "Site settings"
-msgstr ""
-
-#: pyrengine/templates/admin/settings.jinja2:36
-#: pyrengine/templates/admin/settings_pages_widget.jinja2:22
-#: pyrengine/templates/blog/edit_article.jinja2:35
-#: pyrengine/templates/blog/view_article.jinja2:79
-msgid "save"
 msgstr ""
 
 #: pyrengine/templates/admin/settings.jinja2:44
@@ -842,6 +884,10 @@ msgid "Settings"
 msgstr ""
 
 #: pyrengine/templates/widgets/actions.jinja2:11
+msgid "Change password"
+msgstr ""
+
+#: pyrengine/templates/widgets/actions.jinja2:12
 msgid "Sign out"
 msgstr ""
 
