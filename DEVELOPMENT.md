@@ -2,26 +2,35 @@
 
 ## Environment setup
 
-Base OS: Linux/Debian 12 Bookworm or macos with Homebrew
+Base OS: Linux/Debian 13 Trixie or macos with Miniconda313
 
 Install required packages for linux:
 
 ~~~~
-$ sudo apt install python3 python3-dev postgresql-15 libpq-dev
+$ sudo apt install python3 python3-dev postgresql-17 libpq-dev
 ~~~~
 
-For macos you need standard development tools (compilers etc, install using command `xcode-select --install`). You also
+For Macos you need standard development tools (compilers etc, install using command `xcode-select --install`).
 
-Embedded python3 is too old and you need 3.10 or later, so install python3 package from homebrew:
-
-~~~~
-brew install python@3.11
-~~~~
-
-Install venv:
+Embedded python3 is too unpredicatable so install miniconda instead, download [package](https://repo.anaconda.com/miniconda/Miniconda3-py313_25.7.0-2-MacOSX-arm64.sh)
+from anaconda repository and install to location `~/miniconda313`:
 
 ~~~~
-$ python3.11 -m venv .venv
+./Miniconda3-py313_25.7.0-2-MacOSX-arm64.sh -p ~/miniconda313 -m
+~~~~
+
+Install virtual environment. For linux:
+
+~~~~
+$ python3.13 -m venv .venv
+$ source .venv/bin/activate
+(.venv) $
+~~~~
+
+For Macos:
+
+~~~~
+$ ~/miniconda313/bin/python -m venv .venv
 $ source .venv/bin/activate
 (.venv) $
 ~~~~
@@ -29,11 +38,11 @@ $ source .venv/bin/activate
 Prefix `(.venv)` in shell prompt means that this command must be executed in activated
 environment. 
 
-Special step for Macos: you need to specify path to directory with `pg_config` executable,
+Special step for Macos before next step: you need to specify path to directory with `pg_config` executable,
 so if you are using Postgres.app do this:
 
 ~~~~
-(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/15/bin/:$PATH pip install psycopg2==2.9.10
+(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/17/bin/:$PATH pip install psycopg2==2.9.10
 ~~~~
 
 Install application in development mode:
@@ -43,6 +52,7 @@ Install application in development mode:
 ~~~~
 
 This command will install all required python packages automatically.
+
 
 ## Database setup
 
@@ -58,13 +68,13 @@ Type "help" for help.
 pyrengine=# GRANT USAGE, CREATE ON SCHEMA public TO pyrengine_user;
 ~~~~
 
-In macos Postgres.app:
+In macos Postgres.app (download and install version 17 from their [github repository](https://github.com/PostgresApp/PostgresApp/releases)):
 
 ~~~~
-$ /Applications/Postgres.app/Contents/Versions/15/bin/createdb pyrengine
-$ /Applications/Postgres.app/Contents/Versions/15/bin/createuser pyrengine_user -P
-$ /Applications/Postgres.app/Contents/Versions/15/bin/psql pyrengine postgres
-psql (15.3)
+$ /Applications/Postgres.app/Contents/Versions/17/bin/createdb pyrengine
+$ /Applications/Postgres.app/Contents/Versions/17/bin/createuser pyrengine_user -P
+$ /Applications/Postgres.app/Contents/Versions/17/bin/psql pyrengine postgres
+psql (17.6 (Postgres.app))
 Type "help" for help.
 
 pyrengine=# GRANT USAGE, CREATE ON SCHEMA public TO pyrengine_user;
@@ -81,8 +91,9 @@ $ psql -h 127.0.0.1 pyrengine pyrengine_user
 Using macos Posgtres.app:
 
 ~~~~
-$ /Applications/Postgres.app/Contents/Versions/15/bin/psql -h 127.0.0.1 pyrengine pyrengine_user
+$ /Applications/Postgres.app/Contents/Versions/17/bin/psql -h 127.0.0.1 pyrengine pyrengine_user
 ~~~~
+
 
 # Development runtime
 
@@ -194,13 +205,21 @@ To create initial database on application init:
 To drop all created tables use this commands:
 
 ~~~~
-(.venv) $ flask shell
-Python 3.11.3 (main, Apr  7 2023, 20:13:31) [Clang 14.0.0 (clang-1400.0.29.202)] on darwin
-App: app
+(.venv) $ make flask-shell
+Python 3.13.5 | packaged by Anaconda, Inc. | (main, Jun 12 2025, 11:23:37) [Clang 14.0.6 ] on darwin
+App: pyrengine
 Instance: /Users/serge/projects/pyrengine/instance
 >>> from pyrengine.extensions import db
 >>> db.drop_all()
 ~~~~
+
+You also need to drop table `alembic_version` from psql shell:
+
+~~~
+pyrengine=> drop table alembic_version;
+DROP TABLE
+~~~
+
 
 # Deployment
 

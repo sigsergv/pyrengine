@@ -1,9 +1,11 @@
 # Installation
 
+Target system is Debian 13 Trixie.
+
 Install required system packages:
 
 ~~~~
-$ sudo apt install nginx uwsgi uwsgi-plugin-python3 python3 python3-dev python3-venv postgresql-15 gcc libpq-dev
+$ sudo apt install nginx uwsgi uwsgi-plugin-python3 python3 python3-dev python3-venv postgresql-17 gcc libpq-dev
 ~~~~
 
 Create separate system user for the server runtime, do not start it as root user.
@@ -19,7 +21,7 @@ Create postgres database and user, create and remember user password:
 $ sudo -u postgres createdb pyrengine
 $ sudo -u postgres createuser pyrengine_user -P
 $ sudo -u postgres psql pyrengine postgres
-psql (15.3 (Debian 15.3-0+deb12u1))
+psql (17.6 (Debian 17.6-0+deb13u1))
 Type "help" for help.
 
 pyrengine=# GRANT USAGE, CREATE ON SCHEMA public TO pyrengine_user;
@@ -43,7 +45,7 @@ $ source ~blog/pyrengine-blog/venv/bin/activate
 Fetch latest version (.whl-file) from releases page <https://github.com/sigsergv/pyrengine/releases> and install it:
 
 ~~~~
-(venv) $ pip install pyrengine-1.0.5-py3-none-any.whl
+(venv) $ pip install pyrengine-1.0.8-py3-none-any.whl
 ~~~~
 
 Initialize production config:
@@ -98,7 +100,7 @@ Fetch latest version from releases page <https://github.com/sigsergv/pyrengine/r
 Install package to virtual environment:
 
 ~~~~
-$ pip install pyrengine-1.0.1-py3-none-any.whl
+$ pip install pyrengine-1.0.8-py3-none-any.whl
 ~~~~
 
 
@@ -113,5 +115,5 @@ Pyrengine provides sample favicon if you need another please rewrite path to `/f
 To reinstall already installed version use this command:
 
 ~~~~
-$ pip install --upgrade --force-reinstall --no-deps --no-cache-dir ./pyrengine-1.0.2-py3-none-any.whl
+$ pip install --upgrade --force-reinstall --no-deps --no-cache-dir ./pyrengine-1.0.8-py3-none-any.whl
 ~~~~

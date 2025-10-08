@@ -4,8 +4,11 @@ This file contains releases history along with the most important changes.
 
 ## 1.0.8
 
-Release: 2024-??-??
+Release: 2025-??-??
 
+* updated target python version
+* updated target postgres version
+* updated dependencies
 * fixed broken style for different resolutions
 * added change administrator password page
 * added missing translation strings
