@@ -4,7 +4,7 @@ This file contains releases history along with the most important changes.
 
 ## 1.0.8
 
-Release: 2025-??-??
+Release: 2025-10-10
 
 * updated target python version
 * updated target postgres version
