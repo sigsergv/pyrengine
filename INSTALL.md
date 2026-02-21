@@ -45,7 +45,7 @@ $ source ~blog/pyrengine-blog/venv/bin/activate
 Fetch latest version (.whl-file) from releases page <https://github.com/sigsergv/pyrengine/releases> and install it:
 
 ~~~~
-(venv) $ pip install pyrengine-1.0.8-py3-none-any.whl
+(venv) $ pip install pyrengine-1.0.9-py3-none-any.whl
 ~~~~
 
 Initialize production config:
@@ -93,6 +93,9 @@ $ sudo systemctl restart nginx
 $ sudo systemctl restart uwsgi
 ~~~~
 
+Open your installation in browser and got to relative path `/login`, for example, `https://blog.example.com/login`. Default administrator
+login is `admin` and password `setup`.
+
 # Upgrade
 
 Fetch latest version from releases page <https://github.com/sigsergv/pyrengine/releases>.
@@ -100,7 +103,7 @@ Fetch latest version from releases page <https://github.com/sigsergv/pyrengine/r
 Install package to virtual environment:
 
 ~~~~
-$ pip install pyrengine-1.0.8-py3-none-any.whl
+$ pip install pyrengine-1.0.9-py3-none-any.whl
 ~~~~
 
 
@@ -115,5 +118,5 @@ Pyrengine provides sample favicon if you need another please rewrite path to `/f
 To reinstall already installed version use this command:
 
 ~~~~
-$ pip install --upgrade --force-reinstall --no-deps --no-cache-dir ./pyrengine-1.0.8-py3-none-any.whl
+$ pip install --upgrade --force-reinstall --no-deps --no-cache-dir ./pyrengine-1.0.9-py3-none-any.whl
 ~~~~

@@ -12,8 +12,9 @@ $ sudo apt install python3 python3-dev postgresql-17 libpq-dev
 
 For Macos you need standard development tools (compilers etc, install using command `xcode-select --install`).
 
-Embedded python3 is too unpredicatable so install miniconda instead, download [package](https://repo.anaconda.com/miniconda/Miniconda3-py313_25.7.0-2-MacOSX-arm64.sh)
-from anaconda repository and install to location `~/miniconda313`:
+Embedded python3 is too unpredicatable (as the one from brew for example) so install miniconda instead, download
+[package](https://repo.anaconda.com/miniconda/Miniconda3-py313_25.7.0-2-MacOSX-arm64.sh) from anaconda repository
+and install to location `~/miniconda313`:
 
 ~~~~
 ./Miniconda3-py313_25.7.0-2-MacOSX-arm64.sh -p ~/miniconda313 -m
@@ -221,7 +222,7 @@ DROP TABLE
 ~~~
 
 
-# Deployment
+# Building release package
 
 We deploy application using wheel. First install package `build` required for package creation:
 
@@ -235,7 +236,7 @@ Create distribution package:
 (.venv) $ make build
 ~~~~
 
-Resulting wheel package will be placed to directory `dist/`, it looks like `pyrengine-1.0.0-py3-none-any.whl`.
+Resulting wheel package will be placed to directory `dist/`, it looks like `pyrengine-1.0.9-py3-none-any.whl`.
 
 
 

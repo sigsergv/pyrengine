@@ -6,7 +6,7 @@
 {% macro textfield(name, value, title, title_help, error) -%}
   <dt>{% if title_help %}<acronym title="{{ title_help }}">{{ title }}</acronym>{% else %}{{ title }}{% endif %}</dt>
   <div id="error-{{ name }}" class="error" style="{% if not error %}display: none;{% endif %}">{{ error }}</div>
-  <dd><input type="text" name="{{ name }}" id="fid-{{ name }}" value="{{ value }}"></dd>
+  <dd><input type="text" name="{{ name }}" id="fid-{{ name }}" value="{{ value|e }}"></dd>
 {%- endmacro %}
   
 {% macro passwordfield(name, title, title_help, error) -%}
@@ -18,7 +18,7 @@
 {% macro textarea(name, value, title, title_help, error, style) -%}
   {% if title is not none %}<dt>{% if title_help %}<acronym title="{{ title_help }}">{{ title }}</acronym>{% else %}{{ title }}{% endif %}</dt>{% endif %}
   <div id="error-{{ name }}" class="error" style="{% if not error %}display: none;{% endif %}">{{ error }}</div>
-  <dd><textarea type="text" name="{{ name }}" id="fid-{{ name }}"{% if style %}style="{{ style  }}"{% endif %}>{{ value }}</textarea></dd>
+  <dd><textarea type="text" name="{{ name }}" id="fid-{{ name }}"{% if style %}style="{{ style  }}"{% endif %}>{{ value|e }}</textarea></dd>
 {%- endmacro %}
 
 {% macro button(text, icon, onclick) -%}

@@ -1,7 +1,7 @@
 [project]
 dynamic = ["version"]
 name = "pyrengine"
-#version = "1.0.0"
+#version = "1.0.0"  # actual version is set via file `pyrengine/__init__.py`
 description = "Personal blog engine written in Python using Flask and SqlAlchemy"
 readme = "README.md"
 requires-python = ">=3.13"

@@ -2,6 +2,14 @@
 
 This file contains releases history along with the most important changes.
 
+## 1.0.9
+
+Release: 2026-02-21
+
+* fixed issued with displaying search widget HTML code on settings page (closes issue 1)
+* added more instructions into `pyrengine-nginx-uwsgi.conf` (closes issue 2)
+* updated documentation
+
 ## 1.0.8
 
 Release: 2025-10-10
