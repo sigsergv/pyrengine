@@ -2,6 +2,12 @@
 
 This file contains releases history along with the most important changes.
 
+## 1.0.10
+
+Release: 2026-xx-xx
+
+* fixed default uwsgi config and increased headers buffer size
+
 ## 1.0.9
 
 Release: 2026-02-21
