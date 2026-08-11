@@ -43,7 +43,7 @@ Special step for Macos before next step: you need to specify path to directory w
 so if you are using Postgres.app do this:
 
 ~~~~
-(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/17/bin/:$PATH pip install psycopg2==2.9.10
+(.venv) $ PATH=/Applications/Postgres.app/Contents/Versions/17/bin/:$PATH pip install psycopg2==2.9.12
 ~~~~
 
 Install application in development mode:
