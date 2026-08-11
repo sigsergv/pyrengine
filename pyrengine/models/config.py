@@ -1,6 +1,5 @@
 import pytz
 
-from pyrengine.extensions import db
 from pyrengine.utils import cache
 from pyrengine.extensions import db
 

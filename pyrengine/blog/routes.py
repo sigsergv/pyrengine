@@ -39,7 +39,7 @@ def index():
                 start_page = 0
         except ValueError:
             start_page = 0
-    
+
     dbsession = db.session
     user = current_user
 
@@ -101,7 +101,7 @@ def download_file_preview(filename):
     # create preview file if required
     if not os.path.exists(preview_path):
         try:
-            preview_max_width = int(get_config('image_preview_width', 300))
+            preview_max_width = int(get_config('image_preview_width'))
         except ValueError:
             preview_max_width = 300
         except TypeError:
@@ -302,7 +302,7 @@ def login():
             else:
                 # authenticate
                 login_user(u, remember=True)
-        
+
         if u is None:
             ctx = {
                 'error': _('User not found'),
@@ -357,7 +357,7 @@ def write_article():
         v = [int(x) for x in mo.groups()[0:3]]
         article.shortcut_date = '{0:04d}/{1:02d}/{2:02d}'.format(*v)
         article.set_body(ctx['form']['body'])
-        
+
         dbsession = db.session
         q = dbsession.query(Article).filter(Article.shortcut_date == article.shortcut_date)\
             .filter(Article.shortcut == article.shortcut)
@@ -406,9 +406,9 @@ def _update_article(article, ctx):
         mo = date_re.match(ctx['form']['published'])
         v = [int(x) for x in mo.groups()[0:3]]
         article.shortcut_date = '{0:04d}/{1:02d}/{2:02d}'.format(*v)
-        
+
     article.set_body(ctx['form']['body'])
-    
+
     dbsession = db.session
     q = dbsession.query(Article).filter(Article.shortcut_date == article.shortcut_date)\
         .filter(Article.shortcut == article.shortcut)\
@@ -729,7 +729,7 @@ def add_article_comment_ajax(article_id):
 
         if email in notifications_emails:
             continue
-            
+
         notifications_emails.add(email)
 
         print(email)
@@ -806,7 +806,7 @@ def edit_comment_ajax(comment_id):
 
     # passed POST parameters are: 'body', 'name', 'email', 'website', 'date', 'ip', 'xffip'
     params = {
-        'body': 'body', 
+        'body': 'body',
         'name': 'display_name',
         'email': 'email',
         'website': 'website',
@@ -895,22 +895,22 @@ def comments_moderation():
 
         dbsession = db.session
         comments = dbsession.query(Comment).filter(Comment.is_approved==False).all()
-            
+
         for x in comments:
             # set real email
             if x.user is not None:
                 x._real_email = x.user.email
-            else: 
+            else:
                 x._real_email = x.email
             if x._real_email == '':
                 x._real_email = None
-            
+
             # truncate comment text
             trunc_pos = 200
             x._truncated_body = None
             if len(x.rendered_body) > trunc_pos:
                 x._truncated_body = x.rendered_body[0:trunc_pos]
-            
+
             ctx['comments'].append(x)
 
         return render_template('blog/comments_moderation.jinja2', **ctx)
@@ -1027,4 +1027,3 @@ def _update_comments_counters(article):
     total_cnt = dbsession.query(func.count(Comment.id)).filter(Comment.article == article).scalar()
     article.comments_approved = approved_cnt
     article.comments_total = total_cnt
-

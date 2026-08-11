@@ -13,7 +13,7 @@ from pyrengine.utils import hash_password
 from pyrengine import (models, jinja_helpers, notifications, backups, files)
 
 STORAGE_PATH = None
-__version__ = '1.0.9'
+__version__ = '1.0.10'
 
 login_manager = LoginManager()
 
@@ -109,4 +109,3 @@ def init_storage(app):
     app.config['PYRENGINE_STORAGE_PATH'] = os.path.realpath(storage_dir)
     backups.init(app)
     files.init(app)
-

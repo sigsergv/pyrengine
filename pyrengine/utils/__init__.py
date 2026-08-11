@@ -40,7 +40,7 @@ def timestamp_to_str(ts, fmt='%Y-%m-%d %H:%M'):
     Convert UTC seconds to time string in local timezone
     """
     tz = get_config('timezone')
-    tts = datetime.datetime.utcfromtimestamp(ts)  # seconds -> time_struct
+    tts = datetime.datetime.fromtimestamp(ts, tz=datetime.UTC)  # seconds -> time_struct
     utc_dt = pytz.utc.localize(tts).astimezone(tz)  # utc time -> local time
 
     t_str = utc_dt.strftime(fmt)
@@ -53,7 +53,7 @@ def timestamp_to_dt(ts):
     Convert UTC seconds to datetime object
     """
     tz = get_config('timezone')
-    tts = datetime.datetime.utcfromtimestamp(ts)  # seconds -> time_struct
+    tts = datetime.datetime.fromtimestamp(ts, tz=datetime.UTC)  # seconds -> time_struct
     utc_dt = pytz.utc.localize(tts).astimezone(tz)  # utc time -> local time
     return utc_dt
 
@@ -62,7 +62,7 @@ def dt_to_timestamp(dt):
     """
     Convert datetime (UTC) object to UTC seconds
     """
-    return calendar.timegm(dt.timetuple())    
+    return calendar.timegm(dt.timetuple())
 
 
 def str_to_timestamp(t_str):
@@ -102,4 +102,3 @@ def normalize_email(email):
 def package_file_path(p):
     path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', p))
     return path
-

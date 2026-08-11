@@ -12,7 +12,7 @@ log = logging.getLogger(__name__)
 
 def slugify(value, separator):
     return hashlib.md5(value.encode('utf-8')).hexdigest()
-    
+
 MARKUP_CONTINUE_MARKER = "<cut>"
 
 
@@ -20,7 +20,7 @@ def render_text_markup_mini(text):
     """
     Render text using reduced markup elements set
     """
-    md_mini = markdown.Markdown(safe_mode=True, enable_attributes=True, output_format='html')
+    md_mini = markdown.Markdown(enable_attributes=True, output_format='html')
     return md_mini.convert(text)
 
 
@@ -40,7 +40,6 @@ def render_text_markup(text):
                 'permalink': '&para;' # ⚓︎
             }
         },
-        safe_mode=True,
         enable_attributes=True,
         output_format='html5')
 
