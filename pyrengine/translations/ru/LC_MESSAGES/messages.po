@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: sergei@regolit.com\n"
-"POT-Creation-Date: 2024-11-23 15:04+0700\n"
+"POT-Creation-Date: 2026-08-12 20:34+0700\n"
 "PO-Revision-Date: 2023-07-22 13:13+0700\n"
 "Last-Translator: Sergey Stolyarov <sergei@regolit.com>\n"
 "Language: ru\n"
@@ -17,7 +17,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Generated-By: Babel 2.16.0\n"
+"Generated-By: Babel 2.18.0\n"
 
 #: pyrengine/__init__.py:49 pyrengine/__init__.py:57
 msgid "Page not found"
@@ -48,6 +48,7 @@ msgid "Unknown XML format of catalog file."
 msgstr "Формат файла каталога не является корректным XML."
 
 #: pyrengine/backups.py:128
+#, python-brace-format
 msgid "Unsupported backup version: “{0}”!"
 msgstr "Версия бэкапа «{0}» не поддерживается!"
 
@@ -88,6 +89,7 @@ msgid "Latest articles feed"
 msgstr "Лента недавних статей"
 
 #: pyrengine/blog/routes.py:204
+#, python-brace-format
 msgid "Articles with tag “{0}”"
 msgstr "Статьи с тегом «{0}»"
 
@@ -196,6 +198,7 @@ msgid "Verify e-mail address"
 msgstr "Подтвердить E-mail"
 
 #: pyrengine/templates/account/verify_email.jinja2:9
+#, python-brace-format
 msgid "Click button below to verify e-mail address <strong>{0}</strong>."
 msgstr "Нажмите кнопку ниже, чтобы подтвердить адрес <strong>{0}</strong>."
 
@@ -233,6 +236,7 @@ msgid "Backup complete, reload page to see it."
 msgstr "Бэкап завершён, перегрузить страницу, чтобы увидеть новый файл."
 
 #: pyrengine/templates/admin/backups_list.jinja2:14
+#, python-brace-format
 msgid "New backup filename: {0}"
 msgstr "Файл нового бэкапа: {0}"
 
@@ -268,6 +272,7 @@ msgstr "Скачать бэкап"
 
 #: pyrengine/templates/admin/backups_list.jinja2:32
 #: pyrengine/templates/admin/files_list.jinja2:54
+#, python-brace-format
 msgid "{0} bytes"
 msgstr "{0} байтов"
 
@@ -680,6 +685,7 @@ msgid "Tags (comma separated)"
 msgstr "Теги (через запятую)"
 
 #: pyrengine/templates/blog/edit_article.jinja2:14
+#, python-brace-format
 msgid ""
 "Article body (required, markup: *<em>italic</em>*, "
 "**<strong>bold</strong>**, [hyperlink](http://example.com) <a "
@@ -774,6 +780,7 @@ msgid "older->"
 msgstr "старые→"
 
 #: pyrengine/templates/blog/view_article.jinja2:43
+#, python-brace-format
 msgid "Published {0}"
 msgstr "Опубликовано {0}"
 
@@ -828,10 +835,8 @@ msgid ""
 "<strong>Please pay attention that comments with more than one hyperlink "
 "(including field \"website\") will be put on moderation.</strong>"
 msgstr ""
-"Посетители-анонимы, обратите внимение, что более чем одна гиперссылка в "
-"тексте (включая оную из поля «веб-сайт») приведёт к блокировке "
-"комментария для модерации. Зайдите на сайта с использованием аккаунта на "
-"twitter, например, чтобы посылать комментарии без этого ограничения."
+"Обратите внимание, что более чем одна гиперссылка в тексте приведёт к "
+"блокировке комментария для модерации."
 
 #: pyrengine/templates/blog/view_article.jinja2:106
 #: pyrengine/templates/blog/view_article.jinja2:114
@@ -847,10 +852,6 @@ msgid ""
 "Your email (optional, won't be published, required if you want to receive"
 " answers)"
 msgstr "Опциональный email, на который получать ответы (не будет опубликован)"
-
-#: pyrengine/templates/blog/view_article.jinja2:115
-msgid "Your website"
-msgstr "Веб-сайт"
 
 #: pyrengine/templates/blog/view_article.jinja2:117
 msgid "post comment"
@@ -916,6 +917,7 @@ msgid "Actions"
 msgstr "Действия"
 
 #: pyrengine/templates/widgets/actions.jinja2:6
+#, python-brace-format
 msgid "Comments moderation ({})"
 msgstr "Модерация комментариев"
 
@@ -946,3 +948,5 @@ msgstr "Поиск по сайту"
 #~ msgid "Recent articles"
 #~ msgstr "Недавние статьи"
 
+#~ msgid "Your website"
+#~ msgstr "Веб-сайт"

@@ -9,16 +9,16 @@
 <script language="javascript">
 $(document).ready(function() {
 	// scroll to required position
-	var hash = window.location.hash, 
+	var hash = window.location.hash,
 		comment_id = -1;
-		
+
 	// extract comment id
 	if (/#comment-([0-9]+)$/.test(hash)) {
 		comment_id = RegExp.$1;
 	} else {
 		return;
 	}
-	
+
 	var cb = $('#c-'+comment_id);
 	if (cb) {
 		cb.addClass('active');
@@ -38,7 +38,7 @@ $(document).ready(function() {
     {% endif %}
     {{ article.title }} {% if article.is_draft %}<span class="panel warning">{{ _('draft') }}</span>{% endif %}
   </div>
-  
+
   <div class="subtitle">
     <div class="date">{{ _('Published {0}').format(h.timestamp_to_str(article.published, _('DATE_TIME_SHORT'))) }}</div>
     <div class="clear-both"></div>
@@ -65,26 +65,26 @@ $(document).ready(function() {
   <div class="article-inline-comment-edit" id="c-edit" style="display: none;">
   <form>
   <input type="hidden" id="c-edit-comment_id">
-  <div> <input type="text" id="c-edit-name" class="display-name" title="{{ _('Display name of the visitor') }}"> 
+  <div> <input type="text" id="c-edit-name" class="display-name" title="{{ _('Display name of the visitor') }}">
     <input type="text" id="c-edit-date" title="{{ _('Comment date and time') }}" class="date">
     <label><input id="c-edit-is_subscribed" type="checkbox">{{ _('subscribed') }}</label>
-  </div> 
+  </div>
   <div> <input type="text" id="c-edit-email" class="display-name" title="{{ _('Email address of the visitor') }}">
     <input type="text" id="c-edit-ip" title="{{ _('Visitor ip address') }}" class="ip">
-    <input type="text" id="c-edit-xffip" title="{{ _('Visitor X-Forwarded-For address') }}" class="ip"> 
-    <input type="text" id="c-edit-website" title="{{ _('Visitor website') }}" class="display-name"> 
+    <input type="text" id="c-edit-xffip" title="{{ _('Visitor X-Forwarded-For address') }}" class="ip">
+    <input type="text" id="c-edit-website" title="{{ _('Visitor website') }}" class="display-name">
   </div>
-  
+
   <div><textarea id="c-edit-body" class="body"></textarea></div>
   <div><button class="button" onclick="pyrengine.submitArticleCommentEditForm('{{ url_for('blog.edit_comment_ajax', comment_id='666') }}'); return false;"><span class="fa fa-save"></span> {{ _('save') }}</button>
     <a href="#" onclick="pyrengine.cancelArticleCommentEditForm(); return false;">{{ _('close') }}</a>
   </div>
-  
+
   </form>
   </div>
   {% endif %}
 
-  
+
   {% if article.is_commentable %}
   <!-- new comment form here -->
   <div class="article-new-comment" id="c--1">
@@ -112,7 +112,7 @@ $(document).ready(function() {
         {{ forms.textfield('comment-displayname', comment_display_name, _('Your name (required, 50 characters or less)')) }}
         {{ forms.textfield('comment-email', comment_email, _("Your email (optional, won't be published, required if you want to receive answers)")) }}
         {{ forms.checkbox('is_subscribed', is_subscribed, none, _('Subscribe to answers'), '') }}
-        {{ forms.textfield('comment-website', comment_website, _('Your website')) }}
+{#        {{ forms.textfield('comment-website', comment_website, _('Your website')) }} #}
         {% endif %}
         <dd><button class="button" onclick="pyrengine.postArticleComment(); return false;"><span class="fa fa-comment-o"></span> {{ _('post comment') }}</button>
       </dl>

@@ -33,7 +33,7 @@ window.pyrengine.get_selected_rows = function(table_id) {
 	if (!table.get(0)) {
 		return false;
 	}
-	
+
 	var nodes = table.find('input[class=list-cb]'),
 		res = [];
 
@@ -104,7 +104,7 @@ window.pyrengine.create_link_notify_box = function(target_id, message) {
 	default:
 		// 'right' is default position
 		confirmation_el.css({ 'top': target.offset().top, 'left': target.offset().left + target.outerWidth() + 3 });
-	} 
+	}
 	confirmation_el.on('mouseenter', function(e) {
 		var icon = $(e.currentTarget).find('span.confirmation-icon');
 		icon.removeClass('fa-check-circle-o').addClass('fa-check-circle');
@@ -224,12 +224,12 @@ window.pyrengine.replyToArticleComment = function(comment_id) {
 		comment_form = $('#eid-comment-form'),
 		link = $('#eid-leave-comment-link-bottom'),
 		parent_comment_field = $('#fid-parent-comment');
-	
+
 	if (!comment_block.get(0)) {
 		return;
 	}
 	comment_block.append(comment_form);
-	
+
 	if (comment_id === -1) {
 		link.hide(0);
 		parent_comment_field.val('');
@@ -244,42 +244,40 @@ window.pyrengine.replyToArticleComment = function(comment_id) {
 window.pyrengine.postArticleComment = function() {
 	var body = $('#fid-comment-body').val();
 	var e = $('#eid-comment-error');
-	
+
 	if (body == '') {
 		var body_el = $('#fid-comment-body');
 		body_el.focus();
 		pyrengine.notify(e, tr('COMMENT_BODY_IS_REQUIRED'));
 		return;
 	}
-	
+
 	var f = $('#eid-comment-form'),
 		url = f.prop('action') + '/ajax',
 		article_id = $('#fid-article_id').val(),
 		parent = $('#fid-parent-comment').val(),
 		display_name = $('#fid-comment-displayname').val(),
 		email = $('#fid-comment-email').val(),
-		website = $('#fid-comment-website').val(),
 		is_subscribed = $('#fid-is_subscribed').prop('checked');
-	
+
 	var params = {s: article_id};
 	params[article_id.substring(3, 14)] = body;
 	params[article_id.substring(4, 12)] = parent;
 	params[article_id.substring(0, 5)] = display_name;
 	params[article_id.substring(13, 25)] = email;
-	params[article_id.substring(15, 21)] = website;
 	if (is_subscribed === true) {
 		params[article_id.substring(19, 27)] = 'true';
 	}
-	
+
 	var display_name_field = $('#fid-comment-displayname');
-	
+
 	if (display_name_field.prop('type') == 'text' && display_name == '') {
 		display_name_field.focus();
 		pyrengine.notify(e, tr('COMMENT_DISPLAY_NAME_IS_REQUIRED'));
 		return;
 	}
-	
-	var disable_ids = ['fid-comment-displayname', 'fid-comment-email', 'fid-comment-website',
+
+	var disable_ids = ['fid-comment-displayname', 'fid-comment-email',
 		'fid-comment-body', 'eid-post-comment-button', 'fid-is_subscribed'];
 
 	function setFieldsDisabled(disable) {
@@ -310,7 +308,7 @@ window.pyrengine.postArticleComment = function() {
 		if (!json.approved) {
 			// clear fields
 			$('#fid-comment-body').val('');
-			pyrengine.notify($('#eid-comment-notify'), 
+			pyrengine.notify($('#eid-comment-notify'),
 				tr('COMMENT_IS_WAITING_FOR_APPROVAL'), $.noop, 10000);
 			// display alert
 		} else {
@@ -331,12 +329,12 @@ window.pyrengine.replyToComment = function(comment_id) {
 		comment_form = $('#eid-comment-form'),
 		link = $('#eid-leave-comment-link-bottom'),
 		parent_comment_field = $('#fid-parent-comment');
-	
+
 	if (!comment_block.get(0)) {
 		return;
 	}
 	comment_block.append(comment_form);
-	
+
 	if (comment_id === -1) {
 		link.hide(0);
 		parent_comment_field.val('');

@@ -41,7 +41,7 @@ def timestamp_to_str(ts, fmt='%Y-%m-%d %H:%M'):
     """
     tz = get_config('timezone')
     tts = datetime.datetime.fromtimestamp(ts, tz=datetime.UTC)  # seconds -> time_struct
-    utc_dt = pytz.utc.localize(tts).astimezone(tz)  # utc time -> local time
+    utc_dt = tts.astimezone(tz)  # utc time -> local time
 
     t_str = utc_dt.strftime(fmt)
 
@@ -54,7 +54,7 @@ def timestamp_to_dt(ts):
     """
     tz = get_config('timezone')
     tts = datetime.datetime.fromtimestamp(ts, tz=datetime.UTC)  # seconds -> time_struct
-    utc_dt = pytz.utc.localize(tts).astimezone(tz)  # utc time -> local time
+    utc_dt = tts.astimezone(tz)  # utc time -> local time
     return utc_dt
 
 

@@ -20,7 +20,7 @@ def render_text_markup_mini(text):
     """
     Render text using reduced markup elements set
     """
-    md_mini = markdown.Markdown(enable_attributes=True, output_format='html')
+    md_mini = markdown.Markdown(output_format='html')
     return md_mini.convert(text)
 
 
@@ -30,7 +30,7 @@ def render_text_markup(text):
     """
     md = markdown.Markdown(
         extensions=['footnotes', 'wikilinks', 'def_list', 'toc', 'legacy_attrs',
-        'codehilite', 'fenced_code', SubscriptExtension()],
+        'codehilite', 'fenced_code', 'tables', SubscriptExtension()],
         extension_configs={
             'codehilite': {'guess_lang':False},
             #'footnotes': [("PLACE_MARKER", "~~~~~~~~")]
@@ -40,8 +40,7 @@ def render_text_markup(text):
                 'permalink': '&para;' # ⚓︎
             }
         },
-        enable_attributes=True,
-        output_format='html5')
+        output_format='html')
 
     text = pre_render_text_markup(text)
     ind = text.find(MARKUP_CONTINUE_MARKER)
@@ -60,7 +59,7 @@ def render_text_markup(text):
         preview_html = md.convert(preview_part)
 
     complete_html = md.convert(complete_text)
-
+    print(123123)
     return (preview_html, complete_html)
 
 storage_img_re = False

@@ -269,7 +269,7 @@ def _view_article(article):
     signature = str(uuid.uuid4()).replace('-', '')
     is_subscribed = False
 
-    for cn in ('comment_display_name', 'comment_email', 'comment_website'):
+    for cn in ('comment_display_name', 'comment_email'):
         if cn in request.cookies:
             ctx[cn] = request.cookies[cn]
         else:
@@ -581,12 +581,11 @@ def add_article_comment_ajax(article_id):
     parent_ind = key[4:12]
     display_name_ind = key[0:5]
     email_ind = key[13:25]
-    website_ind = key[15:21]
     is_subscribed_ind = key[19:27]
 
-    for ind in (body_ind, parent_ind, display_name_ind, email_ind, website_ind):
+    for ind in (body_ind, parent_ind, display_name_ind, email_ind):
         if ind not in request.form:
-            return HTTPBadRequest()
+            return abort(400)
 
     body = request.form[body_ind]
 
@@ -604,15 +603,14 @@ def add_article_comment_ajax(article_id):
     if not user.is_anonymous:
         comment.user_id = user.id
     else:
-        # get "email", "display_name" and "website" arguments
+        # get "email", "display_name" arguments
         comment.display_name = request.form[display_name_ind]
         comment.email = request.form[email_ind]
-        comment.website = request.form[website_ind]
+        comment.website = ''
 
-        # remember email, display_name and website in browser cookies
+        # remember email, display_name in browser cookies
         cookies.append( ('comment_display_name', comment.display_name, 31536000) )
         cookies.append( ('comment_email', comment.email, 31536000) )
-        cookies.append( ('comment_website', comment.website, 31536000) )
 
     # set parent comment
     parent_id = request.form[parent_ind]
@@ -804,12 +802,11 @@ def edit_comment_ajax(comment_id):
 
     comment = dbsession.query(Comment).options(db.joinedload(Comment.user)).get(comment_id)
 
-    # passed POST parameters are: 'body', 'name', 'email', 'website', 'date', 'ip', 'xffip'
+    # passed POST parameters are: 'body', 'name', 'email', 'date', 'ip', 'xffip'
     params = {
         'body': 'body',
         'name': 'display_name',
         'email': 'email',
-        'website': 'website',
         'ip': 'ip_address',
         'xffip': 'xff_ip_address'
         }
@@ -859,7 +856,7 @@ def comment_fetch_ajax(comment_id):
 
     comment = dbsession.query(Comment).get(comment_id)
 
-    attrs = ('display_name', 'email', 'website', 'body', 'ip_address', 'xff_ip_address', 'is_subscribed')
+    attrs = ('display_name', 'email', 'body', 'ip_address', 'xff_ip_address', 'is_subscribed')
     data = {}
     for a in attrs:
         data[a] = getattr(comment, a)
@@ -875,7 +872,7 @@ def delete_comment_ajax(comment_id):
     dbsession = db.session
     comment = dbsession.query(Comment).get(comment_id)
     if comment is None:
-        return HTTPNotFound()
+        return abort(404)
 
     dbsession.delete(comment)
     dbsession.commit()
